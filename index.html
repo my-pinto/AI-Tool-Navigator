@@ -558,8 +558,17 @@ const fit=Math.max(0,Math.min(100,Math.round(baseFit+boost)));
 
 matched.sort((a,b)=>(b.weight*b.capability)-(a.weight*a.capability));
 
-/* ファイル全体の翻訳を明確に希望した場合、Languiseを優先候補にする */
-const priorityMatch=tool.name==="Languise"&&(profile.fileTranslation||0)>0;
+/* 専門用途を直接選択した場合の優先判定 */
+const languisePriority =
+tool.name==="Languise"&&(profile.fileTranslation||0)>0;
+
+const nottaBrainPriority =
+tool.name==="Notta Brain"&&(
+selectedAnswers[1]===8||
+selectedAnswers[17]===4
+);
+
+const priorityMatch=languisePriority||nottaBrainPriority;
 
 return{tool,fit,baseFit,matched,profile,priorityMatch};
 });
@@ -580,6 +589,14 @@ const top=item.matched.slice(0,2).map(x=>tagLabels[x.tag]).filter(Boolean);
 
 if(item.tool.name==="Languise"&&(item.profile.fileTranslation||0)>0){
 return "ファイル全体の翻訳・校正・要約を希望する回答と、Languiseのサービス用途が直接一致しました。翻訳作業の候補として優先表示しています。";
+}
+if(
+item.tool.name==="Notta Brain"&&(
+selectedAnswers[1]===8||
+selectedAnswers[17]===4
+)
+){
+return "複数の資料や情報をまとめて整理したいという回答と、Notta Brainの情報整理・分析用途が直接一致しました。資料を横断して活用したい人向けの候補として優先表示しています。";
 }
 
 if(top.length){
