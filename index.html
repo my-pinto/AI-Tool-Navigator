@@ -433,130 +433,20 @@ answers:[
 
 
 /* =========================
-   AIツールデータ
-========================= */
-
-const tools = [
-
-{
-name:"ChatGPT",
-description:"文章作成、情報整理、学習、アイデア出しなど幅広く活用できる総合AI。",
-tags:{work:9,writing:10,learning:10,research:8,beginner:9,features:10,japanese:10,mobile:9,pc:10,efficiency:9,free:7}
-},
-
-{
-name:"Gemini",
-description:"情報整理や文章作成、学習など幅広い用途に対応するGoogleのAI。",
-tags:{work:8,writing:8,learning:10,research:9,beginner:8,features:9,japanese:10,mobile:9,pc:9,free:8}
-},
-
-{
-name:"Claude",
-description:"長文の文章作成や資料の整理・分析に活用しやすいAI。",
-tags:{work:8,writing:10,learning:8,research:8,accuracy:9,features:9,pc:9,advanced:8}
-},
-
-{
-name:"Microsoft Copilot",
-description:"仕事や資料作成など、Microsoft環境での活用に向いているAI。",
-tags:{work:10,writing:8,efficiency:10,features:9,pc:10,beginner:8,japanese:9}
-},
-
-{
-name:"Notta",
-description:"会議や音声の文字起こし、議事録作成を効率化したい人向け。",
-tags:{transcription:10,work:9,efficiency:10,beginner:9,japanese:10,pc:9,mobile:9,daily:8}
-},
-
-{
-name:"Notta Brain",
-description:"会議内容や情報を整理・活用し、業務効率化につなげたい人向け。",
-tags:{transcription:9,work:10,efficiency:10,research:8,features:9,pc:9,daily:9}
-},
-
-{
-name:"Canva",
-description:"SNS画像、資料、デザインなどを初心者でも作りやすいデザインツール。",
-tags:{design:10,beginner:10,mobile:9,pc:10,japanese:10,free:9,features:9}
-},
-
-{
-name:"MiriCanvas",
-description:"テンプレートを活用して、画像や資料を簡単に作成しやすいデザインツール。",
-tags:{design:10,beginner:10,mobile:8,pc:9,japanese:10,free:9,features:8}
-},
-
-{
-name:"Aiarty Image Enhancer",
-description:"画像をよりきれいに見せたい、画質改善をしたい人向け。",
-tags:{design:8,specialist:9,pc:10,features:8}
-},
-
-{
-name:"CapCut",
-description:"SNS動画やショート動画の編集・制作に活用しやすいツール。",
-tags:{video:10,beginner:9,mobile:10,pc:9,free:9,features:9}
-},
-
-{
-name:"ElevenLabs",
-description:"AI音声の生成やコンテンツ制作に活用したい人向け。",
-tags:{audio:10,video:8,specialist:9,features:9,advanced:8}
-},
-
-{
-name:"DeepL",
-description:"外国語の翻訳を高品質に行いたい人向けの翻訳ツール。",
-tags:{translation:10,accuracy:10,beginner:9,japanese:9,pc:9,mobile:9,free:8}
-},
-
-{
-name:"ヤラク翻訳",
-description:"仕事で翻訳を活用したい人向けの翻訳サービス。",
-tags:{translation:10,accuracy:9,work:10,efficiency:8,pc:10,japanese:10}
-},
-
-{
-name:"Languise",
-description:"AIを活用した翻訳・外国語関連の作業を効率化したい人向け。",
-tags:{translation:9,accuracy:8,work:8,efficiency:8,japanese:8}
-},
-
-{
-name:"Perplexity",
-description:"情報収集や調査を効率化したい人向けのAI検索ツール。",
-tags:{research:10,learning:9,accuracy:9,features:9,beginner:8,pc:9,mobile:9}
-},
-
-{
-name:"NotebookLM",
-description:"資料を読み込ませて整理・学習・情報分析を行いたい人向け。",
-tags:{learning:10,research:10,work:8,accuracy:9,pc:10,features:9}
-},
-
-{
-name:"デジタネ",
-description:"子どものIT・プログラミング学習を進めたい家庭向けの学習サービス。",
-tags:{kids:10,learning:10,beginner:10,japanese:10,features:8}
-}
-
-];
-
-
-/* =========================
-   診断制御
+   回答履歴
 ========================= */
 
 let currentQuestion = 0;
 
-let userScores = {};
+/* 各質問の選択結果を保存 */
+let selectedAnswers = [];
 
 
 /* =========================
    質問表示
 ========================= */
 
-function showQuestion(){
+function showQuestion() {
 
 const q = questions[currentQuestion];
 
@@ -578,35 +468,61 @@ percent + "%";
 document.getElementById("progress").style.width =
 percent + "%";
 
-const answersArea = document.getElementById("answers");
+const answersArea =
+document.getElementById("answers");
 
 answersArea.innerHTML = "";
 
-q.answers.forEach(function(answer){
 
-const button = document.createElement("button");
+/* 回答ボタンを作成 */
 
-button.className = "answer-button";
+q.answers.forEach(function(answer, index) {
 
-button.textContent = answer.label;
+const button =
+document.createElement("button");
 
-button.onclick = function(){
+button.className =
+"answer-button";
 
-Object.keys(answer.scores).forEach(function(key){
+button.textContent =
+answer.label;
 
-userScores[key] =
-(userScores[key] || 0) +
-answer.scores[key];
 
-});
+/* 戻ってきた時だけ選択状態を表示 */
+
+if (selectedAnswers[currentQuestion] === index) {
+
+button.style.borderColor =
+"#f58220";
+
+button.style.background =
+"#fff7f0";
+
+}
+
+
+/* 回答クリック */
+
+button.onclick = function() {
+
+/* 選択した回答を保存 */
+
+selectedAnswers[currentQuestion] =
+index;
+
+
+/* 次の質問 */
 
 currentQuestion++;
 
-if(currentQuestion < questions.length){
+
+/* 次の質問がある場合 */
+
+if (currentQuestion < questions.length) {
 
 showQuestion();
 
-}else{
+} else {
 
 showResult();
 
@@ -614,62 +530,165 @@ showResult();
 
 };
 
+
 answersArea.appendChild(button);
 
 });
+
+
+/* 戻るボタン */
+
+const backArea =
+document.createElement("div");
+
+backArea.style.marginTop =
+"20px";
+
+backArea.style.display =
+"flex";
+
+backArea.style.justifyContent =
+"space-between";
+
+
+/* 1問目以外なら戻るボタン */
+
+if (currentQuestion > 0) {
+
+const backButton =
+document.createElement("button");
+
+backButton.textContent =
+"← 前の質問に戻る";
+
+backButton.className =
+"answer-button";
+
+backButton.style.width =
+"auto";
+
+backButton.style.padding =
+"12px 20px";
+
+
+backButton.onclick =
+function() {
+
+currentQuestion--;
+
+showQuestion();
+
+};
+
+backArea.appendChild(backButton);
+
+}
+
+
+/* 戻るボタンを追加 */
+
+answersArea.appendChild(backArea);
 
 }
 
 
 /* =========================
-   結果計算
+   スコア計算
 ========================= */
 
-function calculateResults(){
+function calculateResults() {
 
-const results = tools.map(function(tool){
+let userScores = {};
+
+
+/* 選択された20問を集計 */
+
+selectedAnswers.forEach(function(answerIndex, questionIndex) {
+
+const selectedAnswer =
+questions[questionIndex]
+.answers[answerIndex];
+
+
+/* スコア加算 */
+
+Object.keys(selectedAnswer.scores)
+.forEach(function(key) {
+
+userScores[key] =
+(userScores[key] || 0) +
+selectedAnswer.scores[key];
+
+});
+
+});
+
+
+/* ツール採点 */
+
+const results =
+tools.map(function(tool) {
 
 let score = 0;
 
-Object.keys(tool.tags).forEach(function(tag){
+Object.keys(tool.tags)
+.forEach(function(tag) {
 
-if(userScores[tag]){
+if (userScores[tag]) {
 
-score += userScores[tag] * tool.tags[tag];
+score +=
+userScores[tag] *
+tool.tags[tag];
 
 }
 
 });
 
-return{
-name:tool.name,
-description:tool.description,
-rawScore:score
+return {
+
+name: tool.name,
+description: tool.description,
+rawScore: score
+
 };
 
 });
 
 
-results.sort(function(a,b){
+/* 点数順 */
+
+results.sort(function(a, b) {
+
 return b.rawScore - a.rawScore;
+
 });
 
 
-const maxScore = results[0].rawScore || 1;
+const maxScore =
+results[0].rawScore || 1;
 
-return results.slice(0,3).map(function(tool,index){
+
+/* BEST3 */
+
+return results
+.slice(0, 3)
+.map(function(tool, index) {
 
 const percentage =
 Math.max(
 60,
-Math.round((tool.rawScore / maxScore) * 100)
+Math.round(
+(tool.rawScore / maxScore) * 100
+)
 );
 
-return{
-rank:index + 1,
-name:tool.name,
-description:tool.description,
-score:percentage
+return {
+
+rank: index + 1,
+name: tool.name,
+description: tool.description,
+score: percentage
+
 };
 
 });
@@ -681,43 +700,75 @@ score:percentage
    結果表示
 ========================= */
 
-function showResult(){
+function showResult() {
 
-document.getElementById("diagnosis").style.display = "none";
+document.getElementById("diagnosis").style.display =
+"none";
 
-document.getElementById("result").style.display = "block";
+document.getElementById("result").style.display =
+"block";
 
-const resultList = document.getElementById("result-list");
 
-const results = calculateResults();
+const resultList =
+document.getElementById("result-list");
 
-const medals = ["🥇 BEST 1","🥈 BEST 2","🥉 BEST 3"];
 
-resultList.innerHTML = "";
+const results =
+calculateResults();
 
-results.forEach(function(tool,index){
 
-const card = document.createElement("div");
+const medals = [
+"🥇 BEST 1",
+"🥈 BEST 2",
+"🥉 BEST 3"
+];
 
-card.className = "result-card";
+
+resultList.innerHTML =
+"";
+
+
+results.forEach(function(tool, index) {
+
+const card =
+document.createElement("div");
+
+card.className =
+"result-card";
+
 
 card.innerHTML =
 
-'<div class="rank">' + medals[index] + '</div>' +
+'<div class="rank">' +
+medals[index] +
+'</div>' +
 
-'<div class="tool-name">' + tool.name + '</div>' +
+'<div class="tool-name">' +
+tool.name +
+'</div>' +
 
-'<div class="score">適合度 ' + tool.score + '%</div>' +
+'<div class="score">適合度 ' +
+tool.score +
+'%</div>' +
 
-'<div class="tool-description">' + tool.description + '</div>';
+'<div class="tool-description">' +
+tool.description +
+'</div>';
+
 
 resultList.appendChild(card);
 
 });
 
+
 window.scrollTo({
-top:document.getElementById("result").offsetTop,
-behavior:"smooth"
+
+top:
+document.getElementById("result").offsetTop,
+
+behavior:
+"smooth"
+
 });
 
 }
@@ -727,21 +778,31 @@ behavior:"smooth"
    再診断
 ========================= */
 
-function restartDiagnosis(){
+function restartDiagnosis() {
 
 currentQuestion = 0;
 
-userScores = {};
+selectedAnswers = [];
 
-document.getElementById("result").style.display = "none";
 
-document.getElementById("diagnosis").style.display = "block";
+document.getElementById("result").style.display =
+"none";
+
+document.getElementById("diagnosis").style.display =
+"block";
+
 
 showQuestion();
 
+
 window.scrollTo({
-top:document.getElementById("diagnosis").offsetTop,
-behavior:"smooth"
+
+top:
+document.getElementById("diagnosis").offsetTop,
+
+behavior:
+"smooth"
+
 });
 
 }
