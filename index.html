@@ -196,12 +196,11 @@ const questions = [
 {label:"資料・企画を作りたい",scores:{work:8,writing:5}},
 {label:"情報収集・要約",scores:{learning:7,research:5}},
 {label:"会議を文字起こししたい",scores:{transcription:15,work:6}},
-{label:"写真や画像を高画質化したい",scores:{imageEnhancement:20}}
+{label:"写真や画像を高画質化したい",scores:{imageEnhancement:20}},
 {label:"画像・バナーを作りたい",scores:{design:15}},
 {label:"動画を作りたい",scores:{video:15}},
 {label:"翻訳したい",scores:{translation:15}},
-{label:"複数の資料や情報をまとめて整理したい",scores:{knowledgeManagement:15,research:5}},
-{label:"写真や画像の画質を改善したい",scores:{imageEnhancement:15}}
+{label:"複数の資料や情報をまとめて整理したい",scores:{knowledgeManagement:15,research:5}}
 ]},
 {question:"AIを使った経験はありますか？",answers:[
 {label:"ほとんど使ったことがない",scores:{beginner:10}},
@@ -502,13 +501,21 @@ if(name==="デジタネ"&&(profile.kids||0)>0)boost+=22*(profile.kids||0);
 if(name==="Notta"&&(profile.transcription||0)>0)boost+=19*(profile.transcription||0);
 if(name==="Notta Brain"&&(profile.knowledgeManagement||0)>0)boost+=22*(profile.knowledgeManagement||0);
 if(name==="Notta Brain"&&(profile.transcription||0)>0&&(profile.work||0)>0.15)boost+=5*(profile.transcription||0);
+
 if(name==="Aiarty Image Enhancer"&&(profile.imageEnhancement||0)>0){
 boost+=45*(profile.imageEnhancement||0);
 }
-if(name==="Languise"&&(profile.fileTranslation||0)>0)boost+=45*(profile.fileTranslation||0);
-if(name==="Languise"&&(profile.translation||0)>0){
-  boost+=15*(profile.translation||0);
+
+/* Languise：ファイル翻訳を強く評価 */
+if(name==="Languise"&&(profile.fileTranslation||0)>0){
+boost+=55*(profile.fileTranslation||0);
 }
+
+/* 一般的な翻訳ニーズにも評価を加える */
+if(name==="Languise"&&(profile.translation||0)>0){
+boost+=25*(profile.translation||0);
+}
+
 if(name==="ヤラク翻訳"&&(profile.businessTranslation||0)>0)boost+=23*(profile.businessTranslation||0);
 if(name==="MiriCanvas"&&(profile.design||0)>0)boost+=3*(profile.design||0);
 
@@ -526,10 +533,12 @@ return boost;
 
 function calculateResults(){
 const profile=buildUserProfile();
+
 const results=tools.map(tool=>{
 let weightedFit=0;
 let totalWeight=0;
 const matched=[];
+
 Object.entries(profile).forEach(([tag,level])=>{
 if(level<=0)return;
 const importance=tagImportance[tag]||0.5;
@@ -537,25 +546,46 @@ const weight=level*importance;
 const capability=(tool.tags[tag]||0)/10;
 weightedFit+=capability*weight;
 totalWeight+=weight;
+
 if(capability>=0.7&&level>=0.18){
 matched.push({tag,level,capability,weight});
 }
 });
+
 const baseFit=totalWeight?Math.round((weightedFit/totalWeight)*100):0;
 const boost=getSpecialistBoost(tool,profile);
 const fit=Math.max(0,Math.min(100,Math.round(baseFit+boost)));
+
 matched.sort((a,b)=>(b.weight*b.capability)-(a.weight*a.capability));
-return{tool,fit,baseFit,matched,profile};
+
+/* ファイル全体の翻訳を明確に希望した場合、Languiseを優先候補にする */
+const priorityMatch=tool.name==="Languise"&&(profile.fileTranslation||0)>0;
+
+return{tool,fit,baseFit,matched,profile,priorityMatch};
 });
-results.sort((a,b)=>b.fit-a.fit);
+
+/* 専門用途との直接一致を通常スコアより優先して順位に反映 */
+results.sort((a,b)=>{
+if(a.priorityMatch!==b.priorityMatch){
+return Number(b.priorityMatch)-Number(a.priorityMatch);
+}
+return b.fit-a.fit;
+});
+
 return results.slice(0,3);
 }
 
 function makeReason(item){
 const top=item.matched.slice(0,2).map(x=>tagLabels[x.tag]).filter(Boolean);
+
+if(item.tool.name==="Languise"&&(item.profile.fileTranslation||0)>0){
+return "ファイル全体の翻訳・校正・要約を希望する回答と、Languiseのサービス用途が直接一致しました。翻訳作業の候補として優先表示しています。";
+}
+
 if(top.length){
 return "あなたの回答では「"+top.join("」「")+"」が重視されていました。このツールの特徴と重なるため、候補になりました。";
 }
+
 return "回答全体との相対的な一致度から候補になりました。公式サイトで実際の機能を確認し、用途に合うか比較してください。";
 }
 
@@ -563,12 +593,15 @@ function makeCaution(item){
 const p=item.profile;
 const t=item.tool.tags;
 const notes=[];
+
 if((p.free||0)>=0.28&&(t.free||0)<7)notes.push("無料利用を重視する回答でした。無料枠や利用制限を公式サイトで確認してください。");
 if((p.beginner||0)>=0.28&&(t.beginner||0)<7)notes.push("操作の簡単さを重視する場合、最初に操作画面やチュートリアルを確認すると安心です。");
 if((p.mobile||0)>=0.25&&(t.mobile||0)<7)notes.push("スマートフォン中心で使う場合、アプリで必要な機能が使えるか確認してください。");
 if((p.pc||0)>=0.25&&(t.pc||0)<7)notes.push("パソコンでの利用を想定する場合、対応OSやブラウザを確認してください。");
 if((p.japanese||0)>=0.25&&(t.japanese||0)<7)notes.push("日本語での操作性や出力品質を、実際の用途で試してから判断してください。");
+
 if(notes.length===0)notes.push("プランによって使える機能や上限が異なる場合があります。利用前に公式サイトで最新条件を確認してください。");
+
 return notes[0];
 }
 
@@ -578,8 +611,10 @@ answersArea.replaceChildren();
 navigationArea.replaceChildren();
 document.getElementById("diagnosis").style.display="none";
 document.getElementById("result").style.display="block";
+
 const resultList=document.getElementById("result-list");
 resultList.replaceChildren();
+
 const results=calculateResults();
 const ranks=["🥇 BEST 1","🥈 BEST 2","🥉 BEST 3"];
 const captions=["最も相性が高い候補","比較したい第2候補","用途を広げる第3候補"];
@@ -588,6 +623,7 @@ results.forEach((item,index)=>{
 const card=document.createElement("article");
 card.className="result-card rank-"+(index+1);
 card.style.animationDelay=(index*.18)+"s";
+
 const rank=document.createElement("div");
 rank.className="rank";
 rank.textContent=ranks[index];
@@ -606,6 +642,7 @@ card.appendChild(name);
 const score=document.createElement("div");
 score.className="score";
 score.textContent="相性スコア "+item.fit+"点";
+
 const note=document.createElement("span");
 note.className="score-note";
 note.textContent="（当サイト独自の目安）";
@@ -619,6 +656,7 @@ card.appendChild(desc);
 
 const reason=document.createElement("div");
 reason.className="reason-box";
+
 const label=document.createElement("span");
 label.className="detail-label";
 label.textContent="このツールをおすすめする理由";
@@ -629,17 +667,20 @@ card.appendChild(reason);
 if(item.matched.length){
 const chips=document.createElement("div");
 chips.className="matched-tags";
+
 item.matched.slice(0,4).forEach(m=>{
 const chip=document.createElement("span");
 chip.className="tag-chip";
 chip.textContent=tagLabels[m.tag];
 chips.appendChild(chip);
 });
+
 card.appendChild(chips);
 }
 
 const caution=document.createElement("div");
 caution.className="caution-box";
+
 const cautionLabel=document.createElement("span");
 cautionLabel.className="detail-label";
 cautionLabel.textContent="確認しておきたい点";
@@ -656,9 +697,11 @@ link.textContent="公式サイトで詳細を確認する ↗";
 card.appendChild(link);
 
 const affiliate=affiliateAds[item.tool.name];
+
 if(affiliate){
 const affiliateBox=document.createElement("div");
 affiliateBox.className="affiliate-box";
+
 const affiliateLabel=document.createElement("div");
 affiliateLabel.className="affiliate-label";
 affiliateLabel.textContent=affiliate.label;
@@ -679,8 +722,10 @@ pixel.height=1;
 pixel.border=0;
 pixel.alt="";
 affiliateBox.appendChild(pixel);
+
 card.appendChild(affiliateBox);
 }
+
 resultList.appendChild(card);
 });
 
