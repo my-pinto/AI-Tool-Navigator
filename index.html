@@ -505,7 +505,10 @@ if(name==="Notta Brain"&&(profile.transcription||0)>0&&(profile.work||0)>0.15)bo
 if(name==="Aiarty Image Enhancer"&&(profile.imageEnhancement||0)>0){
 boost+=45*(profile.imageEnhancement||0);
 }
-if(name==="Languise"&&(profile.fileTranslation||0)>0)boost+=23*(profile.fileTranslation||0);
+if(name==="Languise"&&(profile.fileTranslation||0)>0)boost+=45*(profile.fileTranslation||0);
+if(name==="Languise"&&(profile.translation||0)>0){
+  boost+=15*(profile.translation||0);
+}
 if(name==="ヤラク翻訳"&&(profile.businessTranslation||0)>0)boost+=23*(profile.businessTranslation||0);
 if(name==="MiriCanvas"&&(profile.design||0)>0)boost+=3*(profile.design||0);
 
