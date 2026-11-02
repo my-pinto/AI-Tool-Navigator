@@ -1,354 +1,1081 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="20問の質問に答えるだけで、あなたに最適なAIツールBEST3を無料診断。仕事、文章、画像、動画、学習、翻訳など目的に合ったAIツールを見つけます。">
 
-  <meta name="description" content="利用目的や予算、AIの経験に応じて、あなたにおすすめのAIツールBEST3を診断できる無料サービスです。">
+<title>AIツール選択ナビ｜20問で最適なAIをBEST3診断</title>
 
-  <title>AIツール選択ナビ｜あなたに最適なAIをBEST3診断</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Hiragino Sans",
-        "Yu Gothic",
-        sans-serif;
-      background: #f5f7fb;
-      color: #1b263b;
-      line-height: 1.7;
-    }
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Hiragino Sans",
+    "Yu Gothic",
+    sans-serif;
+  background: #f4f7fb;
+  color: #172033;
+  line-height: 1.7;
+}
 
-    header {
-      background: #0b1f3a;
-      color: white;
-      padding: 18px 20px;
-    }
+header {
+  background: #0b1f3a;
+  color: #ffffff;
+  padding: 16px 20px;
+}
 
-    .header-inner {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+}
 
-    .hero {
-      background:
-        linear-gradient(
-          135deg,
-          #0b1f3a,
-          #173f70
-        );
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-    }
+.logo span {
+  color: #f58220;
+}
 
-    .hero h1 {
-      font-size: clamp(30px, 6vw, 52px);
-      margin-bottom: 20px;
-    }
+/* HERO */
 
-    .hero p {
-      font-size: 18px;
-      max-width: 700px;
-      margin: 0 auto 35px;
-    }
+.hero {
+  background: linear-gradient(135deg, #0b1f3a, #174a7c);
+  color: white;
+  text-align: center;
+  padding: 80px 20px 90px;
+}
 
-    .start-button {
-      display: inline-block;
-      background: #f58220;
-      color: white;
-      padding: 17px 42px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: bold;
-      transition: 0.2s;
-    }
+.hero h1 {
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.3;
+  margin-bottom: 22px;
+}
 
-    .start-button:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 35px;
+  font-size: 18px;
+  color: #e6edf7;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 60px 20px;
-    }
+.button {
+  display: inline-block;
+  border: none;
+  background: #f58220;
+  color: white;
+  padding: 17px 38px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+}
 
-    .section-title {
-      text-align: center;
-      font-size: 30px;
-      margin-bottom: 15px;
-      color: #0b1f3a;
-    }
+.button:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
 
-    .section-text {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 40px;
-      color: #555;
-    }
+.sub-text {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #d5e0ef;
+}
 
-    .steps {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+/* CONTENT */
 
-    .card {
-      background: white;
-      border-radius: 15px;
-      padding: 28px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 70px 20px;
+}
 
-    .step-number {
-      display: inline-flex;
-      width: 42px;
-      height: 42px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: #f58220;
-      color: white;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
+.section-title {
+  text-align: center;
+  color: #0b1f3a;
+  font-size: 32px;
+  margin-bottom: 14px;
+}
 
-    .card h3 {
-      margin-bottom: 10px;
-      color: #0b1f3a;
-    }
+.section-description {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  color: #566074;
+}
 
-    .category-section {
-      background: white;
-    }
+/* HOW TO */
 
-    .categories {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      margin-top: 35px;
-    }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
 
-    .category {
-      background: #f5f7fb;
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      border: 1px solid #e5e9f0;
-    }
+.step-card {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(11,31,58,0.08);
+}
 
-    .category .icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
+.step-number {
+  width: 42px;
+  height: 42px;
+  background: #f58220;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
 
-    .category h3 {
-      color: #0b1f3a;
-      font-size: 18px;
-    }
+.step-card h3 {
+  color: #0b1f3a;
+  margin-bottom: 8px;
+}
 
-    .cta {
-      text-align: center;
-      background: #0b1f3a;
-      color: white;
-      padding: 70px 20px;
-    }
+/* CATEGORY */
 
-    .cta h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
+.category-section {
+  background: white;
+}
 
-    footer {
-      background: #071426;
-      color: #c9d2df;
-      text-align: center;
-      padding: 25px 20px;
-      font-size: 14px;
-    }
+.categories {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
 
-    @media (max-width: 600px) {
-      .header-inner {
-        justify-content: center;
-      }
+.category-card {
+  border: 1px solid #e4eaf2;
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 22px 12px;
+  text-align: center;
+}
 
-      .hero {
-        padding: 60px 20px;
-      }
+.category-icon {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
 
-      .hero p {
-        font-size: 16px;
-      }
+.category-card h3 {
+  color: #0b1f3a;
+  font-size: 16px;
+}
 
-      .start-button {
-        width: 100%;
-        max-width: 350px;
-      }
-    }
-  </style>
+/* DIAGNOSIS */
+
+#diagnosis {
+  background: #eef3f9;
+}
+
+.diagnosis-box {
+  background: white;
+  max-width: 750px;
+  margin: auto;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(11,31,58,0.12);
+}
+
+.progress-area {
+  margin-bottom: 28px;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #0b1f3a;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #e3e9f1;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 5%;
+  background: #f58220;
+  transition: width 0.3s;
+}
+
+.question-number {
+  color: #f58220;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.question {
+  font-size: 25px;
+  font-weight: 800;
+  color: #0b1f3a;
+  margin-bottom: 25px;
+}
+
+.answers {
+  display: grid;
+  gap: 12px;
+}
+
+.answer-button {
+  width: 100%;
+  padding: 17px 20px;
+  background: #ffffff;
+  border: 2px solid #dfe6ee;
+  border-radius: 12px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #172033;
+}
+
+.answer-button:hover {
+  border-color: #f58220;
+  background: #fff7f0;
+}
+
+.answer-button:active {
+  transform: scale(0.99);
+}
+
+/* RESULT */
+
+#result {
+  display: none;
+  background: #eef3f9;
+}
+
+.result-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.result-header h2 {
+  font-size: 34px;
+  color: #0b1f3a;
+}
+
+.result-header p {
+  color: #566074;
+  margin-top: 10px;
+}
+
+.result-card {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(11,31,58,0.1);
+}
+
+.rank {
+  display: inline-block;
+  padding: 6px 15px;
+  border-radius: 30px;
+  background: #f58220;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.tool-name {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0b1f3a;
+}
+
+.score {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f58220;
+  margin: 8px 0;
+}
+
+.tool-description {
+  color: #566074;
+}
+
+.restart-button {
+  display: block;
+  margin: 30px auto 0;
+}
+
+/* FOOTER */
+
+footer {
+  background: #071426;
+  color: #b8c3d1;
+  text-align: center;
+  padding: 25px 20px;
+  font-size: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .hero {
+    padding: 60px 20px 70px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-card:last-child {
+    grid-column: span 2;
+  }
+
+  .container {
+    padding: 55px 18px;
+  }
+
+  .diagnosis-box {
+    padding: 24px 18px;
+  }
+
+  .question {
+    font-size: 22px;
+  }
+
+  .answer-button {
+    padding: 15px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="header-inner">
-      <div class="logo">AIツール選択ナビ</div>
+<header>
+
+  <div class="header-inner">
+
+    <div class="logo">
+      AIツール<span>選択ナビ</span>
     </div>
-  </header>
 
-  <section class="hero">
+  </div>
 
-    <h1>
-      あなたに最適なAIツールを<br>
-      BEST3で診断
-    </h1>
-
-    <p>
-      「AIを使ってみたいけど、どれを選べばいいかわからない」
-      そんなあなたのために、20の質問からおすすめのAIツールを診断します。
-    </p>
-
-    <a href="#diagnosis" class="start-button">
-      無料で診断をはじめる
-    </a>
-
-  </section>
+</header>
 
 
-  <section class="container">
+<!-- HERO -->
+
+<section class="hero">
+
+  <h1>
+    あなたに最適なAIツールを<br>
+    <span style="color:#f58220;">BEST3</span>で診断
+  </h1>
+
+  <p>
+    20の質問に答えるだけ。
+    あなたの目的・予算・AI経験に合わせて、
+    おすすめのAIツールを診断します。
+  </p>
+
+  <a href="#diagnosis" class="button">
+    無料で診断をはじめる
+  </a>
+
+  <div class="sub-text">
+    診断時間 約3分｜無料｜登録不要
+  </div>
+
+</section>
+
+
+<!-- HOW TO -->
+
+<section class="container">
+
+  <h2 class="section-title">
+    3ステップであなたに合うAIが見つかる
+  </h2>
+
+  <p class="section-description">
+    難しい知識は必要ありません。
+    質問に答えるだけで、あなたに合ったAIツールを探せます。
+  </p>
+
+  <div class="steps">
+
+    <div class="step-card">
+
+      <div class="step-number">1</div>
+
+      <h3>質問に答える</h3>
+
+      <p>
+        利用目的やAI経験など、
+        20の簡単な質問に答えます。
+      </p>
+
+    </div>
+
+
+    <div class="step-card">
+
+      <div class="step-number">2</div>
+
+      <h3>自動分析</h3>
+
+      <p>
+        回答内容をもとに、
+        あなたに合うAIを分析します。
+      </p>
+
+    </div>
+
+
+    <div class="step-card">
+
+      <div class="step-number">3</div>
+
+      <h3>BEST3を確認</h3>
+
+      <p>
+        あなたにおすすめの
+        AIツールBEST3を表示します。
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CATEGORY -->
+
+<section class="category-section">
+
+  <div class="container">
 
     <h2 class="section-title">
-      たった3ステップで最適なAIが見つかる
+      目的に合わせてAIを診断
     </h2>
 
-    <p class="section-text">
-      難しい専門知識は必要ありません。
-      質問に答えるだけで、あなたの目的に合ったAIツールを探せます。
-    </p>
+    <div class="categories">
 
-    <div class="steps">
-
-      <div class="card">
-        <div class="step-number">1</div>
-        <h3>質問に答える</h3>
-        <p>
-          利用目的や予算、AIの経験など、
-          簡単な質問に答えます。
-        </p>
+      <div class="category-card">
+        <div class="category-icon">💼</div>
+        <h3>仕事</h3>
       </div>
 
-      <div class="card">
-        <div class="step-number">2</div>
-        <h3>AIが自動分析</h3>
-        <p>
-          あなたの回答をもとに、
-          各AIツールとの相性を分析します。
-        </p>
+      <div class="category-card">
+        <div class="category-icon">✍️</div>
+        <h3>文章</h3>
       </div>
 
-      <div class="card">
-        <div class="step-number">3</div>
-        <h3>BEST3を表示</h3>
-        <p>
-          あなたにおすすめのAIツールを
-          BEST3形式で紹介します。
-        </p>
+      <div class="category-card">
+        <div class="category-icon">🎨</div>
+        <h3>画像</h3>
+      </div>
+
+      <div class="category-card">
+        <div class="category-icon">🎬</div>
+        <h3>動画</h3>
+      </div>
+
+      <div class="category-card">
+        <div class="category-icon">📚</div>
+        <h3>学習</h3>
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <section class="category-section">
+<!-- DIAGNOSIS -->
 
-    <div class="container">
+<section id="diagnosis">
 
-      <h2 class="section-title">
-        こんなAIツールを診断できます
+  <div class="container">
+
+    <div class="diagnosis-box">
+
+      <div class="progress-area">
+
+        <div class="progress-text">
+
+          <span id="progress-label">
+            質問 1 / 20
+          </span>
+
+          <span id="progress-percent">
+            5%
+          </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+          <div
+            class="progress"
+            id="progress"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div id="question-area">
+
+        <div class="question-number" id="question-number">
+          QUESTION 1
+        </div>
+
+        <div class="question" id="question">
+          AIを使う一番大きな目的は？
+        </div>
+
+        <div class="answers" id="answers"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RESULT -->
+
+<section id="result">
+
+  <div class="container">
+
+    <div class="result-header">
+
+      <h2>
+        診断結果
       </h2>
 
-      <div class="categories">
-
-        <div class="category">
-          <div class="icon">💼</div>
-          <h3>仕事・業務効率化</h3>
-        </div>
-
-        <div class="category">
-          <div class="icon">✍️</div>
-          <h3>文章・ライティング</h3>
-        </div>
-
-        <div class="category">
-          <div class="icon">🎨</div>
-          <h3>画像・デザイン</h3>
-        </div>
-
-        <div class="category">
-          <div class="icon">🎬</div>
-          <h3>動画・音声</h3>
-        </div>
-
-        <div class="category">
-          <div class="icon">📚</div>
-          <h3>学習・調査</h3>
-        </div>
-
-      </div>
+      <p>
+        あなたにおすすめのAIツールBEST3
+      </p>
 
     </div>
 
-  </section>
+    <div id="result-list"></div>
+
+    <button
+      class="button restart-button"
+      onclick="restartDiagnosis()"
+    >
+      もう一度診断する
+    </button>
+
+  </div>
+
+</section>
 
 
-  <section class="cta" id="diagnosis">
+<footer>
 
-    <h2>あなたに合うAIを見つけよう</h2>
+  © 2026 AIツール選択ナビ
 
-    <p>
-      20問の質問に答えるだけで、
-      あなたにおすすめのAIツールBEST3がわかります。
-    </p>
-
-    <br>
-
-    <a href="#" class="start-button">
-      診断をスタートする
-    </a>
-
-  </section>
+</footer>
 
 
-  <footer>
+<script>
 
-    <p>
-      © AIツール選択ナビ
-    </p>
+/* =========================
+   質問データ
+========================= */
 
-  </footer>
+const questions = [
+
+{
+question: "AIを使う一番大きな目的は？",
+answers: [
+"仕事を効率化したい",
+"文章を作りたい",
+"画像・デザインを作りたい",
+"動画・音声を作りたい",
+"勉強・学習に使いたい",
+"翻訳したい"
+]
+},
+
+{
+question: "具体的に何をしたいですか？",
+answers: [
+"メール・文章作成",
+"資料・企画を作りたい",
+"情報収集・要約",
+"会議を文字起こししたい",
+"画像・バナーを作りたい",
+"動画を作りたい",
+"翻訳したい"
+]
+},
+
+{
+question: "AIを使った経験はありますか？",
+answers: [
+"ほとんど使ったことがない",
+"少し使ったことがある",
+"普段から使っている",
+"高度な使い方もしている"
+]
+},
+
+{
+question: "主にどの端末で使いますか？",
+answers: [
+"スマートフォン",
+"パソコン",
+"両方",
+"まだ決めていない"
+]
+},
+
+{
+question: "日本語の使いやすさは重要ですか？",
+answers: [
+"とても重要",
+"できれば重要",
+"あまり気にしない"
+]
+},
+
+{
+question: "AIに一番求めるものは？",
+answers: [
+"とにかく簡単に使える",
+"正確さを重視したい",
+"多くの機能を使いたい",
+"専門的な作業をしたい"
+]
+},
+
+{
+question: "月額料金の希望は？",
+answers: [
+"完全無料で使いたい",
+"無料版があればよい",
+"月1,000円程度まで",
+"月3,000円程度まで",
+"効果があれば料金は気にしない"
+]
+},
+
+{
+question: "利用頻度は？",
+answers: [
+"たまに使う",
+"週に数回",
+"ほぼ毎日",
+"仕事で毎日使う"
+]
+},
+
+{
+question: "どのくらい時間を節約したいですか？",
+answers: [
+"少し便利になればよい",
+"作業時間を減らしたい",
+"大幅に効率化したい"
+]
+},
+
+{
+question: "文章を作る機会はありますか？",
+answers: [
+"ほとんどない",
+"メールや短い文章",
+"資料やブログなど長文",
+"毎日の仕事で多い"
+]
+},
+
+{
+question: "資料や企画を作りますか？",
+answers: [
+"ほとんど作らない",
+"ときどき作る",
+"よく作る",
+"仕事で頻繁に作る"
+]
+},
+
+{
+question: "会議や音声を文字にする必要がありますか？",
+answers: [
+"必要ない",
+"ときどきある",
+"よくある",
+"仕事で頻繁に必要"
+]
+},
+
+{
+question: "画像やデザインを作りますか？",
+answers: [
+"ほとんど作らない",
+"SNS用に作りたい",
+"資料や仕事で使いたい",
+"本格的なデザインをしたい"
+]
+},
+
+{
+question: "動画を作りますか？",
+answers: [
+"作らない",
+"SNS用に少し作りたい",
+"趣味・副業で作りたい",
+"仕事で使いたい"
+]
+},
+
+{
+question: "音声を作ったり編集したりしますか？",
+answers: [
+"必要ない",
+"少し興味がある",
+"よく使いたい",
+"仕事・コンテンツ制作で必要"
+]
+},
+
+{
+question: "外国語を使う機会は？",
+answers: [
+"ほとんどない",
+"ときどきある",
+"よくある",
+"仕事で頻繁にある"
+]
+},
+
+{
+question: "AIに情報収集を手伝ってほしいですか？",
+answers: [
+"あまり必要ない",
+"少し使いたい",
+"よく使いたい",
+"仕事や学習で頻繁に使いたい"
+]
+},
+
+{
+question: "AIを使う目的に近いものは？",
+answers: [
+"日常生活を便利にしたい",
+"仕事を効率化したい",
+"副業・収益化に活用したい",
+"学習やスキルアップに使いたい",
+"クリエイティブな作品を作りたい"
+]
+},
+
+{
+question: "AIを選ぶときに一番不安なのは？",
+answers: [
+"操作が難しそう",
+"料金が心配",
+"どれを選べばいいかわからない",
+"自分の目的に合うかわからない"
+]
+},
+
+{
+question: "あなたにとって一番重要なのは？",
+answers: [
+"使いやすさ",
+"料金の安さ",
+"機能の多さ",
+"専門性",
+"仕事の効率化"
+]
+}
+
+];
+
+
+/* =========================
+   診断制御
+========================= */
+
+let currentQuestion = 0;
+
+const answers = [];
+
+
+/* =========================
+   質問を表示
+========================= */
+
+function showQuestion() {
+
+const q = questions[currentQuestion];
+
+document.getElementById("question-number").textContent =
+"QUESTION " + (currentQuestion + 1);
+
+document.getElementById("question").textContent =
+q.question;
+
+document.getElementById("progress-label").textContent =
+"質問 " + (currentQuestion + 1) + " / " + questions.length;
+
+const percent =
+Math.round(
+((currentQuestion + 1) / questions.length) * 100
+);
+
+document.getElementById("progress-percent").textContent =
+percent + "%";
+
+document.getElementById("progress").style.width =
+percent + "%";
+
+
+const answersArea =
+document.getElementById("answers");
+
+answersArea.innerHTML = "";
+
+
+q.answers.forEach(function(answer) {
+
+const button =
+document.createElement("button");
+
+button.className =
+"answer-button";
+
+button.textContent =
+answer;
+
+button.onclick =
+function() {
+
+answers.push({
+question: q.question,
+answer: answer
+});
+
+currentQuestion++;
+
+if (
+currentQuestion <
+questions.length
+) {
+
+showQuestion();
+
+} else {
+
+showResult();
+
+}
+
+};
+
+answersArea.appendChild(button);
+
+});
+
+}
+
+
+/* =========================
+   診断結果
+========================= */
+
+function showResult() {
+
+document.getElementById(
+"diagnosis"
+).style.display =
+"none";
+
+document.getElementById(
+"result"
+).style.display =
+"block";
+
+
+const resultList =
+document.getElementById(
+"result-list"
+);
+
+
+/* 仮の結果 */
+
+const results = [
+
+{
+rank: "🥇 BEST 1",
+name: "ChatGPT",
+score: "95%",
+description:
+"文章作成、情報整理、学習、仕事など幅広い用途に活用できる万能AIです。"
+},
+
+{
+rank: "🥈 BEST 2",
+name: "Gemini",
+score: "89%",
+description:
+"情報整理や文章作成など、幅広い用途に活用できるAIです。"
+},
+
+{
+rank: "🥉 BEST 3",
+name: "Claude",
+score: "84%",
+description:
+"長文の文章作成や情報整理などを得意とするAIです。"
+}
+
+];
+
+
+resultList.innerHTML = "";
+
+
+results.forEach(function(tool) {
+
+const card =
+document.createElement("div");
+
+card.className =
+"result-card";
+
+card.innerHTML =
+
+'<div class="rank">' +
+tool.rank +
+'</div>' +
+
+'<div class="tool-name">' +
+tool.name +
+'</div>' +
+
+'<div class="score">適合度 ' +
+tool.score +
+'</div>' +
+
+'<div class="tool-description">' +
+tool.description +
+'</div>';
+
+
+resultList.appendChild(card);
+
+});
+
+window.scrollTo({
+top:
+document.getElementById(
+"result"
+).offsetTop,
+
+behavior:
+"smooth"
+});
+
+}
+
+
+/* =========================
+   もう一度診断
+========================= */
+
+function restartDiagnosis() {
+
+currentQuestion = 0;
+
+answers.length = 0;
+
+
+document.getElementById(
+"result"
+).style.display =
+"none";
+
+
+document.getElementById(
+"diagnosis"
+).style.display =
+"block";
+
+
+showQuestion();
+
+
+window.scrollTo({
+top:
+document.getElementById(
+"diagnosis"
+).offsetTop,
+
+behavior:
+"smooth"
+});
+
+}
+
+
+/* =========================
+   初期表示
+========================= */
+
+showQuestion();
+
+</script>
 
 </body>
 </html>
