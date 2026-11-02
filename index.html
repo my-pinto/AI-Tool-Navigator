@@ -35,7 +35,6 @@ header{background:#0b1f3a;color:white;padding:16px 20px}
   box-shadow:0 7px 18px rgba(245,130,32,.3);
   transition:transform .2s,box-shadow .2s;
 }
-.button:hover{transform:translateY(-3px);box-shadow:0 11px 25px rgba(245,130,32,.4)}
 .button:active{transform:scale(.95)}
 
 .container{max-width:900px;margin:auto;padding:70px 20px}
@@ -48,7 +47,6 @@ header{background:#0b1f3a;color:white;padding:16px 20px}
   box-shadow:0 8px 24px rgba(11,31,58,.08);
   transition:transform .25s;
 }
-.step-card:hover{transform:translateY(-5px)}
 .step-number{
   width:42px;height:42px;background:#f58220;color:white;
   border-radius:50%;display:flex;align-items:center;
@@ -63,7 +61,6 @@ header{background:#0b1f3a;color:white;padding:16px 20px}
   border-radius:14px;padding:22px 12px;text-align:center;
   transition:transform .2s,border-color .2s;
 }
-.category-card:hover{transform:translateY(-4px);border-color:#f58220}
 .category-icon{font-size:34px;margin-bottom:8px}
 .category-card h3{color:#0b1f3a;font-size:16px}
 
@@ -106,37 +103,60 @@ header{background:#0b1f3a;color:white;padding:16px 20px}
 }
 
 .answers{display:grid;gap:12px}
-.answer-button {
-  width: 100%;
-  padding: 17px 20px;
-  background: white;
-  border: 2px solid #dfe6ee;
-  border-radius: 12px;
-  text-align: left;
-  font-size: 16px;
-  cursor: pointer;
-  color: #172033;
-  transition: border-color .2s, background .2s, transform .2s;
-  -webkit-tap-highlight-color: transparent;
-  appearance: none;
+
+/* 回答ボタンの基本状態 */
+.answer-button{
+  width:100%;
+  padding:17px 20px;
+  background:white;
+  border:2px solid #dfe6ee;
+  border-radius:12px;
+  text-align:left;
+  font-size:16px;
+  cursor:pointer;
+  color:#172033;
+  transition:border-color .2s,background .2s,transform .2s;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-appearance:none;
+  appearance:none;
+  touch-action:manipulation;
+  outline:none;
 }
 
-.answer-button:hover {
-  border-color: #f58220;
-  background: #fff7f0;
+/*
+  重要：
+  hoverが使えるマウス端末だけにホバー演出を適用。
+  iPhoneなどのタッチ端末には適用しない。
+*/
+@media (hover:hover) and (pointer:fine){
+  .answer-button:hover{
+    border-color:#f58220;
+    background:#fff7f0;
+  }
 }
 
-.answer-button.is-pressed {
-  border-color: #f58220 !important;
-  background: #fff1e4 !important;
-  animation: answerPop .3s ease;
+/* タップ後のフォーカスでオレンジ枠を残さない */
+.answer-button:focus{
+  outline:none;
+  border-color:#dfe6ee;
+  background:white;
 }
 
-@keyframes answerPop {
-  0% { transform: scale(1); }
-  45% { transform: scale(1.035); }
-  100% { transform: scale(1); }
+/* キーボード操作時は青系のフォーカス表示 */
+.answer-button:focus-visible{
+  outline:3px solid #8ba9cc;
+  outline-offset:3px;
 }
+
+/* タップした瞬間だけの選択演出 */
+.answer-button.is-pressed{
+  border-color:#f58220;
+  background:#fff1e4;
+  animation:answerPop .3s ease;
+  pointer-events:none;
+}
+
+@keyframes answerPop{
   0%{transform:scale(1)}
   45%{transform:scale(1.035)}
   100%{transform:scale(1)}
@@ -144,11 +164,24 @@ header{background:#0b1f3a;color:white;padding:16px 20px}
 
 .navigation-area{margin-top:20px;min-height:48px}
 .back-button{
-  border:1px solid #cfd8e3;background:white;color:#0b1f3a;
-  padding:12px 20px;border-radius:10px;font-size:15px;
-  font-weight:bold;cursor:pointer;transition:.2s;
+  border:1px solid #cfd8e3;
+  background:white;
+  color:#0b1f3a;
+  padding:12px 20px;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
 }
-.back-button:hover{border-color:#f58220;background:#fff7f0}
+@media (hover:hover) and (pointer:fine){
+  .back-button:hover{
+    border-color:#f58220;
+    background:#fff7f0;
+  }
+}
 .back-button:active{transform:scale(.96)}
 .back-button:disabled{opacity:.5;cursor:default}
 
@@ -252,6 +285,7 @@ footer{background:#071426;color:#b8c3d1;text-align:center;padding:25px 20px;font
   .result-card{padding:23px 19px}
   .result-card.rank-1{padding:30px 20px}
 }
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms!important;
@@ -578,7 +612,7 @@ const tools = [
 ];
 
 /* =========================
-   診断制御・選択状態完全リセット版
+   診断制御
 ========================= */
 
 let currentQuestion = 0;
@@ -586,18 +620,34 @@ let selectedAnswers = [];
 let isTransitioning = false;
 
 const questionContent = document.getElementById("question-content");
+const answersArea = document.getElementById("answers");
+const navigationArea = document.getElementById("navigation-area");
 
-function clearSelection() {
-  document.querySelectorAll(".answer-button").forEach(function(button) {
+/*
+  ボタンの状態を解除し、フォーカスも外す。
+  タッチ端末のhover表示はCSS側で無効化している。
+*/
+function clearSelection(){
+  document.querySelectorAll(".answer-button").forEach(function(button){
     button.classList.remove("is-pressed");
     button.blur();
   });
+
+  if(document.activeElement && document.activeElement.blur){
+    document.activeElement.blur();
+  }
 }
 
-function showQuestion() {
+/*
+  質問を表示する前に、古い回答ボタンを完全に破棄する。
+*/
+function showQuestion(){
   const q = questions[currentQuestion];
 
   clearSelection();
+
+  answersArea.replaceChildren();
+  navigationArea.replaceChildren();
 
   questionContent.classList.remove("leaving");
   questionContent.style.animation = "none";
@@ -622,85 +672,81 @@ function showQuestion() {
   document.getElementById("progress").style.width =
     percent + "%";
 
-  const answersArea = document.getElementById("answers");
-
-  answersArea.replaceChildren();
-
-  q.answers.forEach(function(answer, index) {
+  q.answers.forEach(function(answer,index){
     const button = document.createElement("button");
 
     button.type = "button";
     button.className = "answer-button";
     button.textContent = answer.label;
 
-    button.addEventListener("click", function() {
-      if (isTransitioning) return;
+    button.addEventListener("click",function(){
+      if(isTransitioning) return;
 
       isTransitioning = true;
 
-      /* クリックした選択肢だけに演出 */
+      /* クリックした回答だけを一時的に演出 */
       clearSelection();
       button.classList.add("is-pressed");
 
       /* 回答を保存 */
       selectedAnswers[currentQuestion] = index;
 
-      /* 選択枠を解除してから移動 */
-      setTimeout(function() {
+      /*
+        演出後にボタンを完全に破棄してから次へ進む。
+      */
+      setTimeout(function(){
         clearSelection();
 
         questionContent.classList.add("leaving");
 
-        setTimeout(function() {
+        setTimeout(function(){
           currentQuestion++;
 
-          isTransitioning = false;
-
-          if (currentQuestion < questions.length) {
+          if(currentQuestion < questions.length){
+            isTransitioning = false;
             showQuestion();
-          } else {
+          }else{
+            isTransitioning = false;
             showResult();
           }
-        }, 180);
+        },180);
 
-      }, 300);
+      },300);
     });
 
     answersArea.appendChild(button);
   });
 
-  const navigationArea =
-    document.getElementById("navigation-area");
-
-  navigationArea.replaceChildren();
-
-  if (currentQuestion > 0) {
+  /* 戻るボタン */
+  if(currentQuestion > 0){
     const backButton = document.createElement("button");
 
     backButton.type = "button";
     backButton.className = "back-button";
     backButton.textContent = "← 前の質問に戻る";
 
-    backButton.addEventListener("click", function() {
-      if (isTransitioning) return;
+    backButton.addEventListener("click",function(){
+      if(isTransitioning) return;
 
       isTransitioning = true;
 
-      /* 現在の選択状態を完全解除 */
       clearSelection();
 
-      /* 戻る位置以降の回答を削除 */
-      selectedAnswers.length = currentQuestion - 1;
+      /*
+        戻る位置の回答から後ろをすべて削除。
+        例：質問3から質問2に戻る場合、
+        質問2以降の回答を未選択にする。
+      */
+      selectedAnswers.splice(currentQuestion - 1);
 
       questionContent.classList.add("leaving");
 
-      setTimeout(function() {
+      setTimeout(function(){
         currentQuestion--;
 
-        isTransitioning = false;
-
         showQuestion();
-      }, 180);
+        isTransitioning = false;
+      },180);
     });
 
     navigationArea.appendChild(backButton);
@@ -711,49 +757,49 @@ function showQuestion() {
    結果計算
 ========================= */
 
-function calculateResults() {
+function calculateResults(){
   let userScores = {};
 
-  selectedAnswers.forEach(function(answerIndex, questionIndex) {
-    if (answerIndex === undefined) return;
+  selectedAnswers.forEach(function(answerIndex,questionIndex){
+    if(answerIndex === undefined) return;
 
     const selectedAnswer =
       questions[questionIndex].answers[answerIndex];
 
-    Object.keys(selectedAnswer.scores).forEach(function(key) {
+    Object.keys(selectedAnswer.scores).forEach(function(key){
       userScores[key] =
         (userScores[key] || 0) + selectedAnswer.scores[key];
     });
   });
 
-  const results = tools.map(function(tool) {
+  const results = tools.map(function(tool){
     let score = 0;
 
-    Object.keys(tool.tags).forEach(function(tag) {
-      if (userScores[tag]) {
+    Object.keys(tool.tags).forEach(function(tag){
+      if(userScores[tag]){
         score += userScores[tag] * tool.tags[tag];
       }
     });
 
     return {
-      name: tool.name,
-      description: tool.description,
-      rawScore: score
+      name:tool.name,
+      description:tool.description,
+      rawScore:score
     };
   });
 
-  results.sort(function(a, b) {
+  results.sort(function(a,b){
     return b.rawScore - a.rawScore;
   });
 
   const maxScore = results[0].rawScore || 1;
 
-  return results.slice(0, 3).map(function(tool, index) {
+  return results.slice(0,3).map(function(tool,index){
     return {
-      rank: index + 1,
-      name: tool.name,
-      description: tool.description,
-      score: Math.max(
+      rank:index + 1,
+      name:tool.name,
+      description:tool.description,
+      score:Math.max(
         60,
         Math.round((tool.rawScore / maxScore) * 100)
       )
@@ -765,8 +811,11 @@ function calculateResults() {
    結果表示
 ========================= */
 
-function showResult() {
+function showResult(){
   clearSelection();
+
+  answersArea.replaceChildren();
+  navigationArea.replaceChildren();
 
   document.getElementById("diagnosis").style.display = "none";
   document.getElementById("result").style.display = "block";
@@ -775,17 +824,17 @@ function showResult() {
   const results = calculateResults();
 
   const info = [
-    ["🥇 BEST 1", "あなたに最もおすすめ！",
+    ["🥇 BEST 1","あなたに最もおすすめ！",
      "今回の診断で最も適合度が高いAIツールです。"],
-    ["🥈 BEST 2", "おすすめの第2候補",
+    ["🥈 BEST 2","おすすめの第2候補",
      "BEST1と比較して検討したいAIツールです。"],
-    ["🥉 BEST 3", "おすすめの第3候補",
+    ["🥉 BEST 3","おすすめの第3候補",
      "別の選択肢として検討したいAIツールです。"]
   ];
 
   resultList.replaceChildren();
 
-  results.forEach(function(tool, index) {
+  results.forEach(function(tool,index){
     const card = document.createElement("div");
 
     card.className = "result-card rank-" + (index + 1);
@@ -806,8 +855,8 @@ function showResult() {
   });
 
   window.scrollTo({
-    top: document.getElementById("result").offsetTop,
-    behavior: "smooth"
+    top:document.getElementById("result").offsetTop,
+    behavior:"smooth"
   });
 }
 
@@ -815,12 +864,15 @@ function showResult() {
    再診断
 ========================= */
 
-function restartDiagnosis() {
+function restartDiagnosis(){
   currentQuestion = 0;
   selectedAnswers = [];
   isTransitioning = false;
 
   clearSelection();
+
+  answersArea.replaceChildren();
+  navigationArea.replaceChildren();
 
   document.getElementById("result").style.display = "none";
   document.getElementById("diagnosis").style.display = "block";
@@ -828,8 +880,8 @@ function restartDiagnosis() {
   showQuestion();
 
   window.scrollTo({
-    top: document.getElementById("diagnosis").offsetTop,
-    behavior: "smooth"
+    top:document.getElementById("diagnosis").offsetTop,
+    behavior:"smooth"
   });
 }
 
