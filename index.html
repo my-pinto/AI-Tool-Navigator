@@ -5,318 +5,261 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="20問の質問に答えるだけで、あなたに最適なAIツールBEST3を無料診断。">
 <title>AIツール選択ナビ｜20問で最適なAIをBEST3診断</title>
+
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+  background:#f4f7fb;color:#172033;line-height:1.7;
 }
-html {
-  scroll-behavior: smooth;
+header{background:#0b1f3a;color:white;padding:16px 20px}
+.header-inner{max-width:1100px;margin:auto}
+.logo{font-size:22px;font-weight:800}
+.logo span{color:#f58220}
+
+.hero{
+  background:linear-gradient(135deg,#0b1f3a,#174a7c);
+  color:white;text-align:center;padding:80px 20px 90px;
 }
-body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Hiragino Sans",
-    "Yu Gothic",
-    sans-serif;
-  background: #f4f7fb;
-  color: #172033;
-  line-height: 1.7;
+.hero h1{font-size:clamp(32px,6vw,54px);line-height:1.3;margin-bottom:22px}
+.hero p{max-width:700px;margin:0 auto 35px;font-size:18px;color:#e6edf7}
+.sub-text{margin-top:18px;font-size:14px;color:#cbd8e8}
+
+.button{
+  display:inline-block;border:none;
+  background:linear-gradient(135deg,#ff9b36,#f36b12);
+  color:white;padding:17px 38px;border-radius:50px;
+  font-size:18px;font-weight:800;cursor:pointer;
+  text-decoration:none;
+  box-shadow:0 7px 18px rgba(245,130,32,.3);
+  transition:transform .2s,box-shadow .2s;
 }
-header {
-  background: #0b1f3a;
-  color: white;
-  padding: 16px 20px;
+.button:hover{transform:translateY(-3px);box-shadow:0 11px 25px rgba(245,130,32,.4)}
+.button:active{transform:scale(.95)}
+
+.container{max-width:900px;margin:auto;padding:70px 20px}
+.section-title{text-align:center;color:#0b1f3a;font-size:32px;margin-bottom:14px}
+.section-description{text-align:center;max-width:700px;margin:0 auto 40px;color:#566074}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step-card{
+  background:white;padding:28px;border-radius:18px;
+  box-shadow:0 8px 24px rgba(11,31,58,.08);
+  transition:transform .25s;
 }
-.header-inner {
-  max-width: 1100px;
-  margin: auto;
+.step-card:hover{transform:translateY(-5px)}
+.step-number{
+  width:42px;height:42px;background:#f58220;color:white;
+  border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:bold;margin-bottom:15px;
 }
-.logo {
-  font-size: 22px;
-  font-weight: 800;
+.step-card h3{color:#0b1f3a;margin-bottom:8px}
+
+.category-section{background:white}
+.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
+.category-card{
+  border:1px solid #e4eaf2;background:#f8fafc;
+  border-radius:14px;padding:22px 12px;text-align:center;
+  transition:transform .2s,border-color .2s;
 }
-.logo span {
-  color: #f58220;
+.category-card:hover{transform:translateY(-4px);border-color:#f58220}
+.category-icon{font-size:34px;margin-bottom:8px}
+.category-card h3{color:#0b1f3a;font-size:16px}
+
+#diagnosis,#result{background:#eef3f9}
+#result{display:none}
+
+.diagnosis-box{
+  background:white;max-width:750px;margin:auto;padding:35px;
+  border-radius:20px;box-shadow:0 10px 30px rgba(11,31,58,.12);
 }
-.hero {
-  background: linear-gradient(135deg, #0b1f3a, #174a7c);
-  color: white;
-  text-align: center;
-  padding: 80px 20px 90px;
+.progress-area{margin-bottom:28px}
+.progress-text{
+  display:flex;justify-content:space-between;
+  font-weight:bold;margin-bottom:8px;color:#0b1f3a;
 }
-.hero h1 {
-  font-size: clamp(32px, 6vw, 54px);
-  line-height: 1.3;
-  margin-bottom: 22px;
+.progress-bar{width:100%;height:12px;background:#e3e9f1;border-radius:20px;overflow:hidden}
+.progress{
+  height:100%;width:5%;
+  background:linear-gradient(90deg,#f58220,#ffb14e);
+  border-radius:20px;
+  transition:width .65s cubic-bezier(.22,1,.36,1);
+  position:relative;
 }
-.hero p {
-  max-width: 700px;
-  margin: 0 auto 35px;
-  font-size: 18px;
-  color: #e6edf7;
+.progress::after{
+  content:"";position:absolute;right:0;top:0;
+  width:25px;height:100%;background:rgba(255,255,255,.35);
+  filter:blur(5px);
 }
-.button {
-  display: inline-block;
-  border: none;
-  background: #f58220;
-  color: white;
-  padding: 17px 38px;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 800;
-  cursor: pointer;
-  text-decoration: none;
+.question-number{color:#f58220;font-weight:800;margin-bottom:8px}
+.question{font-size:25px;font-weight:800;color:#0b1f3a;margin-bottom:25px}
+
+.question-content{animation:questionIn .38s ease both}
+@keyframes questionIn{
+  from{opacity:0;transform:translateX(22px)}
+  to{opacity:1;transform:translateX(0)}
 }
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 70px 20px;
+.question-content.leaving{animation:questionOut .18s ease both}
+@keyframes questionOut{
+  to{opacity:0;transform:translateX(-15px)}
 }
-.section-title {
-  text-align: center;
-  color: #0b1f3a;
-  font-size: 32px;
-  margin-bottom: 14px;
+
+.answers{display:grid;gap:12px}
+.answer-button{
+  width:100%;padding:17px 20px;background:white;
+  border:2px solid #dfe6ee;border-radius:12px;
+  text-align:left;font-size:16px;cursor:pointer;color:#172033;
+  transition:border-color .2s,background .2s,transform .2s,box-shadow .2s;
+  position:relative;
 }
-.section-description {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 40px;
-  color: #566074;
+.answer-button:hover{
+  border-color:#f58220;background:#fff7f0;
+  transform:translateY(-2px);
+  box-shadow:0 5px 13px rgba(245,130,32,.12);
 }
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.answer-button:active{transform:scale(.97)}
+.answer-button.is-pressed{
+  border-color:#f58220;background:#fff1e4;
+  animation:answerPop .32s ease;
+  box-shadow:0 0 0 4px rgba(245,130,32,.13);
 }
-.step-card {
-  background: white;
-  padding: 28px;
-  border-radius: 18px;
-  box-shadow: 0 8px 24px rgba(11, 31, 58, 0.08);
+@keyframes answerPop{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.035)}
+  100%{transform:scale(1)}
 }
-.step-number {
-  width: 42px;
-  height: 42px;
-  background: #f58220;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 15px;
+
+.navigation-area{margin-top:20px;min-height:48px}
+.back-button{
+  border:1px solid #cfd8e3;background:white;color:#0b1f3a;
+  padding:12px 20px;border-radius:10px;font-size:15px;
+  font-weight:bold;cursor:pointer;transition:.2s;
 }
-.step-card h3 {
-  color: #0b1f3a;
-  margin-bottom: 8px;
+.back-button:hover{border-color:#f58220;background:#fff7f0}
+.back-button:active{transform:scale(.96)}
+.back-button:disabled{opacity:.5;cursor:default}
+
+.result-header{text-align:center;margin-bottom:35px}
+.result-header h2{font-size:clamp(30px,5vw,42px);color:#0b1f3a}
+.result-header p{color:#566074;margin-top:10px}
+.completion-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:85px;height:85px;border-radius:50%;
+  background:linear-gradient(135deg,#fff0d8,#ffcf83);
+  font-size:45px;margin-bottom:15px;
+  box-shadow:0 8px 25px rgba(245,130,32,.2);
+  animation:completionPop .65s cubic-bezier(.2,1.5,.5,1) both;
 }
-.category-section {
-  background: white;
+@keyframes completionPop{
+  0%{transform:scale(0) rotate(-20deg);opacity:0}
+  75%{transform:scale(1.15) rotate(5deg);opacity:1}
+  100%{transform:scale(1) rotate(0)}
 }
-.categories {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
+.result-subtitle{
+  display:inline-block;background:#fff0df;color:#b85b0b;
+  padding:7px 18px;border-radius:30px;
+  font-weight:800;font-size:14px;margin-top:16px;
 }
-.category-card {
-  border: 1px solid #e4eaf2;
-  background: #f8fafc;
-  border-radius: 14px;
-  padding: 22px 12px;
-  text-align: center;
+
+.result-card{
+  background:white;padding:28px;border-radius:18px;
+  margin-bottom:20px;box-shadow:0 8px 24px rgba(11,31,58,.10);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(25px) scale(.97);
+  animation:cardIn .65s cubic-bezier(.2,1,.3,1) forwards;
 }
-.category-icon {
-  font-size: 34px;
-  margin-bottom: 8px;
+@keyframes cardIn{
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
-.category-card h3 {
-  color: #0b1f3a;
-  font-size: 16px;
+.result-card.rank-1{
+  border:3px solid #e6ad38;
+  padding:36px 30px;
+  background:linear-gradient(145deg,#fffdf5,#fff8e7);
+  box-shadow:0 15px 38px rgba(194,139,35,.22);
 }
-#diagnosis,
-#result {
-  background: #eef3f9;
+.result-card.rank-1::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:7px;
+  background:linear-gradient(90deg,#d69a25,#ffe28a,#d69a25);
 }
-#result {
-  display: none;
+.result-card.rank-2{
+  border:2px solid #b9c5d3;
+  background:linear-gradient(145deg,#fff,#f5f8fc);
 }
-.diagnosis-box {
-  background: white;
-  max-width: 750px;
-  margin: auto;
-  padding: 35px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(11, 31, 58, 0.12);
+.result-card.rank-3{
+  border:2px solid #d5a17c;
+  background:linear-gradient(145deg,#fff,#fff7f1);
 }
-.progress-area {
-  margin-bottom: 28px;
+.rank{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 17px;border-radius:30px;
+  background:#f58220;color:white;font-weight:900;margin-bottom:15px;
 }
-.progress-text {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #0b1f3a;
+.rank-1 .rank{
+  background:linear-gradient(135deg,#e9b84d,#b77b12);
+  font-size:17px;padding:10px 21px;
+  box-shadow:0 5px 15px rgba(183,123,18,.25);
 }
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #e3e9f1;
-  border-radius: 20px;
-  overflow: hidden;
+.rank-2 .rank{background:linear-gradient(135deg,#8d9dad,#5f7084)}
+.rank-3 .rank{background:linear-gradient(135deg,#c58b65,#95603e)}
+
+.rank-caption{font-size:13px;color:#9a6c16;font-weight:800;margin-bottom:5px}
+.tool-name{font-size:28px;font-weight:900;color:#0b1f3a}
+.rank-1 .tool-name{font-size:clamp(30px,5vw,40px)}
+.score{font-size:20px;font-weight:bold;color:#f58220;margin:8px 0 15px}
+.rank-1 .score{font-size:25px;color:#bd831b}
+.tool-description{color:#566074}
+.rank-1 .tool-description{font-size:17px}
+
+.result-message{
+  margin-top:20px;padding:15px 18px;border-radius:12px;
+  background:rgba(255,255,255,.75);color:#46536a;font-size:14px;
 }
-.progress {
-  height: 100%;
-  width: 5%;
-  background: #f58220;
-  transition: width 0.3s;
+.rank-1 .result-message{border:1px solid #f0dfb4}
+.rank-2 .result-message{border:1px solid #e1e7ef}
+.rank-3 .result-message{border:1px solid #f0dfd2}
+
+.result-list-title{
+  text-align:center;font-size:18px;font-weight:800;
+  color:#0b1f3a;margin:35px 0 20px;
 }
-.question-number {
-  color: #f58220;
-  font-weight: 800;
-  margin-bottom: 8px;
+.restart-button{display:block;margin:35px auto 0}
+
+footer{background:#071426;color:#b8c3d1;text-align:center;padding:25px 20px;font-size:14px}
+
+@media(max-width:700px){
+  .hero{padding:60px 20px 70px}
+  .hero p{font-size:16px}
+  .steps{grid-template-columns:1fr}
+  .categories{grid-template-columns:repeat(2,1fr)}
+  .category-card:last-child{grid-column:span 2}
+  .container{padding:55px 18px}
+  .diagnosis-box{padding:24px 18px}
+  .question{font-size:22px}
+  .answer-button{padding:15px;font-size:15px}
+  .result-card{padding:23px 19px}
+  .result-card.rank-1{padding:30px 20px}
 }
-.question {
-  font-size: 25px;
-  font-weight: 800;
-  color: #0b1f3a;
-  margin-bottom: 25px;
-}
-.answers {
-  display: grid;
-  gap: 12px;
-}
-.answer-button {
-  width: 100%;
-  padding: 17px 20px;
-  background: white;
-  border: 2px solid #dfe6ee;
-  border-radius: 12px;
-  text-align: left;
-  font-size: 16px;
-  cursor: pointer;
-  color: #172033;
-  transition: 0.2s;
-}
-/* ホバー時だけオレンジ */
-.answer-button:hover {
-  border-color: #f58220;
-  background: #fff7f0;
-}
-.navigation-area {
-  margin-top: 20px;
-  min-height: 48px;
-}
-.back-button {
-  border: 1px solid #cfd8e3;
-  background: white;
-  color: #0b1f3a;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.back-button:hover {
-  border-color: #f58220;
-}
-.result-header {
-  text-align: center;
-  margin-bottom: 35px;
-}
-.result-header h2 {
-  font-size: 34px;
-  color: #0b1f3a;
-}
-.result-header p {
-  color: #566074;
-  margin-top: 10px;
-}
-.result-card {
-  background: white;
-  padding: 28px;
-  border-radius: 18px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(11, 31, 58, 0.10);
-}
-.rank {
-  display: inline-block;
-  padding: 6px 15px;
-  border-radius: 30px;
-  background: #f58220;
-  color: white;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-.tool-name {
-  font-size: 28px;
-  font-weight: 800;
-  color: #0b1f3a;
-}
-.score {
-  font-size: 20px;
-  font-weight: bold;
-  color: #f58220;
-  margin: 8px 0;
-}
-.tool-description {
-  color: #566074;
-}
-.restart-button {
-  display: block;
-  margin: 30px auto 0;
-}
-footer {
-  background: #071426;
-  color: #b8c3d1;
-  text-align: center;
-  padding: 25px 20px;
-  font-size: 14px;
-}
-@media (max-width: 700px) {
-  .hero {
-    padding: 60px 20px 70px;
-  }
-  .hero p {
-    font-size: 16px;
-  }
-  .steps {
-    grid-template-columns: 1fr;
-  }
-  .categories {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .category-card:last-child {
-    grid-column: span 2;
-  }
-  .container {
-    padding: 55px 18px;
-  }
-  .diagnosis-box {
-    padding: 24px 18px;
-  }
-  .question {
-    font-size: 22px;
-  }
-  .answer-button {
-    padding: 15px;
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
   }
 }
 </style>
 </head>
+
 <body>
 <header>
   <div class="header-inner">
     <div class="logo">AIツール<span>選択ナビ</span></div>
   </div>
 </header>
+
 <section class="hero">
-  <h1>
-    あなたに最適なAIツールを<br>
+  <h1>あなたに最適なAIツールを<br>
     <span style="color:#f58220;">BEST3</span>で診断
   </h1>
   <p>
@@ -324,107 +267,90 @@ footer {
     あなたの目的・予算・AI経験に合わせて、
     おすすめのAIツールを診断します。
   </p>
-  <a href="#diagnosis" class="button">
-    無料で診断をはじめる
-  </a>
-  <div class="sub-text">
-    診断時間 約3分｜無料｜登録不要
-  </div>
+  <a href="#diagnosis" class="button">無料で診断をはじめる</a>
+  <div class="sub-text">診断時間 約3分｜無料｜登録不要</div>
 </section>
+
 <section class="container">
-  <h2 class="section-title">
-    3ステップであなたに合うAIが見つかる
-  </h2>
+  <h2 class="section-title">3ステップであなたに合うAIが見つかる</h2>
   <p class="section-description">
     難しい知識は必要ありません。
     質問に答えるだけで、あなたに合ったAIツールを探せます。
   </p>
   <div class="steps">
-<div class="step-card">
-  <div class="step-number">1</div>
-  <h3>質問に答える</h3>
-  <p>利用目的やAI経験など、20の簡単な質問に答えます。</p>
-</div>
-<div class="step-card">
-  <div class="step-number">2</div>
-  <h3>自動分析</h3>
-  <p>回答内容をもとに、あなたに合うAIを分析します。</p>
-</div>
-<div class="step-card">
-  <div class="step-number">3</div>
-  <h3>BEST3を確認</h3>
-  <p>あなたにおすすめのAIツールBEST3を表示します。</p>
-</div>
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <h3>質問に答える</h3>
+      <p>利用目的やAI経験など、20の簡単な質問に答えます。</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <h3>自動分析</h3>
+      <p>回答内容をもとに、あなたに合うAIを分析します。</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <h3>BEST3を確認</h3>
+      <p>あなたにおすすめのAIツールBEST3を表示します。</p>
+    </div>
   </div>
 </section>
+
 <section class="category-section">
   <div class="container">
-<h2 class="section-title">
-  目的に合わせてAIを診断
-</h2>
-<div class="categories">
-  <div class="category-card">
-    <div class="category-icon">💼</div>
-    <h3>仕事</h3>
-  </div>
-  <div class="category-card">
-    <div class="category-icon">✍️</div>
-    <h3>文章</h3>
-  </div>
-  <div class="category-card">
-    <div class="category-icon">🎨</div>
-    <h3>画像</h3>
-  </div>
-  <div class="category-card">
-    <div class="category-icon">🎬</div>
-    <h3>動画</h3>
-  </div>
-  <div class="category-card">
-    <div class="category-icon">📚</div>
-    <h3>学習</h3>
-  </div>
-</div>
+    <h2 class="section-title">目的に合わせてAIを診断</h2>
+    <div class="categories">
+      <div class="category-card"><div class="category-icon">💼</div><h3>仕事</h3></div>
+      <div class="category-card"><div class="category-icon">✍️</div><h3>文章</h3></div>
+      <div class="category-card"><div class="category-icon">🎨</div><h3>画像</h3></div>
+      <div class="category-card"><div class="category-icon">🎬</div><h3>動画</h3></div>
+      <div class="category-card"><div class="category-icon">📚</div><h3>学習</h3></div>
+    </div>
   </div>
 </section>
+
 <section id="diagnosis">
   <div class="container">
-<div class="diagnosis-box">
-  <div class="progress-area">
-    <div class="progress-text">
-      <span id="progress-label">質問 1 / 20</span>
-      <span id="progress-percent">5%</span>
+    <div class="diagnosis-box">
+      <div id="question-content" class="question-content">
+        <div class="progress-area">
+          <div class="progress-text">
+            <span id="progress-label">質問 1 / 20</span>
+            <span id="progress-percent">5%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+          </div>
+        </div>
+        <div class="question-number" id="question-number"></div>
+        <div class="question" id="question"></div>
+        <div class="answers" id="answers"></div>
+        <div class="navigation-area" id="navigation-area"></div>
+      </div>
     </div>
-    <div class="progress-bar">
-      <div class="progress" id="progress"></div>
-    </div>
-  </div>
-  <div class="question-number" id="question-number"></div>
-  <div class="question" id="question"></div>
-  <div class="answers" id="answers"></div>
-  <div class="navigation-area" id="navigation-area"></div>
-</div>
   </div>
 </section>
+
 <section id="result">
   <div class="container">
-<div class="result-header">
-  <h2>診断結果</h2>
-  <p>あなたにおすすめのAIツールBEST3</p>
-</div>
-<div id="result-list"></div>
-<button
-  class="button restart-button"
-  onclick="restartDiagnosis()">
-  もう一度診断する
-</button>
+    <div class="result-header">
+      <div class="completion-icon">🏆</div>
+      <h2>診断完了！</h2>
+      <p>あなたの回答をもとにAIツールを分析しました。</p>
+      <div class="result-subtitle">あなたにおすすめのAIツール BEST 3</div>
+    </div>
+    <div id="result-list"></div>
+    <button class="button restart-button" onclick="restartDiagnosis()">
+      もう一度診断する
+    </button>
   </div>
 </section>
-<footer>
-  © 2026 AIツール選択ナビ
-</footer>
+
+<footer>© 2026 AIツール選択ナビ</footer>
+
 <script>
 /* =========================
-   質問データ
+   質問データ（全20問）
 ========================= */
 const questions = [
 {
@@ -615,8 +541,9 @@ answers:[
 ]
 }
 ];
+
 /* =========================
-   AIツールデータ
+   AIツールデータ（全17種類）
 ========================= */
 const tools = [
 {name:"ChatGPT",description:"文章作成、情報整理、学習、アイデア出しなど幅広く活用できる総合AI。",tags:{work:9,writing:10,learning:10,research:8,beginner:9,features:10,japanese:10,mobile:9,pc:10,efficiency:9,free:7}},
@@ -637,179 +564,263 @@ const tools = [
 {name:"NotebookLM",description:"資料を読み込ませて整理・学習・情報分析を行いたい人向け。",tags:{learning:10,research:10,work:8,accuracy:9,pc:10,features:9}},
 {name:"デジタネ",description:"子どものIT・プログラミング学習を進めたい家庭向けの学習サービス。",tags:{kids:10,learning:10,beginner:10,japanese:10,features:8}}
 ];
+
 /* =========================
    診断制御
 ========================= */
-let currentQuestion = 0;
-let selectedAnswers = [];
+let currentQuestion=0;
+let selectedAnswers=[];
+let isTransitioning=false;
+
+const questionContent=document.getElementById("question-content");
+
+function updateProgress(){
+  const percent=Math.round(((currentQuestion+1)/questions.length)*100);
+  document.getElementById("progress-label").textContent=
+    "質問 "+(currentQuestion+1)+" / "+questions.length;
+  document.getElementById("progress-percent").textContent=percent+"%";
+  document.getElementById("progress").style.width=percent+"%";
+}
+
 /* =========================
    質問表示
 ========================= */
-function showQuestion() {
-  const q = questions[currentQuestion];
-  document.getElementById("question-number").textContent =
-    "QUESTION " + (currentQuestion + 1);
-  document.getElementById("question").textContent =
-    q.question;
-  document.getElementById("progress-label").textContent =
-    "質問 " + (currentQuestion + 1) + " / " + questions.length;
-  const percent =
-    Math.round(((currentQuestion + 1) / questions.length) * 100);
-  document.getElementById("progress-percent").textContent =
-    percent + "%";
-  document.getElementById("progress").style.width =
-    percent + "%";
-  const answersArea =
-    document.getElementById("answers");
-  /* 毎回、回答欄を完全に作り直す */
-  answersArea.innerHTML = "";
-  q.answers.forEach(function(answer, index) {
-    const button =
-      document.createElement("button");
-    button.className = "answer-button";
-    button.textContent = answer.label;
-    /*
-      重要：
-      selectedクラスは一切付けない
-      → 次の質問でも戻った質問でも
-         オレンジ枠は残らない
-    */
-    button.onclick = function() {
-      /*
-        内部では回答を保存する
-        ただし画面上では選択状態を残さない
-      */
-      selectedAnswers[currentQuestion] = index;
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        showQuestion();
-      } else {
-        showResult();
-      }
-    };
+function showQuestion(){
+  const q=questions[currentQuestion];
+
+  questionContent.classList.remove("leaving");
+  questionContent.style.animation="none";
+  void questionContent.offsetWidth;
+  questionContent.style.animation="";
+
+  document.getElementById("question-number").textContent=
+    "QUESTION "+(currentQuestion+1);
+  document.getElementById("question").textContent=q.question;
+
+  updateProgress();
+
+  const answersArea=document.getElementById("answers");
+  answersArea.innerHTML="";
+
+  q.answers.forEach(function(answer,index){
+    const button=document.createElement("button");
+    button.className="answer-button";
+    button.textContent=answer.label;
+    button.type="button";
+
+    button.addEventListener("click",function(){
+      if(isTransitioning)return;
+      isTransitioning=true;
+
+      /* 以前の回答表示を残さず、回答を記録 */
+      selectedAnswers[currentQuestion]=index;
+
+      /* 押した瞬間のアニメーション */
+      button.classList.add("is-pressed");
+
+      /* アニメーション後に次の質問へ */
+      setTimeout(function(){
+        questionContent.classList.add("leaving");
+
+        setTimeout(function(){
+          currentQuestion++;
+          isTransitioning=false;
+
+          if(currentQuestion<questions.length){
+            showQuestion();
+          }else{
+            showResult();
+          }
+        },160);
+      },180);
+    });
+
     answersArea.appendChild(button);
   });
+
   /* 戻るボタン */
-  const navigationArea =
-    document.getElementById("navigation-area");
-  navigationArea.innerHTML = "";
-  if (currentQuestion > 0) {
-    const backButton =
-      document.createElement("button");
-    backButton.className = "back-button";
-    backButton.textContent =
-      "← 前の質問に戻る";
-    backButton.onclick = function() {
-      currentQuestion--;
-      /*
-        戻った質問も新しく描画するため、
-        以前選んだ回答のオレンジ枠は表示されない
-      */
-      showQuestion();
-    };
+  const navigationArea=document.getElementById("navigation-area");
+  navigationArea.innerHTML="";
+
+  if(currentQuestion>0){
+    const backButton=document.createElement("button");
+    backButton.className="back-button";
+    backButton.textContent="← 前の質問に戻る";
+    backButton.type="button";
+
+    backButton.addEventListener("click",function(){
+      if(isTransitioning)return;
+      isTransitioning=true;
+
+      questionContent.classList.add("leaving");
+
+      setTimeout(function(){
+        currentQuestion--;
+
+        /* 戻った質問の以前の回答を完全に削除 */
+        selectedAnswers[currentQuestion]=undefined;
+
+        isTransitioning=false;
+        showQuestion();
+      },160);
+    });
+
     navigationArea.appendChild(backButton);
   }
 }
+
 /* =========================
    結果計算
 ========================= */
-function calculateResults() {
-  let userScores = {};
-  selectedAnswers.forEach(function(answerIndex, questionIndex) {
-    if (answerIndex === undefined) return;
-    const selectedAnswer =
-      questions[questionIndex].answers[answerIndex];
-    Object.keys(selectedAnswer.scores)
-      .forEach(function(key) {
-        userScores[key] =
-          (userScores[key] || 0)
-          + selectedAnswer.scores[key];
-      });
+function calculateResults(){
+  let userScores={};
+
+  selectedAnswers.forEach(function(answerIndex,questionIndex){
+    if(answerIndex===undefined)return;
+
+    const selectedAnswer=questions[questionIndex].answers[answerIndex];
+
+    Object.keys(selectedAnswer.scores).forEach(function(key){
+      userScores[key]=(userScores[key]||0)+selectedAnswer.scores[key];
+    });
   });
-  const results = tools.map(function(tool) {
-    let score = 0;
-    Object.keys(tool.tags)
-      .forEach(function(tag) {
-        if (userScores[tag]) {
-          score +=
-            userScores[tag] * tool.tags[tag];
-        }
-      });
-    return {
-      name: tool.name,
-      description: tool.description,
-      rawScore: score
+
+  const results=tools.map(function(tool){
+    let score=0;
+
+    Object.keys(tool.tags).forEach(function(tag){
+      if(userScores[tag]){
+        score+=userScores[tag]*tool.tags[tag];
+      }
+    });
+
+    return{
+      name:tool.name,
+      description:tool.description,
+      rawScore:score
     };
   });
-  results.sort(function(a, b) {
-    return b.rawScore - a.rawScore;
+
+  results.sort(function(a,b){
+    return b.rawScore-a.rawScore;
   });
-  const maxScore =
-    results[0].rawScore || 1;
-  return results
-    .slice(0, 3)
-    .map(function(tool, index) {
-      const percentage =
-        Math.max(
-          60,
-          Math.round(
-            (tool.rawScore / maxScore) * 100
-          )
-        );
-      return {
-        rank: index + 1,
-        name: tool.name,
-        description: tool.description,
-        score: percentage
-      };
-    });
+
+  const maxScore=results[0].rawScore||1;
+
+  return results.slice(0,3).map(function(tool,index){
+    const percentage=Math.max(
+      60,
+      Math.round((tool.rawScore/maxScore)*100)
+    );
+
+    return{
+      rank:index+1,
+      name:tool.name,
+      description:tool.description,
+      score:percentage
+    };
+  });
 }
+
 /* =========================
    結果表示
 ========================= */
-function showResult() {
-  document.getElementById("diagnosis").style.display = "none";
-  document.getElementById("result").style.display = "block";
-  const resultList =
-    document.getElementById("result-list");
-  const results =
-    calculateResults();
-  const medals = [
-    "🥇 BEST 1",
-    "🥈 BEST 2",
-    "🥉 BEST 3"
+function showResult(){
+  document.getElementById("diagnosis").style.display="none";
+  document.getElementById("result").style.display="block";
+
+  const resultList=document.getElementById("result-list");
+  const results=calculateResults();
+
+  const rankInfo=[
+    {
+      medal:"🥇",
+      label:"BEST 1",
+      caption:"あなたに最もおすすめ！",
+      message:"今回の診断結果で、あなたとの適合度が最も高いAIツールです。まずはこちらから試してみましょう。"
+    },
+    {
+      medal:"🥈",
+      label:"BEST 2",
+      caption:"おすすめの第2候補",
+      message:"BEST1と比較しながら検討したい、おすすめのAIツールです。"
+    },
+    {
+      medal:"🥉",
+      label:"BEST 3",
+      caption:"おすすめの第3候補",
+      message:"別の使い方や目的にも対応できる、比較候補のAIツールです。"
+    }
   ];
-  resultList.innerHTML = "";
-  results.forEach(function(tool, index) {
-    const card =
-      document.createElement("div");
-    card.className = "result-card";
-    card.innerHTML =
-      '<div class="rank">' + medals[index] + '</div>' +
-      '<div class="tool-name">' + tool.name + '</div>' +
-      '<div class="score">適合度 ' + tool.score + '%</div>' +
-      '<div class="tool-description">' + tool.description + '</div>';
+
+  resultList.innerHTML="";
+
+  results.forEach(function(tool,index){
+    const info=rankInfo[index];
+    const card=document.createElement("div");
+
+    card.className="result-card rank-"+(index+1);
+    card.style.animationDelay=(index*0.45+0.15)+"s";
+
+    const rank=document.createElement("div");
+    rank.className="rank";
+    rank.textContent=info.medal+" "+info.label;
+
+    const caption=document.createElement("div");
+    caption.className="rank-caption";
+    caption.textContent=info.caption;
+
+    const name=document.createElement("div");
+    name.className="tool-name";
+    name.textContent=tool.name;
+
+    const score=document.createElement("div");
+    score.className="score";
+    score.textContent="適合度 "+tool.score+"%";
+
+    const description=document.createElement("div");
+    description.className="tool-description";
+    description.textContent=tool.description;
+
+    const message=document.createElement("div");
+    message.className="result-message";
+    message.textContent=info.message;
+
+    card.appendChild(rank);
+    card.appendChild(caption);
+    card.appendChild(name);
+    card.appendChild(score);
+    card.appendChild(description);
+    card.appendChild(message);
+
     resultList.appendChild(card);
   });
+
   window.scrollTo({
-    top: document.getElementById("result").offsetTop,
-    behavior: "smooth"
+    top:document.getElementById("result").offsetTop,
+    behavior:"smooth"
   });
 }
+
 /* =========================
    再診断
 ========================= */
-function restartDiagnosis() {
-  currentQuestion = 0;
-  selectedAnswers = [];
-  document.getElementById("result").style.display = "none";
-  document.getElementById("diagnosis").style.display = "block";
+function restartDiagnosis(){
+  currentQuestion=0;
+  selectedAnswers=[];
+  isTransitioning=false;
+
+  document.getElementById("result").style.display="none";
+  document.getElementById("diagnosis").style.display="block";
+
   showQuestion();
+
   window.scrollTo({
-    top: document.getElementById("diagnosis").offsetTop,
-    behavior: "smooth"
+    top:document.getElementById("diagnosis").offsetTop,
+    behavior:"smooth"
   });
 }
+
 /* 初期表示 */
 showQuestion();
 </script>
