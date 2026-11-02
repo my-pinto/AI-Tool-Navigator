@@ -1634,6 +1634,15 @@ function showQuestion(){
 
 const q=questions[currentQuestion];
 
+setTimeout(()=>{
+const diagnosisTop=document.getElementById("diagnosis").offsetTop;
+
+window.scrollTo({
+top:Math.max(0,diagnosisTop-10),
+behavior:"smooth"
+});
+},50);
+
 clearSelection();
 
 answersArea.replaceChildren();
