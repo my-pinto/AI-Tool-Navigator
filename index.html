@@ -196,6 +196,7 @@ const questions = [
 {label:"資料・企画を作りたい",scores:{work:8,writing:5}},
 {label:"情報収集・要約",scores:{learning:7,research:5}},
 {label:"会議を文字起こししたい",scores:{transcription:15,work:6}},
+{label:"写真や画像を高画質化したい",scores:{imageEnhancement:20}}
 {label:"画像・バナーを作りたい",scores:{design:15}},
 {label:"動画を作りたい",scores:{video:15}},
 {label:"翻訳したい",scores:{translation:15}},
@@ -266,7 +267,7 @@ const questions = [
 {label:"SNS用に作りたい",scores:{design:8}},
 {label:"資料や仕事で使いたい",scores:{design:10,work:5}},
 {label:"本格的なデザインをしたい",scores:{design:15,specialist:5}},
-{label:"既存の写真・画像を高画質化したい",scores:{imageEnhancement:15,specialist:5}}
+{label:"既存の写真・画像を高画質化したい",scores:{imageEnhancement:20,specialist:5}}
 ]},
 {question:"動画を作りますか？",answers:[
 {label:"作らない",scores:{}},
@@ -501,7 +502,9 @@ if(name==="デジタネ"&&(profile.kids||0)>0)boost+=22*(profile.kids||0);
 if(name==="Notta"&&(profile.transcription||0)>0)boost+=19*(profile.transcription||0);
 if(name==="Notta Brain"&&(profile.knowledgeManagement||0)>0)boost+=22*(profile.knowledgeManagement||0);
 if(name==="Notta Brain"&&(profile.transcription||0)>0&&(profile.work||0)>0.15)boost+=5*(profile.transcription||0);
-if(name==="Aiarty Image Enhancer"&&(profile.imageEnhancement||0)>0)boost+=25*(profile.imageEnhancement||0);
+if(name==="Aiarty Image Enhancer"&&(profile.imageEnhancement||0)>0){
+boost+=45*(profile.imageEnhancement||0);
+}
 if(name==="Languise"&&(profile.fileTranslation||0)>0)boost+=23*(profile.fileTranslation||0);
 if(name==="ヤラク翻訳"&&(profile.businessTranslation||0)>0)boost+=23*(profile.businessTranslation||0);
 if(name==="MiriCanvas"&&(profile.design||0)>0)boost+=3*(profile.design||0);
