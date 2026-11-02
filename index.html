@@ -106,25 +106,37 @@ header{background:#0b1f3a;color:white;padding:16px 20px}
 }
 
 .answers{display:grid;gap:12px}
-.answer-button{
-  width:100%;padding:17px 20px;background:white;
-  border:2px solid #dfe6ee;border-radius:12px;
-  text-align:left;font-size:16px;cursor:pointer;color:#172033;
-  transition:border-color .2s,background .2s,transform .2s,box-shadow .2s;
-  position:relative;
+.answer-button {
+  width: 100%;
+  padding: 17px 20px;
+  background: white;
+  border: 2px solid #dfe6ee;
+  border-radius: 12px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  color: #172033;
+  transition: border-color .2s, background .2s, transform .2s;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
 }
-.answer-button:hover{
-  border-color:#f58220;background:#fff7f0;
-  transform:translateY(-2px);
-  box-shadow:0 5px 13px rgba(245,130,32,.12);
+
+.answer-button:hover {
+  border-color: #f58220;
+  background: #fff7f0;
 }
-.answer-button:active{transform:scale(.97)}
-.answer-button.is-pressed{
-  border-color:#f58220;background:#fff1e4;
-  animation:answerPop .32s ease;
-  box-shadow:0 0 0 4px rgba(245,130,32,.13);
+
+.answer-button.is-pressed {
+  border-color: #f58220 !important;
+  background: #fff1e4 !important;
+  animation: answerPop .3s ease;
 }
-@keyframes answerPop{
+
+@keyframes answerPop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
   0%{transform:scale(1)}
   45%{transform:scale(1.035)}
   100%{transform:scale(1)}
@@ -566,103 +578,129 @@ const tools = [
 ];
 
 /* =========================
-   診断制御
+   診断制御・選択状態完全リセット版
 ========================= */
-let currentQuestion=0;
-let selectedAnswers=[];
-let isTransitioning=false;
 
-const questionContent=document.getElementById("question-content");
+let currentQuestion = 0;
+let selectedAnswers = [];
+let isTransitioning = false;
 
-function updateProgress(){
-  const percent=Math.round(((currentQuestion+1)/questions.length)*100);
-  document.getElementById("progress-label").textContent=
-    "質問 "+(currentQuestion+1)+" / "+questions.length;
-  document.getElementById("progress-percent").textContent=percent+"%";
-  document.getElementById("progress").style.width=percent+"%";
+const questionContent = document.getElementById("question-content");
+
+function clearSelection() {
+  document.querySelectorAll(".answer-button").forEach(function(button) {
+    button.classList.remove("is-pressed");
+    button.blur();
+  });
 }
 
-/* =========================
-   質問表示
-========================= */
-function showQuestion(){
-  const q=questions[currentQuestion];
+function showQuestion() {
+  const q = questions[currentQuestion];
+
+  clearSelection();
 
   questionContent.classList.remove("leaving");
-  questionContent.style.animation="none";
+  questionContent.style.animation = "none";
   void questionContent.offsetWidth;
-  questionContent.style.animation="";
+  questionContent.style.animation = "";
 
-  document.getElementById("question-number").textContent=
-    "QUESTION "+(currentQuestion+1);
-  document.getElementById("question").textContent=q.question;
+  document.getElementById("question-number").textContent =
+    "QUESTION " + (currentQuestion + 1);
 
-  updateProgress();
+  document.getElementById("question").textContent = q.question;
 
-  const answersArea=document.getElementById("answers");
-  answersArea.innerHTML="";
+  const percent = Math.round(
+    ((currentQuestion + 1) / questions.length) * 100
+  );
 
-  q.answers.forEach(function(answer,index){
-    const button=document.createElement("button");
-    button.className="answer-button";
-    button.textContent=answer.label;
-    button.type="button";
+  document.getElementById("progress-label").textContent =
+    "質問 " + (currentQuestion + 1) + " / " + questions.length;
 
-    button.addEventListener("click",function(){
-      if(isTransitioning)return;
-      isTransitioning=true;
+  document.getElementById("progress-percent").textContent =
+    percent + "%";
 
-      /* 以前の回答表示を残さず、回答を記録 */
-      selectedAnswers[currentQuestion]=index;
+  document.getElementById("progress").style.width =
+    percent + "%";
 
-      /* 押した瞬間のアニメーション */
+  const answersArea = document.getElementById("answers");
+
+  answersArea.replaceChildren();
+
+  q.answers.forEach(function(answer, index) {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "answer-button";
+    button.textContent = answer.label;
+
+    button.addEventListener("click", function() {
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+
+      /* クリックした選択肢だけに演出 */
+      clearSelection();
       button.classList.add("is-pressed");
 
-      /* アニメーション後に次の質問へ */
-      setTimeout(function(){
+      /* 回答を保存 */
+      selectedAnswers[currentQuestion] = index;
+
+      /* 選択枠を解除してから移動 */
+      setTimeout(function() {
+        clearSelection();
+
         questionContent.classList.add("leaving");
 
-        setTimeout(function(){
+        setTimeout(function() {
           currentQuestion++;
-          isTransitioning=false;
 
-          if(currentQuestion<questions.length){
+          isTransitioning = false;
+
+          if (currentQuestion < questions.length) {
             showQuestion();
-          }else{
+          } else {
             showResult();
           }
-        },160);
-      },180);
+        }, 180);
+
+      }, 300);
     });
 
     answersArea.appendChild(button);
   });
 
-  /* 戻るボタン */
-  const navigationArea=document.getElementById("navigation-area");
-  navigationArea.innerHTML="";
+  const navigationArea =
+    document.getElementById("navigation-area");
 
-  if(currentQuestion>0){
-    const backButton=document.createElement("button");
-    backButton.className="back-button";
-    backButton.textContent="← 前の質問に戻る";
-    backButton.type="button";
+  navigationArea.replaceChildren();
 
-    backButton.addEventListener("click",function(){
-      if(isTransitioning)return;
-      isTransitioning=true;
+  if (currentQuestion > 0) {
+    const backButton = document.createElement("button");
+
+    backButton.type = "button";
+    backButton.className = "back-button";
+    backButton.textContent = "← 前の質問に戻る";
+
+    backButton.addEventListener("click", function() {
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+
+      /* 現在の選択状態を完全解除 */
+      clearSelection();
+
+      /* 戻る位置以降の回答を削除 */
+      selectedAnswers.length = currentQuestion - 1;
 
       questionContent.classList.add("leaving");
 
-      setTimeout(function(){
+      setTimeout(function() {
         currentQuestion--;
 
-        /* 戻った質問の以前の回答を完全に削除 */
-        selectedAnswers[currentQuestion]=undefined;
+        isTransitioning = false;
 
-        isTransitioning=false;
         showQuestion();
-      },160);
+      }, 180);
     });
 
     navigationArea.appendChild(backButton);
@@ -672,52 +710,53 @@ function showQuestion(){
 /* =========================
    結果計算
 ========================= */
-function calculateResults(){
-  let userScores={};
 
-  selectedAnswers.forEach(function(answerIndex,questionIndex){
-    if(answerIndex===undefined)return;
+function calculateResults() {
+  let userScores = {};
 
-    const selectedAnswer=questions[questionIndex].answers[answerIndex];
+  selectedAnswers.forEach(function(answerIndex, questionIndex) {
+    if (answerIndex === undefined) return;
 
-    Object.keys(selectedAnswer.scores).forEach(function(key){
-      userScores[key]=(userScores[key]||0)+selectedAnswer.scores[key];
+    const selectedAnswer =
+      questions[questionIndex].answers[answerIndex];
+
+    Object.keys(selectedAnswer.scores).forEach(function(key) {
+      userScores[key] =
+        (userScores[key] || 0) + selectedAnswer.scores[key];
     });
   });
 
-  const results=tools.map(function(tool){
-    let score=0;
+  const results = tools.map(function(tool) {
+    let score = 0;
 
-    Object.keys(tool.tags).forEach(function(tag){
-      if(userScores[tag]){
-        score+=userScores[tag]*tool.tags[tag];
+    Object.keys(tool.tags).forEach(function(tag) {
+      if (userScores[tag]) {
+        score += userScores[tag] * tool.tags[tag];
       }
     });
 
-    return{
-      name:tool.name,
-      description:tool.description,
-      rawScore:score
+    return {
+      name: tool.name,
+      description: tool.description,
+      rawScore: score
     };
   });
 
-  results.sort(function(a,b){
-    return b.rawScore-a.rawScore;
+  results.sort(function(a, b) {
+    return b.rawScore - a.rawScore;
   });
 
-  const maxScore=results[0].rawScore||1;
+  const maxScore = results[0].rawScore || 1;
 
-  return results.slice(0,3).map(function(tool,index){
-    const percentage=Math.max(
-      60,
-      Math.round((tool.rawScore/maxScore)*100)
-    );
-
-    return{
-      rank:index+1,
-      name:tool.name,
-      description:tool.description,
-      score:percentage
+  return results.slice(0, 3).map(function(tool, index) {
+    return {
+      rank: index + 1,
+      name: tool.name,
+      description: tool.description,
+      score: Math.max(
+        60,
+        Math.round((tool.rawScore / maxScore) * 100)
+      )
     };
   });
 }
@@ -725,99 +764,72 @@ function calculateResults(){
 /* =========================
    結果表示
 ========================= */
-function showResult(){
-  document.getElementById("diagnosis").style.display="none";
-  document.getElementById("result").style.display="block";
 
-  const resultList=document.getElementById("result-list");
-  const results=calculateResults();
+function showResult() {
+  clearSelection();
 
-  const rankInfo=[
-    {
-      medal:"🥇",
-      label:"BEST 1",
-      caption:"あなたに最もおすすめ！",
-      message:"今回の診断結果で、あなたとの適合度が最も高いAIツールです。まずはこちらから試してみましょう。"
-    },
-    {
-      medal:"🥈",
-      label:"BEST 2",
-      caption:"おすすめの第2候補",
-      message:"BEST1と比較しながら検討したい、おすすめのAIツールです。"
-    },
-    {
-      medal:"🥉",
-      label:"BEST 3",
-      caption:"おすすめの第3候補",
-      message:"別の使い方や目的にも対応できる、比較候補のAIツールです。"
-    }
+  document.getElementById("diagnosis").style.display = "none";
+  document.getElementById("result").style.display = "block";
+
+  const resultList = document.getElementById("result-list");
+  const results = calculateResults();
+
+  const info = [
+    ["🥇 BEST 1", "あなたに最もおすすめ！",
+     "今回の診断で最も適合度が高いAIツールです。"],
+    ["🥈 BEST 2", "おすすめの第2候補",
+     "BEST1と比較して検討したいAIツールです。"],
+    ["🥉 BEST 3", "おすすめの第3候補",
+     "別の選択肢として検討したいAIツールです。"]
   ];
 
-  resultList.innerHTML="";
+  resultList.replaceChildren();
 
-  results.forEach(function(tool,index){
-    const info=rankInfo[index];
-    const card=document.createElement("div");
+  results.forEach(function(tool, index) {
+    const card = document.createElement("div");
 
-    card.className="result-card rank-"+(index+1);
-    card.style.animationDelay=(index*0.45+0.15)+"s";
+    card.className = "result-card rank-" + (index + 1);
+    card.style.animationDelay = (index * 0.45 + 0.15) + "s";
 
-    const rank=document.createElement("div");
-    rank.className="rank";
-    rank.textContent=info.medal+" "+info.label;
+    card.innerHTML =
+      '<div class="rank">' + info[index][0] + '</div>' +
+      '<div class="rank-caption">' + info[index][1] + '</div>' +
+      '<div class="tool-name"></div>' +
+      '<div class="score">適合度 ' + tool.score + '%</div>' +
+      '<div class="tool-description"></div>' +
+      '<div class="result-message">' + info[index][2] + '</div>';
 
-    const caption=document.createElement("div");
-    caption.className="rank-caption";
-    caption.textContent=info.caption;
-
-    const name=document.createElement("div");
-    name.className="tool-name";
-    name.textContent=tool.name;
-
-    const score=document.createElement("div");
-    score.className="score";
-    score.textContent="適合度 "+tool.score+"%";
-
-    const description=document.createElement("div");
-    description.className="tool-description";
-    description.textContent=tool.description;
-
-    const message=document.createElement("div");
-    message.className="result-message";
-    message.textContent=info.message;
-
-    card.appendChild(rank);
-    card.appendChild(caption);
-    card.appendChild(name);
-    card.appendChild(score);
-    card.appendChild(description);
-    card.appendChild(message);
+    card.querySelector(".tool-name").textContent = tool.name;
+    card.querySelector(".tool-description").textContent = tool.description;
 
     resultList.appendChild(card);
   });
 
   window.scrollTo({
-    top:document.getElementById("result").offsetTop,
-    behavior:"smooth"
+    top: document.getElementById("result").offsetTop,
+    behavior: "smooth"
   });
 }
 
 /* =========================
    再診断
 ========================= */
-function restartDiagnosis(){
-  currentQuestion=0;
-  selectedAnswers=[];
-  isTransitioning=false;
 
-  document.getElementById("result").style.display="none";
-  document.getElementById("diagnosis").style.display="block";
+function restartDiagnosis() {
+  currentQuestion = 0;
+  selectedAnswers = [];
+  isTransitioning = false;
+
+  clearSelection();
+
+  document.getElementById("result").style.display = "none";
+  document.getElementById("diagnosis").style.display = "block";
 
   showQuestion();
 
   window.scrollTo({
-    top:document.getElementById("diagnosis").offsetTop,
-    behavior:"smooth"
+    top: document.getElementById("diagnosis").offsetTop,
+    behavior: "smooth"
   });
 }
 
