@@ -3,23 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="20問の質問に答えるだけで、あなたに最適なAIツールBEST3を無料診断。仕事、文章、画像、動画、学習、翻訳など目的に合ったAIツールを見つけます。">
-
+<meta name="description" content="20問の質問に答えるだけで、あなたに最適なAIツールBEST3を無料診断。">
 <title>AIツール選択ナビ｜20問で最適なAIをBEST3診断</title>
-
 <style>
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
 body {
   font-family:
     -apple-system,
@@ -31,55 +25,39 @@ body {
   color: #172033;
   line-height: 1.7;
 }
-
-/* =========================
-   HEADER
-========================= */
-
 header {
   background: #0b1f3a;
   color: white;
   padding: 16px 20px;
 }
-
 .header-inner {
   max-width: 1100px;
   margin: auto;
 }
-
 .logo {
   font-size: 22px;
   font-weight: 800;
 }
-
 .logo span {
   color: #f58220;
 }
-
-/* =========================
-   HERO
-========================= */
-
 .hero {
   background: linear-gradient(135deg, #0b1f3a, #174a7c);
   color: white;
   text-align: center;
   padding: 80px 20px 90px;
 }
-
 .hero h1 {
   font-size: clamp(32px, 6vw, 54px);
   line-height: 1.3;
   margin-bottom: 22px;
 }
-
 .hero p {
   max-width: 700px;
   margin: 0 auto 35px;
   font-size: 18px;
   color: #e6edf7;
 }
-
 .button {
   display: inline-block;
   border: none;
@@ -92,58 +70,34 @@ header {
   cursor: pointer;
   text-decoration: none;
 }
-
-.button:hover {
-  opacity: 0.92;
-}
-
-.sub-text {
-  margin-top: 14px;
-  font-size: 14px;
-  color: #d5e0ef;
-}
-
-/* =========================
-   COMMON
-========================= */
-
 .container {
   max-width: 900px;
   margin: auto;
   padding: 70px 20px;
 }
-
 .section-title {
   text-align: center;
   color: #0b1f3a;
   font-size: 32px;
   margin-bottom: 14px;
 }
-
 .section-description {
   text-align: center;
   max-width: 700px;
   margin: 0 auto 40px;
   color: #566074;
 }
-
-/* =========================
-   STEP
-========================= */
-
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-
 .step-card {
   background: white;
   padding: 28px;
   border-radius: 18px;
   box-shadow: 0 8px 24px rgba(11, 31, 58, 0.08);
 }
-
 .step-number {
   width: 42px;
   height: 42px;
@@ -156,26 +110,18 @@ header {
   font-weight: bold;
   margin-bottom: 15px;
 }
-
 .step-card h3 {
   color: #0b1f3a;
   margin-bottom: 8px;
 }
-
-/* =========================
-   CATEGORY
-========================= */
-
 .category-section {
   background: white;
 }
-
 .categories {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 15px;
 }
-
 .category-card {
   border: 1px solid #e4eaf2;
   background: #f8fafc;
@@ -183,30 +129,21 @@ header {
   padding: 22px 12px;
   text-align: center;
 }
-
 .category-icon {
   font-size: 34px;
   margin-bottom: 8px;
 }
-
 .category-card h3 {
   color: #0b1f3a;
   font-size: 16px;
 }
-
-/* =========================
-   DIAGNOSIS
-========================= */
-
 #diagnosis,
 #result {
   background: #eef3f9;
 }
-
 #result {
   display: none;
 }
-
 .diagnosis-box {
   background: white;
   max-width: 750px;
@@ -215,11 +152,9 @@ header {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(11, 31, 58, 0.12);
 }
-
 .progress-area {
   margin-bottom: 28px;
 }
-
 .progress-text {
   display: flex;
   justify-content: space-between;
@@ -227,7 +162,6 @@ header {
   margin-bottom: 8px;
   color: #0b1f3a;
 }
-
 .progress-bar {
   width: 100%;
   height: 10px;
@@ -235,32 +169,27 @@ header {
   border-radius: 20px;
   overflow: hidden;
 }
-
 .progress {
   height: 100%;
   width: 5%;
   background: #f58220;
   transition: width 0.3s;
 }
-
 .question-number {
   color: #f58220;
   font-weight: 800;
   margin-bottom: 8px;
 }
-
 .question {
   font-size: 25px;
   font-weight: 800;
   color: #0b1f3a;
   margin-bottom: 25px;
 }
-
 .answers {
   display: grid;
   gap: 12px;
 }
-
 .answer-button {
   width: 100%;
   padding: 17px 20px;
@@ -273,25 +202,15 @@ header {
   color: #172033;
   transition: 0.2s;
 }
-
+/* ホバー時だけオレンジ */
 .answer-button:hover {
   border-color: #f58220;
   background: #fff7f0;
 }
-
-/* 前の質問に戻った時だけ表示 */
-
-.answer-button.selected {
-  border-color: #f58220;
-  background: #fff7f0;
-  font-weight: bold;
-}
-
 .navigation-area {
   margin-top: 20px;
   min-height: 48px;
 }
-
 .back-button {
   border: 1px solid #cfd8e3;
   background: white;
@@ -302,30 +221,21 @@ header {
   font-weight: bold;
   cursor: pointer;
 }
-
 .back-button:hover {
   border-color: #f58220;
 }
-
-/* =========================
-   RESULT
-========================= */
-
 .result-header {
   text-align: center;
   margin-bottom: 35px;
 }
-
 .result-header h2 {
   font-size: 34px;
   color: #0b1f3a;
 }
-
 .result-header p {
   color: #566074;
   margin-top: 10px;
 }
-
 .result-card {
   background: white;
   padding: 28px;
@@ -333,7 +243,6 @@ header {
   margin-bottom: 20px;
   box-shadow: 0 8px 24px rgba(11, 31, 58, 0.10);
 }
-
 .rank {
   display: inline-block;
   padding: 6px 15px;
@@ -343,33 +252,24 @@ header {
   font-weight: bold;
   margin-bottom: 12px;
 }
-
 .tool-name {
   font-size: 28px;
   font-weight: 800;
   color: #0b1f3a;
 }
-
 .score {
   font-size: 20px;
   font-weight: bold;
   color: #f58220;
   margin: 8px 0;
 }
-
 .tool-description {
   color: #566074;
 }
-
 .restart-button {
   display: block;
   margin: 30px auto 0;
 }
-
-/* =========================
-   FOOTER
-========================= */
-
 footer {
   background: #071426;
   color: #b8c3d1;
@@ -377,267 +277,156 @@ footer {
   padding: 25px 20px;
   font-size: 14px;
 }
-
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 700px) {
-
   .hero {
     padding: 60px 20px 70px;
   }
-
   .hero p {
     font-size: 16px;
   }
-
   .steps {
     grid-template-columns: 1fr;
   }
-
   .categories {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .category-card:last-child {
     grid-column: span 2;
   }
-
   .container {
     padding: 55px 18px;
   }
-
   .diagnosis-box {
     padding: 24px 18px;
   }
-
   .question {
     font-size: 22px;
   }
-
   .answer-button {
     padding: 15px;
   }
-
 }
-
 </style>
 </head>
-
 <body>
-
-<!-- HEADER -->
-
 <header>
   <div class="header-inner">
-    <div class="logo">
-      AIツール<span>選択ナビ</span>
-    </div>
+    <div class="logo">AIツール<span>選択ナビ</span></div>
   </div>
 </header>
-
-
-<!-- HERO -->
-
 <section class="hero">
-
   <h1>
     あなたに最適なAIツールを<br>
     <span style="color:#f58220;">BEST3</span>で診断
   </h1>
-
   <p>
     20の質問に答えるだけ。<br>
     あなたの目的・予算・AI経験に合わせて、
     おすすめのAIツールを診断します。
   </p>
-
   <a href="#diagnosis" class="button">
     無料で診断をはじめる
   </a>
-
   <div class="sub-text">
     診断時間 約3分｜無料｜登録不要
   </div>
-
 </section>
-
-
-<!-- STEP -->
-
 <section class="container">
-
   <h2 class="section-title">
     3ステップであなたに合うAIが見つかる
   </h2>
-
   <p class="section-description">
-    難しい知識は必要ありません。質問に答えるだけで、
-    あなたに合ったAIツールを探せます。
+    難しい知識は必要ありません。
+    質問に答えるだけで、あなたに合ったAIツールを探せます。
   </p>
-
   <div class="steps">
-
-    <div class="step-card">
-      <div class="step-number">1</div>
-      <h3>質問に答える</h3>
-      <p>利用目的やAI経験など、20の簡単な質問に答えます。</p>
-    </div>
-
-    <div class="step-card">
-      <div class="step-number">2</div>
-      <h3>自動分析</h3>
-      <p>回答内容をもとに、あなたに合うAIを分析します。</p>
-    </div>
-
-    <div class="step-card">
-      <div class="step-number">3</div>
-      <h3>BEST3を確認</h3>
-      <p>あなたにおすすめのAIツールBEST3を表示します。</p>
-    </div>
-
+<div class="step-card">
+  <div class="step-number">1</div>
+  <h3>質問に答える</h3>
+  <p>利用目的やAI経験など、20の簡単な質問に答えます。</p>
+</div>
+<div class="step-card">
+  <div class="step-number">2</div>
+  <h3>自動分析</h3>
+  <p>回答内容をもとに、あなたに合うAIを分析します。</p>
+</div>
+<div class="step-card">
+  <div class="step-number">3</div>
+  <h3>BEST3を確認</h3>
+  <p>あなたにおすすめのAIツールBEST3を表示します。</p>
+</div>
   </div>
-
 </section>
-
-
-<!-- CATEGORY -->
-
 <section class="category-section">
-
   <div class="container">
-
-    <h2 class="section-title">
-      目的に合わせてAIを診断
-    </h2>
-
-    <div class="categories">
-
-      <div class="category-card">
-        <div class="category-icon">💼</div>
-        <h3>仕事</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">✍️</div>
-        <h3>文章</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">🎨</div>
-        <h3>画像</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">🎬</div>
-        <h3>動画</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">📚</div>
-        <h3>学習</h3>
-      </div>
-
-    </div>
-
+<h2 class="section-title">
+  目的に合わせてAIを診断
+</h2>
+<div class="categories">
+  <div class="category-card">
+    <div class="category-icon">💼</div>
+    <h3>仕事</h3>
   </div>
-
+  <div class="category-card">
+    <div class="category-icon">✍️</div>
+    <h3>文章</h3>
+  </div>
+  <div class="category-card">
+    <div class="category-icon">🎨</div>
+    <h3>画像</h3>
+  </div>
+  <div class="category-card">
+    <div class="category-icon">🎬</div>
+    <h3>動画</h3>
+  </div>
+  <div class="category-card">
+    <div class="category-icon">📚</div>
+    <h3>学習</h3>
+  </div>
+</div>
+  </div>
 </section>
-
-
-<!-- DIAGNOSIS -->
-
 <section id="diagnosis">
-
   <div class="container">
-
-    <div class="diagnosis-box">
-
-      <div class="progress-area">
-
-        <div class="progress-text">
-          <span id="progress-label">質問 1 / 20</span>
-          <span id="progress-percent">5%</span>
-        </div>
-
-        <div class="progress-bar">
-          <div class="progress" id="progress"></div>
-        </div>
-
-      </div>
-
-      <div
-        class="question-number"
-        id="question-number">
-      </div>
-
-      <div
-        class="question"
-        id="question">
-      </div>
-
-      <div
-        class="answers"
-        id="answers">
-      </div>
-
-      <div
-        class="navigation-area"
-        id="navigation-area">
-      </div>
-
+<div class="diagnosis-box">
+  <div class="progress-area">
+    <div class="progress-text">
+      <span id="progress-label">質問 1 / 20</span>
+      <span id="progress-percent">5%</span>
     </div>
-
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
   </div>
-
+  <div class="question-number" id="question-number"></div>
+  <div class="question" id="question"></div>
+  <div class="answers" id="answers"></div>
+  <div class="navigation-area" id="navigation-area"></div>
+</div>
+  </div>
 </section>
-
-
-<!-- RESULT -->
-
 <section id="result">
-
   <div class="container">
-
-    <div class="result-header">
-
-      <h2>診断結果</h2>
-
-      <p>
-        あなたにおすすめのAIツールBEST3
-      </p>
-
-    </div>
-
-    <div id="result-list"></div>
-
-    <button
-      class="button restart-button"
-      onclick="restartDiagnosis()">
-      もう一度診断する
-    </button>
-
+<div class="result-header">
+  <h2>診断結果</h2>
+  <p>あなたにおすすめのAIツールBEST3</p>
+</div>
+<div id="result-list"></div>
+<button
+  class="button restart-button"
+  onclick="restartDiagnosis()">
+  もう一度診断する
+</button>
   </div>
-
 </section>
-
-
-<!-- FOOTER -->
-
 <footer>
   © 2026 AIツール選択ナビ
 </footer>
-
-
 <script>
-
 /* =========================
    質問データ
 ========================= */
-
 const questions = [
-
 {
 question:"AIを使う一番大きな目的は？",
 answers:[
@@ -650,7 +439,6 @@ answers:[
 {label:"子どものIT・プログラミング学習に活用したい",scores:{kids:15}}
 ]
 },
-
 {
 question:"具体的に何をしたいですか？",
 answers:[
@@ -663,7 +451,6 @@ answers:[
 {label:"翻訳したい",scores:{translation:15}}
 ]
 },
-
 {
 question:"AIを使った経験はありますか？",
 answers:[
@@ -673,7 +460,6 @@ answers:[
 {label:"高度な使い方もしている",scores:{advanced:10}}
 ]
 },
-
 {
 question:"主にどの端末で使いますか？",
 answers:[
@@ -683,7 +469,6 @@ answers:[
 {label:"まだ決めていない",scores:{}}
 ]
 },
-
 {
 question:"日本語の使いやすさは重要ですか？",
 answers:[
@@ -692,7 +477,6 @@ answers:[
 {label:"あまり気にしない",scores:{}}
 ]
 },
-
 {
 question:"AIに一番求めるものは？",
 answers:[
@@ -702,7 +486,6 @@ answers:[
 {label:"専門的な作業をしたい",scores:{specialist:10}}
 ]
 },
-
 {
 question:"月額料金の希望は？",
 answers:[
@@ -713,7 +496,6 @@ answers:[
 {label:"効果があれば料金は気にしない",scores:{premium:10}}
 ]
 },
-
 {
 question:"利用頻度は？",
 answers:[
@@ -723,7 +505,6 @@ answers:[
 {label:"仕事で毎日使う",scores:{work:8,daily:10}}
 ]
 },
-
 {
 question:"どのくらい時間を節約したいですか？",
 answers:[
@@ -732,7 +513,6 @@ answers:[
 {label:"大幅に効率化したい",scores:{efficiency:15,work:5}}
 ]
 },
-
 {
 question:"文章を作る機会はありますか？",
 answers:[
@@ -742,7 +522,6 @@ answers:[
 {label:"毎日の仕事で多い",scores:{writing:12,work:5}}
 ]
 },
-
 {
 question:"資料や企画を作りますか？",
 answers:[
@@ -752,7 +531,6 @@ answers:[
 {label:"仕事で頻繁に作る",scores:{work:12,efficiency:5}}
 ]
 },
-
 {
 question:"会議や音声を文字にする必要がありますか？",
 answers:[
@@ -762,7 +540,6 @@ answers:[
 {label:"仕事で頻繁に必要",scores:{transcription:15,work:5}}
 ]
 },
-
 {
 question:"画像やデザインを作りますか？",
 answers:[
@@ -772,7 +549,6 @@ answers:[
 {label:"本格的なデザインをしたい",scores:{design:15,specialist:5}}
 ]
 },
-
 {
 question:"動画を作りますか？",
 answers:[
@@ -782,7 +558,6 @@ answers:[
 {label:"仕事で使いたい",scores:{video:15,work:5}}
 ]
 },
-
 {
 question:"音声を作ったり編集したりしますか？",
 answers:[
@@ -792,7 +567,6 @@ answers:[
 {label:"仕事・コンテンツ制作で必要",scores:{audio:15,video:5}}
 ]
 },
-
 {
 question:"外国語を使う機会は？",
 answers:[
@@ -802,7 +576,6 @@ answers:[
 {label:"仕事で頻繁にある",scores:{translation:15,work:5}}
 ]
 },
-
 {
 question:"AIに情報収集を手伝ってほしいですか？",
 answers:[
@@ -812,7 +585,6 @@ answers:[
 {label:"仕事や学習で頻繁に使いたい",scores:{research:15,learning:8}}
 ]
 },
-
 {
 question:"AIを使う目的に近いものは？",
 answers:[
@@ -823,7 +595,6 @@ answers:[
 {label:"クリエイティブな作品を作りたい",scores:{design:8,video:8}}
 ]
 },
-
 {
 question:"AIを選ぶときに一番不安なのは？",
 answers:[
@@ -833,7 +604,6 @@ answers:[
 {label:"自分の目的に合うかわからない",scores:{specialist:5}}
 ]
 },
-
 {
 question:"あなたにとって一番重要なのは？",
 answers:[
@@ -844,548 +614,204 @@ answers:[
 {label:"仕事の効率化",scores:{efficiency:10,work:5}}
 ]
 }
-
 ];
-
-
 /* =========================
    AIツールデータ
 ========================= */
-
 const tools = [
-
-{
-name:"ChatGPT",
-description:"文章作成、情報整理、学習、アイデア出しなど幅広く活用できる総合AI。",
-tags:{
-work:9,writing:10,learning:10,research:8,
-beginner:9,features:10,japanese:10,
-mobile:9,pc:10,efficiency:9,free:7
-}
-},
-
-{
-name:"Gemini",
-description:"情報整理や文章作成、学習など幅広い用途に対応する総合AI。",
-tags:{
-work:8,writing:8,learning:10,research:9,
-beginner:8,features:9,japanese:10,
-mobile:9,pc:9,free:8
-}
-},
-
-{
-name:"Claude",
-description:"長文の文章作成や資料の整理・分析に活用しやすいAI。",
-tags:{
-work:8,writing:10,learning:8,research:8,
-accuracy:9,features:9,pc:9,advanced:8
-}
-},
-
-{
-name:"Microsoft Copilot",
-description:"仕事や資料作成など、Microsoft環境での活用に向いているAI。",
-tags:{
-work:10,writing:8,efficiency:10,
-features:9,pc:10,beginner:8,japanese:9
-}
-},
-
-{
-name:"Notta",
-description:"会議や音声の文字起こし、議事録作成を効率化したい人向け。",
-tags:{
-transcription:10,work:9,efficiency:10,
-beginner:9,japanese:10,pc:9,mobile:9,daily:8
-}
-},
-
-{
-name:"Notta Brain",
-description:"会議内容や情報を整理・活用し、業務効率化につなげたい人向け。",
-tags:{
-transcription:9,work:10,efficiency:10,
-research:8,features:9,pc:9,daily:9
-}
-},
-
-{
-name:"Canva",
-description:"SNS画像、資料、デザインなどを初心者でも作りやすいデザインツール。",
-tags:{
-design:10,beginner:10,mobile:9,
-pc:10,japanese:10,free:9,features:9
-}
-},
-
-{
-name:"MiriCanvas",
-description:"テンプレートを活用して、画像や資料を簡単に作成しやすいデザインツール。",
-tags:{
-design:10,beginner:10,mobile:8,
-pc:9,japanese:10,free:9,features:8
-}
-},
-
-{
-name:"Aiarty Image Enhancer",
-description:"画像の画質改善や高画質化をしたい人向け。",
-tags:{
-design:8,specialist:9,pc:10,features:8
-}
-},
-
-{
-name:"CapCut",
-description:"SNS動画やショート動画の編集・制作に活用しやすいツール。",
-tags:{
-video:10,beginner:9,mobile:10,
-pc:9,free:9,features:9
-}
-},
-
-{
-name:"ElevenLabs",
-description:"AI音声の生成やコンテンツ制作に活用したい人向け。",
-tags:{
-audio:10,video:8,specialist:9,
-features:9,advanced:8
-}
-},
-
-{
-name:"DeepL",
-description:"外国語の翻訳を行いたい人向けの翻訳ツール。",
-tags:{
-translation:10,accuracy:10,beginner:9,
-japanese:9,pc:9,mobile:9,free:8
-}
-},
-
-{
-name:"ヤラク翻訳",
-description:"仕事で翻訳を活用したい人向けの翻訳サービス。",
-tags:{
-translation:10,accuracy:9,work:10,
-efficiency:8,pc:10,japanese:10
-}
-},
-
-{
-name:"Languise",
-description:"AIを活用した翻訳・外国語関連の作業を効率化したい人向け。",
-tags:{
-translation:9,accuracy:8,work:8,
-efficiency:8,japanese:8
-}
-},
-
-{
-name:"Perplexity",
-description:"情報収集や調査を効率化したい人向けのAI検索ツール。",
-tags:{
-research:10,learning:9,accuracy:9,
-features:9,beginner:8,pc:9,mobile:9
-}
-},
-
-{
-name:"NotebookLM",
-description:"資料を読み込ませて整理・学習・情報分析を行いたい人向け。",
-tags:{
-learning:10,research:10,work:8,
-accuracy:9,pc:10,features:9
-}
-},
-
-{
-name:"デジタネ",
-description:"子どものIT・プログラミング学習を進めたい家庭向けの学習サービス。",
-tags:{
-kids:10,learning:10,beginner:10,
-japanese:10,features:8
-}
-}
-
+{name:"ChatGPT",description:"文章作成、情報整理、学習、アイデア出しなど幅広く活用できる総合AI。",tags:{work:9,writing:10,learning:10,research:8,beginner:9,features:10,japanese:10,mobile:9,pc:10,efficiency:9,free:7}},
+{name:"Gemini",description:"情報整理や文章作成、学習など幅広い用途に対応する総合AI。",tags:{work:8,writing:8,learning:10,research:9,beginner:8,features:9,japanese:10,mobile:9,pc:9,free:8}},
+{name:"Claude",description:"長文の文章作成や資料の整理・分析に活用しやすいAI。",tags:{work:8,writing:10,learning:8,research:8,accuracy:9,features:9,pc:9,advanced:8}},
+{name:"Microsoft Copilot",description:"仕事や資料作成など、Microsoft環境での活用に向いているAI。",tags:{work:10,writing:8,efficiency:10,features:9,pc:10,beginner:8,japanese:9}},
+{name:"Notta",description:"会議や音声の文字起こし、議事録作成を効率化したい人向け。",tags:{transcription:10,work:9,efficiency:10,beginner:9,japanese:10,pc:9,mobile:9,daily:8}},
+{name:"Notta Brain",description:"会議内容や情報を整理・活用し、業務効率化につなげたい人向け。",tags:{transcription:9,work:10,efficiency:10,research:8,features:9,pc:9,daily:9}},
+{name:"Canva",description:"SNS画像、資料、デザインなどを初心者でも作りやすいデザインツール。",tags:{design:10,beginner:10,mobile:9,pc:10,japanese:10,free:9,features:9}},
+{name:"MiriCanvas",description:"テンプレートを活用して、画像や資料を簡単に作成しやすいデザインツール。",tags:{design:10,beginner:10,mobile:8,pc:9,japanese:10,free:9,features:8}},
+{name:"Aiarty Image Enhancer",description:"画像の画質改善や高画質化をしたい人向け。",tags:{design:8,specialist:9,pc:10,features:8}},
+{name:"CapCut",description:"SNS動画やショート動画の編集・制作に活用しやすいツール。",tags:{video:10,beginner:9,mobile:10,pc:9,free:9,features:9}},
+{name:"ElevenLabs",description:"AI音声の生成やコンテンツ制作に活用したい人向け。",tags:{audio:10,video:8,specialist:9,features:9,advanced:8}},
+{name:"DeepL",description:"外国語の翻訳を行いたい人向けの翻訳ツール。",tags:{translation:10,accuracy:10,beginner:9,japanese:9,pc:9,mobile:9,free:8}},
+{name:"ヤラク翻訳",description:"仕事で翻訳を活用したい人向けの翻訳サービス。",tags:{translation:10,accuracy:9,work:10,efficiency:8,pc:10,japanese:10}},
+{name:"Languise",description:"AIを活用した翻訳・外国語関連の作業を効率化したい人向け。",tags:{translation:9,accuracy:8,work:8,efficiency:8,japanese:8}},
+{name:"Perplexity",description:"情報収集や調査を効率化したい人向けのAI検索ツール。",tags:{research:10,learning:9,accuracy:9,features:9,beginner:8,pc:9,mobile:9}},
+{name:"NotebookLM",description:"資料を読み込ませて整理・学習・情報分析を行いたい人向け。",tags:{learning:10,research:10,work:8,accuracy:9,pc:10,features:9}},
+{name:"デジタネ",description:"子どものIT・プログラミング学習を進めたい家庭向けの学習サービス。",tags:{kids:10,learning:10,beginner:10,japanese:10,features:8}}
 ];
-
-
 /* =========================
    診断制御
 ========================= */
-
 let currentQuestion = 0;
-
-/* 各質問の選択番号を保存 */
-
 let selectedAnswers = [];
-
-
 /* =========================
    質問表示
 ========================= */
-
 function showQuestion() {
-
   const q = questions[currentQuestion];
-
   document.getElementById("question-number").textContent =
     "QUESTION " + (currentQuestion + 1);
-
   document.getElementById("question").textContent =
     q.question;
-
   document.getElementById("progress-label").textContent =
     "質問 " + (currentQuestion + 1) + " / " + questions.length;
-
   const percent =
-    Math.round(
-      ((currentQuestion + 1) / questions.length) * 100
-    );
-
+    Math.round(((currentQuestion + 1) / questions.length) * 100);
   document.getElementById("progress-percent").textContent =
     percent + "%";
-
   document.getElementById("progress").style.width =
     percent + "%";
-
-
   const answersArea =
     document.getElementById("answers");
-
-  /* 次の質問を表示する前に完全にクリア */
-
+  /* 毎回、回答欄を完全に作り直す */
   answersArea.innerHTML = "";
-
-
   q.answers.forEach(function(answer, index) {
-
     const button =
       document.createElement("button");
-
-    button.className =
-      "answer-button";
-
-    button.textContent =
-      answer.label;
-
-
-    /* 戻ってきた質問だけ以前の選択を表示 */
-
-    if (
-      selectedAnswers[currentQuestion] === index
-    ) {
-      button.classList.add("selected");
-    }
-
-
+    button.className = "answer-button";
+    button.textContent = answer.label;
+    /*
+      重要：
+      selectedクラスは一切付けない
+      → 次の質問でも戻った質問でも
+         オレンジ枠は残らない
+    */
     button.onclick = function() {
-
-      /* 回答を保存 */
-
+      /*
+        内部では回答を保存する
+        ただし画面上では選択状態を残さない
+      */
       selectedAnswers[currentQuestion] = index;
-
-
-      /* 次の質問へ */
-
       currentQuestion++;
-
-
-      if (
-        currentQuestion < questions.length
-      ) {
-
+      if (currentQuestion < questions.length) {
         showQuestion();
-
       } else {
-
         showResult();
-
       }
-
     };
-
-
     answersArea.appendChild(button);
-
   });
-
-
-  /* =========================
-     戻るボタン
-  ========================= */
-
+  /* 戻るボタン */
   const navigationArea =
     document.getElementById("navigation-area");
-
   navigationArea.innerHTML = "";
-
-
-  /* 1問目以外だけ表示 */
-
   if (currentQuestion > 0) {
-
     const backButton =
       document.createElement("button");
-
-    backButton.className =
-      "back-button";
-
+    backButton.className = "back-button";
     backButton.textContent =
       "← 前の質問に戻る";
-
-
     backButton.onclick = function() {
-
       currentQuestion--;
-
+      /*
+        戻った質問も新しく描画するため、
+        以前選んだ回答のオレンジ枠は表示されない
+      */
       showQuestion();
-
     };
-
-
     navigationArea.appendChild(backButton);
-
   }
-
 }
-
-
 /* =========================
    結果計算
 ========================= */
-
 function calculateResults() {
-
   let userScores = {};
-
-
-  /* 選択された回答を集計 */
-
-  selectedAnswers.forEach(
-    function(answerIndex, questionIndex) {
-
-      if (
-        answerIndex === undefined
-      ) return;
-
-
-      const selectedAnswer =
-        questions[questionIndex]
-        .answers[answerIndex];
-
-
-      Object.keys(
-        selectedAnswer.scores
-      ).forEach(function(key) {
-
+  selectedAnswers.forEach(function(answerIndex, questionIndex) {
+    if (answerIndex === undefined) return;
+    const selectedAnswer =
+      questions[questionIndex].answers[answerIndex];
+    Object.keys(selectedAnswer.scores)
+      .forEach(function(key) {
         userScores[key] =
           (userScores[key] || 0)
           + selectedAnswer.scores[key];
-
       });
-
-    }
-  );
-
-
-  /* 各AIツールを採点 */
-
-  const results =
-    tools.map(function(tool) {
-
-      let score = 0;
-
-
-      Object.keys(tool.tags)
-      .forEach(function(tag) {
-
-        if (userScores[tag]) {
-
-          score +=
-            userScores[tag]
-            * tool.tags[tag];
-
-        }
-
-      });
-
-
-      return {
-
-        name: tool.name,
-        description: tool.description,
-        rawScore: score
-
-      };
-
-    });
-
-
-  /* 点数順 */
-
-  results.sort(function(a, b) {
-
-    return b.rawScore - a.rawScore;
-
   });
-
-
+  const results = tools.map(function(tool) {
+    let score = 0;
+    Object.keys(tool.tags)
+      .forEach(function(tag) {
+        if (userScores[tag]) {
+          score +=
+            userScores[tag] * tool.tags[tag];
+        }
+      });
+    return {
+      name: tool.name,
+      description: tool.description,
+      rawScore: score
+    };
+  });
+  results.sort(function(a, b) {
+    return b.rawScore - a.rawScore;
+  });
   const maxScore =
     results[0].rawScore || 1;
-
-
-  /* BEST3を返す */
-
   return results
     .slice(0, 3)
     .map(function(tool, index) {
-
       const percentage =
         Math.max(
           60,
           Math.round(
-            (tool.rawScore / maxScore)
-            * 100
+            (tool.rawScore / maxScore) * 100
           )
         );
-
-
       return {
-
         rank: index + 1,
         name: tool.name,
         description: tool.description,
         score: percentage
-
       };
-
     });
-
 }
-
-
 /* =========================
    結果表示
 ========================= */
-
 function showResult() {
-
-  document.getElementById("diagnosis")
-    .style.display = "none";
-
-  document.getElementById("result")
-    .style.display = "block";
-
-
+  document.getElementById("diagnosis").style.display = "none";
+  document.getElementById("result").style.display = "block";
   const resultList =
     document.getElementById("result-list");
-
-
   const results =
     calculateResults();
-
-
   const medals = [
     "🥇 BEST 1",
     "🥈 BEST 2",
     "🥉 BEST 3"
   ];
-
-
   resultList.innerHTML = "";
-
-
   results.forEach(function(tool, index) {
-
     const card =
       document.createElement("div");
-
-    card.className =
-      "result-card";
-
-
+    card.className = "result-card";
     card.innerHTML =
-
-      '<div class="rank">' +
-      medals[index] +
-      '</div>' +
-
-      '<div class="tool-name">' +
-      tool.name +
-      '</div>' +
-
-      '<div class="score">適合度 ' +
-      tool.score +
-      '%</div>' +
-
-      '<div class="tool-description">' +
-      tool.description +
-      '</div>';
-
-
+      '<div class="rank">' + medals[index] + '</div>' +
+      '<div class="tool-name">' + tool.name + '</div>' +
+      '<div class="score">適合度 ' + tool.score + '%</div>' +
+      '<div class="tool-description">' + tool.description + '</div>';
     resultList.appendChild(card);
-
   });
-
-
   window.scrollTo({
-
-    top:
-      document.getElementById("result")
-      .offsetTop,
-
-    behavior:
-      "smooth"
-
+    top: document.getElementById("result").offsetTop,
+    behavior: "smooth"
   });
-
 }
-
-
 /* =========================
    再診断
 ========================= */
-
 function restartDiagnosis() {
-
   currentQuestion = 0;
-
   selectedAnswers = [];
-
-
-  document.getElementById("result")
-    .style.display = "none";
-
-  document.getElementById("diagnosis")
-    .style.display = "block";
-
-
+  document.getElementById("result").style.display = "none";
+  document.getElementById("diagnosis").style.display = "block";
   showQuestion();
-
-
   window.scrollTo({
-
-    top:
-      document.getElementById("diagnosis")
-      .offsetTop,
-
-    behavior:
-      "smooth"
-
+    top: document.getElementById("diagnosis").offsetTop,
+    behavior: "smooth"
   });
-
 }
-
-
-/* =========================
-   初期表示
-========================= */
-
+/* 初期表示 */
 showQuestion();
-
 </script>
-
 </body>
 </html>
