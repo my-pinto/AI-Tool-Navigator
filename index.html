@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -159,9 +160,15 @@ color:#0b1f3a;
 font-size:15px;
 }
 
+/* 診断画面は最初は非表示 */
+
 #diagnosis,
 #result{
 background:#eef3f9;
+}
+
+#diagnosis{
+display:none;
 }
 
 #result{
@@ -244,19 +251,22 @@ transform:translateX(-12px);
 }
 }
 
+/* 回答ボタンをコンパクトに */
+
 .answers{
 display:grid;
-gap:11px;
+gap:8px;
 }
 
 .answer-button{
 width:100%;
-padding:16px 18px;
+padding:10px 14px;
 background:#fff;
 border:2px solid #dfe6ee;
-border-radius:12px;
+border-radius:10px;
 text-align:left;
-font-size:16px;
+font-size:15px;
+line-height:1.45;
 cursor:pointer;
 color:#172033;
 transition:border-color .18s,background .18s,transform .18s;
@@ -502,10 +512,7 @@ background:#eaf0f7;
 color:#34506e;
 }
 
-/* =========================
-   公式サイトリンク
-   BEST1でも必ず1行表示
-========================= */
+/* 公式サイトリンク：BEST1〜3すべて1行表示 */
 
 .official-link{
 display:flex;
@@ -532,9 +539,7 @@ background:#e6f1fb;
 transform:translateY(-2px);
 }
 
-/* =========================
-   PRセクション
-========================= */
+/* PRセクション */
 
 .pr-section{
 margin-top:38px;
@@ -603,7 +608,7 @@ line-height:1.5;
 margin-bottom:14px;
 }
 
-/* 押したくなるPRボタン */
+/* PRボタン */
 
 .pr-link{
 display:flex;
@@ -691,9 +696,12 @@ padding:23px 17px;
 font-size:21px;
 }
 
+/* スマホの回答ボタンをさらにコンパクトに */
+
 .answer-button{
-padding:14px;
-font-size:15px;
+padding:9px 12px;
+font-size:14px;
+line-height:1.4;
 }
 
 .result-card{
@@ -760,7 +768,9 @@ transition-duration:.01ms!important;
 20の質問に答えるだけ。あなたの目的・予算・AI経験・使い方に合わせて、おすすめのAIツールを診断します。
 </p>
 
-<a href="#diagnosis" class="button">無料で診断をはじめる</a>
+<button type="button" class="button" onclick="startDiagnosis()">
+無料で診断をはじめる
+</button>
 
 <div class="sub-text">診断時間 約3分｜無料｜登録不要</div>
 </section>
@@ -1129,7 +1139,6 @@ answers:[
 
 /* =========================
    PR案件
-   今後案件が増えたらここへ追加
 ========================= */
 
 const affiliateAds = [
@@ -1627,6 +1636,33 @@ document.activeElement.blur();
 
 
 /* =========================
+   診断開始
+========================= */
+
+function startDiagnosis(){
+
+currentQuestion=0;
+selectedAnswers=[];
+isTransitioning=false;
+
+document.getElementById("result").style.display="none";
+document.getElementById("diagnosis").style.display="block";
+
+showQuestion();
+
+setTimeout(()=>{
+
+document.getElementById("diagnosis").scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+},100);
+
+}
+
+
+/* =========================
    質問表示
 ========================= */
 
@@ -1634,13 +1670,15 @@ function showQuestion(){
 
 const q=questions[currentQuestion];
 
-setTimeout(()=>{
-const diagnosisTop=document.getElementById("diagnosis").offsetTop;
+/* 質問が変わるたびに診断画面の位置へ移動 */
 
-window.scrollTo({
-top:Math.max(0,diagnosisTop-10),
-behavior:"smooth"
+setTimeout(()=>{
+
+document.getElementById("diagnosis").scrollIntoView({
+behavior:"smooth",
+block:"start"
 });
+
 },50);
 
 clearSelection();
@@ -1752,7 +1790,6 @@ if(isTransitioning)return;
 isTransitioning=true;
 
 clearSelection();
-
 
 /* 戻った質問以降の回答を削除 */
 
@@ -2294,7 +2331,7 @@ const relevant=scoredAds
 .slice(0,3);
 
 
-/* もし条件に合う案件がない場合は表示しない */
+/* 条件に合う案件がない場合は表示しない */
 
 return relevant;
 
@@ -2341,9 +2378,7 @@ const captions=[
 ];
 
 
-/* =========================
-   BEST1〜BEST3
-========================= */
+/* BEST1〜BEST3 */
 
 results.forEach((item,index)=>{
 
@@ -2415,7 +2450,7 @@ desc.textContent=item.tool.description;
 card.appendChild(desc);
 
 
-/* 理由 */
+/* おすすめ理由 */
 
 const reason=document.createElement("div");
 
@@ -2497,9 +2532,7 @@ makeCaution(item)
 card.appendChild(caution);
 
 
-/* =========================
-   BEST1〜3は必ず公式リンク
-========================= */
+/* 公式サイトリンク */
 
 const link=document.createElement("a");
 
@@ -2523,9 +2556,7 @@ resultList.appendChild(card);
 });
 
 
-/* =========================
-   回答に関連するPRを表示
-========================= */
+/* 回答に関連するPRを表示 */
 
 const profile=buildUserProfile();
 
@@ -2617,7 +2648,7 @@ affiliate.text;
 prCard.appendChild(prText);
 
 
-/* 大きなPRボタン */
+/* PRボタン */
 
 const prLink=
 document.createElement("a");
@@ -2670,9 +2701,9 @@ resultList.appendChild(prSection);
 
 /* 結果位置へスクロール */
 
-window.scrollTo({
-top:document.getElementById("result").offsetTop,
-behavior:"smooth"
+document.getElementById("result").scrollIntoView({
+behavior:"smooth",
+block:"start"
 });
 
 }
@@ -2706,17 +2737,12 @@ document.getElementById("diagnosis").style.display="block";
 showQuestion();
 
 
-window.scrollTo({
-top:document.getElementById("diagnosis").offsetTop,
-behavior:"smooth"
+document.getElementById("diagnosis").scrollIntoView({
+behavior:"smooth",
+block:"start"
 });
 
 }
-
-
-/* 初期表示 */
-
-showQuestion();
 
 </script>
 
