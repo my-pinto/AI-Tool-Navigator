@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="利用目的や予算、AIの経験に応じて、あなたにおすすめのAIツールBEST3を診断できる無料サービスです。">
+
+  <title>AIツール選択ナビ｜あなたに最適なAIをBEST3診断</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Hiragino Sans",
+        "Yu Gothic",
+        sans-serif;
+      background: #f5f7fb;
+      color: #1b263b;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #0b1f3a;
+      color: white;
+      padding: 18px 20px;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .hero {
+      background:
+        linear-gradient(
+          135deg,
+          #0b1f3a,
+          #173f70
+        );
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 52px);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 35px;
+    }
+
+    .start-button {
+      display: inline-block;
+      background: #f58220;
+      color: white;
+      padding: 17px 42px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .start-button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 30px;
+      margin-bottom: 15px;
+      color: #0b1f3a;
+    }
+
+    .section-text {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: #555;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 28px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .step-number {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #f58220;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #0b1f3a;
+    }
+
+    .category-section {
+      background: white;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .category {
+      background: #f5f7fb;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid #e5e9f0;
+    }
+
+    .category .icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .category h3 {
+      color: #0b1f3a;
+      font-size: 18px;
+    }
+
+    .cta {
+      text-align: center;
+      background: #0b1f3a;
+      color: white;
+      padding: 70px 20px;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: #071426;
+      color: #c9d2df;
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        justify-content: center;
+      }
+
+      .hero {
+        padding: 60px 20px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .start-button {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">AIツール選択ナビ</div>
+    </div>
+  </header>
+
+  <section class="hero">
+
+    <h1>
+      あなたに最適なAIツールを<br>
+      BEST3で診断
+    </h1>
+
+    <p>
+      「AIを使ってみたいけど、どれを選べばいいかわからない」
+      そんなあなたのために、20の質問からおすすめのAIツールを診断します。
+    </p>
+
+    <a href="#diagnosis" class="start-button">
+      無料で診断をはじめる
+    </a>
+
+  </section>
+
+
+  <section class="container">
+
+    <h2 class="section-title">
+      たった3ステップで最適なAIが見つかる
+    </h2>
+
+    <p class="section-text">
+      難しい専門知識は必要ありません。
+      質問に答えるだけで、あなたの目的に合ったAIツールを探せます。
+    </p>
+
+    <div class="steps">
+
+      <div class="card">
+        <div class="step-number">1</div>
+        <h3>質問に答える</h3>
+        <p>
+          利用目的や予算、AIの経験など、
+          簡単な質問に答えます。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="step-number">2</div>
+        <h3>AIが自動分析</h3>
+        <p>
+          あなたの回答をもとに、
+          各AIツールとの相性を分析します。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="step-number">3</div>
+        <h3>BEST3を表示</h3>
+        <p>
+          あなたにおすすめのAIツールを
+          BEST3形式で紹介します。
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="category-section">
+
+    <div class="container">
+
+      <h2 class="section-title">
+        こんなAIツールを診断できます
+      </h2>
+
+      <div class="categories">
+
+        <div class="category">
+          <div class="icon">💼</div>
+          <h3>仕事・業務効率化</h3>
+        </div>
+
+        <div class="category">
+          <div class="icon">✍️</div>
+          <h3>文章・ライティング</h3>
+        </div>
+
+        <div class="category">
+          <div class="icon">🎨</div>
+          <h3>画像・デザイン</h3>
+        </div>
+
+        <div class="category">
+          <div class="icon">🎬</div>
+          <h3>動画・音声</h3>
+        </div>
+
+        <div class="category">
+          <div class="icon">📚</div>
+          <h3>学習・調査</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="cta" id="diagnosis">
+
+    <h2>あなたに合うAIを見つけよう</h2>
+
+    <p>
+      20問の質問に答えるだけで、
+      あなたにおすすめのAIツールBEST3がわかります。
+    </p>
+
+    <br>
+
+    <a href="#" class="start-button">
+      診断をスタートする
+    </a>
+
+  </section>
+
+
+  <footer>
+
+    <p>
+      © AIツール選択ナビ
+    </p>
+
+  </footer>
+
+</body>
+</html>
