@@ -739,6 +739,10 @@ caution.appendChild(cautionLabel);
 caution.appendChild(document.createTextNode(makeCaution(item)));
 card.appendChild(caution);
 
+const affiliate=affiliateAds[item.tool.name];
+
+/* PRリンクがないツールだけ公式サイトリンクを表示 */
+if(!affiliate){
 const link=document.createElement("a");
 link.className="official-link";
 link.href=item.tool.url;
@@ -746,10 +750,36 @@ link.target="_blank";
 link.rel="noopener noreferrer";
 link.textContent="公式サイトで詳細を確認する ↗";
 card.appendChild(link);
+}
 
-const affiliate=affiliateAds[item.tool.name];
-
+/* PRリンクがあるツールはPRリンクのみ表示 */
 if(affiliate){
+const affiliateBox=document.createElement("div");
+affiliateBox.className="affiliate-box";
+
+const affiliateLabel=document.createElement("div");
+affiliateLabel.className="affiliate-label";
+affiliateLabel.textContent=affiliate.label;
+affiliateBox.appendChild(affiliateLabel);
+
+const affiliateLink=document.createElement("a");
+affiliateLink.className="affiliate-link";
+affiliateLink.href=affiliate.href;
+affiliateLink.target="_blank";
+affiliateLink.rel="nofollow sponsored noopener noreferrer";
+affiliateLink.textContent=affiliate.text;
+affiliateBox.appendChild(affiliateLink);
+
+const pixel=document.createElement("img");
+pixel.src=affiliate.pixel;
+pixel.width=1;
+pixel.height=1;
+pixel.border=0;
+pixel.alt="";
+affiliateBox.appendChild(pixel);
+
+card.appendChild(affiliateBox);
+}
 const affiliateBox=document.createElement("div");
 affiliateBox.className="affiliate-box";
 
