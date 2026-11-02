@@ -9,834 +9,535 @@
 <title>AIツール選択ナビ｜20問で最適なAIをBEST3診断</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+background:#f4f7fb;color:#172033;line-height:1.7
+}
+header{background:#0b1f3a;color:#fff;padding:16px 20px}
+.header-inner{max-width:1100px;margin:auto}
+.logo{font-size:22px;font-weight:800}
+.logo span{color:#f58220}
+
+.hero{
+background:linear-gradient(135deg,#0b1f3a,#174a7c);
+color:#fff;text-align:center;padding:80px 20px 90px
+}
+.hero h1{font-size:clamp(32px,6vw,54px);line-height:1.3;margin-bottom:22px}
+.hero p{max-width:700px;margin:0 auto 35px;font-size:18px;color:#e6edf7}
+
+.button{
+display:inline-block;border:none;background:#f58220;color:#fff;
+padding:17px 38px;border-radius:50px;font-size:18px;font-weight:800;
+cursor:pointer;text-decoration:none
+}
+.sub-text{margin-top:14px;font-size:14px;color:#d5e0ef}
+
+.container{max-width:900px;margin:auto;padding:70px 20px}
+.section-title{text-align:center;color:#0b1f3a;font-size:32px;margin-bottom:14px}
+.section-description{text-align:center;max-width:700px;margin:0 auto 40px;color:#566074}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step-card,.diagnosis-box,.result-card{
+background:#fff;padding:28px;border-radius:18px;
+box-shadow:0 8px 24px rgba(11,31,58,.08)
+}
+.step-number{
+width:42px;height:42px;background:#f58220;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;font-weight:bold;margin-bottom:15px
+}
+.step-card h3{color:#0b1f3a;margin-bottom:8px}
+
+.category-section{background:#fff}
+.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
+.category-card{
+border:1px solid #e4eaf2;background:#f8fafc;border-radius:14px;
+padding:22px 12px;text-align:center
+}
+.category-icon{font-size:34px;margin-bottom:8px}
+.category-card h3{color:#0b1f3a;font-size:16px}
+
+#diagnosis,#result{background:#eef3f9}
+#result{display:none}
+
+.diagnosis-box{max-width:750px;margin:auto}
+.progress-area{margin-bottom:28px}
+.progress-text{
+display:flex;justify-content:space-between;font-weight:bold;
+margin-bottom:8px;color:#0b1f3a
+}
+.progress-bar{
+width:100%;height:10px;background:#e3e9f1;border-radius:20px;overflow:hidden
+}
+.progress{
+height:100%;width:5%;background:#f58220;transition:.3s
 }
 
-html {
-  scroll-behavior: smooth;
+.question-number{color:#f58220;font-weight:800;margin-bottom:8px}
+.question{font-size:25px;font-weight:800;color:#0b1f3a;margin-bottom:25px}
+.answers{display:grid;gap:12px}
+.answer-button{
+width:100%;padding:17px 20px;background:#fff;border:2px solid #dfe6ee;
+border-radius:12px;text-align:left;font-size:16px;cursor:pointer;color:#172033
+}
+.answer-button:hover{border-color:#f58220;background:#fff7f0}
+
+.result-header{text-align:center;margin-bottom:35px}
+.result-header h2{font-size:34px;color:#0b1f3a}
+.result-header p{color:#566074;margin-top:10px}
+
+.rank{
+display:inline-block;padding:6px 15px;border-radius:30px;
+background:#f58220;color:#fff;font-weight:bold;margin-bottom:12px
+}
+.tool-name{font-size:28px;font-weight:800;color:#0b1f3a}
+.score{font-size:20px;font-weight:bold;color:#f58220;margin:8px 0}
+.tool-description{color:#566074}
+.restart-button{display:block;margin:30px auto 0}
+
+footer{
+background:#071426;color:#b8c3d1;text-align:center;
+padding:25px 20px;font-size:14px
 }
 
-body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Hiragino Sans",
-    "Yu Gothic",
-    sans-serif;
-  background: #f4f7fb;
-  color: #172033;
-  line-height: 1.7;
+@media(max-width:700px){
+.hero{padding:60px 20px 70px}
+.hero p{font-size:16px}
+.steps{grid-template-columns:1fr}
+.categories{grid-template-columns:repeat(2,1fr)}
+.category-card:last-child{grid-column:span 2}
+.container{padding:55px 18px}
+.diagnosis-box{padding:24px 18px}
+.question{font-size:22px}
+.answer-button{padding:15px}
 }
-
-header {
-  background: #0b1f3a;
-  color: #ffffff;
-  padding: 16px 20px;
-}
-
-.header-inner {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 800;
-}
-
-.logo span {
-  color: #f58220;
-}
-
-/* HERO */
-
-.hero {
-  background: linear-gradient(135deg, #0b1f3a, #174a7c);
-  color: white;
-  text-align: center;
-  padding: 80px 20px 90px;
-}
-
-.hero h1 {
-  font-size: clamp(32px, 6vw, 54px);
-  line-height: 1.3;
-  margin-bottom: 22px;
-}
-
-.hero p {
-  max-width: 700px;
-  margin: 0 auto 35px;
-  font-size: 18px;
-  color: #e6edf7;
-}
-
-.button {
-  display: inline-block;
-  border: none;
-  background: #f58220;
-  color: white;
-  padding: 17px 38px;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: 0.2s;
-  text-decoration: none;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-  opacity: 0.92;
-}
-
-.sub-text {
-  margin-top: 14px;
-  font-size: 14px;
-  color: #d5e0ef;
-}
-
-/* CONTENT */
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 70px 20px;
-}
-
-.section-title {
-  text-align: center;
-  color: #0b1f3a;
-  font-size: 32px;
-  margin-bottom: 14px;
-}
-
-.section-description {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 40px;
-  color: #566074;
-}
-
-/* HOW TO */
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.step-card {
-  background: white;
-  padding: 28px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(11,31,58,0.08);
-}
-
-.step-number {
-  width: 42px;
-  height: 42px;
-  background: #f58220;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.step-card h3 {
-  color: #0b1f3a;
-  margin-bottom: 8px;
-}
-
-/* CATEGORY */
-
-.category-section {
-  background: white;
-}
-
-.categories {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
-}
-
-.category-card {
-  border: 1px solid #e4eaf2;
-  background: #f8fafc;
-  border-radius: 14px;
-  padding: 22px 12px;
-  text-align: center;
-}
-
-.category-icon {
-  font-size: 34px;
-  margin-bottom: 8px;
-}
-
-.category-card h3 {
-  color: #0b1f3a;
-  font-size: 16px;
-}
-
-/* DIAGNOSIS */
-
-#diagnosis {
-  background: #eef3f9;
-}
-
-.diagnosis-box {
-  background: white;
-  max-width: 750px;
-  margin: auto;
-  padding: 35px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(11,31,58,0.12);
-}
-
-.progress-area {
-  margin-bottom: 28px;
-}
-
-.progress-text {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #0b1f3a;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #e3e9f1;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  width: 5%;
-  background: #f58220;
-  transition: width 0.3s;
-}
-
-.question-number {
-  color: #f58220;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.question {
-  font-size: 25px;
-  font-weight: 800;
-  color: #0b1f3a;
-  margin-bottom: 25px;
-}
-
-.answers {
-  display: grid;
-  gap: 12px;
-}
-
-.answer-button {
-  width: 100%;
-  padding: 17px 20px;
-  background: #ffffff;
-  border: 2px solid #dfe6ee;
-  border-radius: 12px;
-  text-align: left;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s;
-  color: #172033;
-}
-
-.answer-button:hover {
-  border-color: #f58220;
-  background: #fff7f0;
-}
-
-.answer-button:active {
-  transform: scale(0.99);
-}
-
-/* RESULT */
-
-#result {
-  display: none;
-  background: #eef3f9;
-}
-
-.result-header {
-  text-align: center;
-  margin-bottom: 35px;
-}
-
-.result-header h2 {
-  font-size: 34px;
-  color: #0b1f3a;
-}
-
-.result-header p {
-  color: #566074;
-  margin-top: 10px;
-}
-
-.result-card {
-  background: white;
-  padding: 28px;
-  border-radius: 18px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(11,31,58,0.1);
-}
-
-.rank {
-  display: inline-block;
-  padding: 6px 15px;
-  border-radius: 30px;
-  background: #f58220;
-  color: white;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.tool-name {
-  font-size: 28px;
-  font-weight: 800;
-  color: #0b1f3a;
-}
-
-.score {
-  font-size: 20px;
-  font-weight: bold;
-  color: #f58220;
-  margin: 8px 0;
-}
-
-.tool-description {
-  color: #566074;
-}
-
-.restart-button {
-  display: block;
-  margin: 30px auto 0;
-}
-
-/* FOOTER */
-
-footer {
-  background: #071426;
-  color: #b8c3d1;
-  text-align: center;
-  padding: 25px 20px;
-  font-size: 14px;
-}
-
-/* MOBILE */
-
-@media (max-width: 700px) {
-
-  .hero {
-    padding: 60px 20px 70px;
-  }
-
-  .hero p {
-    font-size: 16px;
-  }
-
-  .steps {
-    grid-template-columns: 1fr;
-  }
-
-  .categories {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .category-card:last-child {
-    grid-column: span 2;
-  }
-
-  .container {
-    padding: 55px 18px;
-  }
-
-  .diagnosis-box {
-    padding: 24px 18px;
-  }
-
-  .question {
-    font-size: 22px;
-  }
-
-  .answer-button {
-    padding: 15px;
-  }
-
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-
-  <div class="header-inner">
-
-    <div class="logo">
-      AIツール<span>選択ナビ</span>
-    </div>
-
-  </div>
-
+<div class="header-inner">
+<div class="logo">AIツール<span>選択ナビ</span></div>
+</div>
 </header>
 
-
-<!-- HERO -->
-
 <section class="hero">
-
-  <h1>
-    あなたに最適なAIツールを<br>
-    <span style="color:#f58220;">BEST3</span>で診断
-  </h1>
-
-  <p>
-    20の質問に答えるだけ。
-    あなたの目的・予算・AI経験に合わせて、
-    おすすめのAIツールを診断します。
-  </p>
-
-  <a href="#diagnosis" class="button">
-    無料で診断をはじめる
-  </a>
-
-  <div class="sub-text">
-    診断時間 約3分｜無料｜登録不要
-  </div>
-
+<h1>あなたに最適なAIツールを<br><span style="color:#f58220;">BEST3</span>で診断</h1>
+<p>20の質問に答えるだけ。あなたの目的・予算・AI経験に合わせて、おすすめのAIツールを診断します。</p>
+<a href="#diagnosis" class="button">無料で診断をはじめる</a>
+<div class="sub-text">診断時間 約3分｜無料｜登録不要</div>
 </section>
-
-
-<!-- HOW TO -->
 
 <section class="container">
+<h2 class="section-title">3ステップであなたに合うAIが見つかる</h2>
+<p class="section-description">難しい知識は必要ありません。質問に答えるだけで、あなたに合ったAIツールを探せます。</p>
 
-  <h2 class="section-title">
-    3ステップであなたに合うAIが見つかる
-  </h2>
+<div class="steps">
+<div class="step-card">
+<div class="step-number">1</div>
+<h3>質問に答える</h3>
+<p>利用目的やAI経験など、20の簡単な質問に答えます。</p>
+</div>
 
-  <p class="section-description">
-    難しい知識は必要ありません。
-    質問に答えるだけで、あなたに合ったAIツールを探せます。
-  </p>
+<div class="step-card">
+<div class="step-number">2</div>
+<h3>自動分析</h3>
+<p>回答内容をもとに、あなたに合うAIを分析します。</p>
+</div>
 
-  <div class="steps">
-
-    <div class="step-card">
-
-      <div class="step-number">1</div>
-
-      <h3>質問に答える</h3>
-
-      <p>
-        利用目的やAI経験など、
-        20の簡単な質問に答えます。
-      </p>
-
-    </div>
-
-
-    <div class="step-card">
-
-      <div class="step-number">2</div>
-
-      <h3>自動分析</h3>
-
-      <p>
-        回答内容をもとに、
-        あなたに合うAIを分析します。
-      </p>
-
-    </div>
-
-
-    <div class="step-card">
-
-      <div class="step-number">3</div>
-
-      <h3>BEST3を確認</h3>
-
-      <p>
-        あなたにおすすめの
-        AIツールBEST3を表示します。
-      </p>
-
-    </div>
-
-  </div>
-
+<div class="step-card">
+<div class="step-number">3</div>
+<h3>BEST3を確認</h3>
+<p>あなたにおすすめのAIツールBEST3を表示します。</p>
+</div>
+</div>
 </section>
-
-
-<!-- CATEGORY -->
 
 <section class="category-section">
+<div class="container">
+<h2 class="section-title">目的に合わせてAIを診断</h2>
 
-  <div class="container">
-
-    <h2 class="section-title">
-      目的に合わせてAIを診断
-    </h2>
-
-    <div class="categories">
-
-      <div class="category-card">
-        <div class="category-icon">💼</div>
-        <h3>仕事</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">✍️</div>
-        <h3>文章</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">🎨</div>
-        <h3>画像</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">🎬</div>
-        <h3>動画</h3>
-      </div>
-
-      <div class="category-card">
-        <div class="category-icon">📚</div>
-        <h3>学習</h3>
-      </div>
-
-    </div>
-
-  </div>
-
+<div class="categories">
+<div class="category-card"><div class="category-icon">💼</div><h3>仕事</h3></div>
+<div class="category-card"><div class="category-icon">✍️</div><h3>文章</h3></div>
+<div class="category-card"><div class="category-icon">🎨</div><h3>画像</h3></div>
+<div class="category-card"><div class="category-icon">🎬</div><h3>動画</h3></div>
+<div class="category-card"><div class="category-icon">📚</div><h3>学習</h3></div>
+</div>
+</div>
 </section>
-
-
-<!-- DIAGNOSIS -->
 
 <section id="diagnosis">
+<div class="container">
+<div class="diagnosis-box">
 
-  <div class="container">
+<div class="progress-area">
+<div class="progress-text">
+<span id="progress-label">質問 1 / 20</span>
+<span id="progress-percent">5%</span>
+</div>
 
-    <div class="diagnosis-box">
+<div class="progress-bar">
+<div class="progress" id="progress"></div>
+</div>
+</div>
 
-      <div class="progress-area">
+<div class="question-number" id="question-number">QUESTION 1</div>
+<div class="question" id="question"></div>
+<div class="answers" id="answers"></div>
 
-        <div class="progress-text">
-
-          <span id="progress-label">
-            質問 1 / 20
-          </span>
-
-          <span id="progress-percent">
-            5%
-          </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-          <div
-            class="progress"
-            id="progress"
-          ></div>
-
-        </div>
-
-      </div>
-
-
-      <div id="question-area">
-
-        <div class="question-number" id="question-number">
-          QUESTION 1
-        </div>
-
-        <div class="question" id="question">
-          AIを使う一番大きな目的は？
-        </div>
-
-        <div class="answers" id="answers"></div>
-
-      </div>
-
-    </div>
-
-  </div>
-
+</div>
+</div>
 </section>
-
-
-<!-- RESULT -->
 
 <section id="result">
+<div class="container">
 
-  <div class="container">
+<div class="result-header">
+<h2>診断結果</h2>
+<p>あなたにおすすめのAIツールBEST3</p>
+</div>
 
-    <div class="result-header">
+<div id="result-list"></div>
 
-      <h2>
-        診断結果
-      </h2>
+<button class="button restart-button" onclick="restartDiagnosis()">
+もう一度診断する
+</button>
 
-      <p>
-        あなたにおすすめのAIツールBEST3
-      </p>
-
-    </div>
-
-    <div id="result-list"></div>
-
-    <button
-      class="button restart-button"
-      onclick="restartDiagnosis()"
-    >
-      もう一度診断する
-    </button>
-
-  </div>
-
+</div>
 </section>
 
-
 <footer>
-
-  © 2026 AIツール選択ナビ
-
+© 2026 AIツール選択ナビ
 </footer>
 
 
 <script>
 
 /* =========================
-   質問データ
+   質問
 ========================= */
 
 const questions = [
 
 {
-question: "AIを使う一番大きな目的は？",
-answers: [
-"仕事を効率化したい",
-"文章を作りたい",
-"画像・デザインを作りたい",
-"動画・音声を作りたい",
-"勉強・学習に使いたい",
-"翻訳したい"
+question:"AIを使う一番大きな目的は？",
+answers:[
+{label:"仕事を効率化したい",scores:{work:10}},
+{label:"文章を作りたい",scores:{writing:10}},
+{label:"画像・デザインを作りたい",scores:{design:10}},
+{label:"動画・音声を作りたい",scores:{video:10}},
+{label:"勉強・学習に使いたい",scores:{learning:10}},
+{label:"翻訳したい",scores:{translation:10}},
+{label:"子どものIT・プログラミング学習に活用したい",scores:{kids:15}}
 ]
 },
 
 {
-question: "具体的に何をしたいですか？",
-answers: [
-"メール・文章作成",
-"資料・企画を作りたい",
-"情報収集・要約",
-"会議を文字起こししたい",
-"画像・バナーを作りたい",
-"動画を作りたい",
-"翻訳したい"
+question:"具体的に何をしたいですか？",
+answers:[
+{label:"メール・文章作成",scores:{writing:8,work:4}},
+{label:"資料・企画を作りたい",scores:{work:8,writing:5}},
+{label:"情報収集・要約",scores:{learning:7,writing:5}},
+{label:"会議を文字起こししたい",scores:{transcription:15,work:6}},
+{label:"画像・バナーを作りたい",scores:{design:15}},
+{label:"動画を作りたい",scores:{video:15}},
+{label:"翻訳したい",scores:{translation:15}}
 ]
 },
 
 {
-question: "AIを使った経験はありますか？",
-answers: [
-"ほとんど使ったことがない",
-"少し使ったことがある",
-"普段から使っている",
-"高度な使い方もしている"
+question:"AIを使った経験はありますか？",
+answers:[
+{label:"ほとんど使ったことがない",scores:{beginner:10}},
+{label:"少し使ったことがある",scores:{beginner:6}},
+{label:"普段から使っている",scores:{advanced:5}},
+{label:"高度な使い方もしている",scores:{advanced:10}}
 ]
 },
 
 {
-question: "主にどの端末で使いますか？",
-answers: [
-"スマートフォン",
-"パソコン",
-"両方",
-"まだ決めていない"
+question:"主にどの端末で使いますか？",
+answers:[
+{label:"スマートフォン",scores:{mobile:8}},
+{label:"パソコン",scores:{pc:8}},
+{label:"両方",scores:{mobile:4,pc:4}},
+{label:"まだ決めていない",scores:{}}
 ]
 },
 
 {
-question: "日本語の使いやすさは重要ですか？",
-answers: [
-"とても重要",
-"できれば重要",
-"あまり気にしない"
+question:"日本語の使いやすさは重要ですか？",
+answers:[
+{label:"とても重要",scores:{japanese:10}},
+{label:"できれば重要",scores:{japanese:5}},
+{label:"あまり気にしない",scores:{}}
 ]
 },
 
 {
-question: "AIに一番求めるものは？",
-answers: [
-"とにかく簡単に使える",
-"正確さを重視したい",
-"多くの機能を使いたい",
-"専門的な作業をしたい"
+question:"AIに一番求めるものは？",
+answers:[
+{label:"とにかく簡単に使える",scores:{beginner:10}},
+{label:"正確さを重視したい",scores:{accuracy:10}},
+{label:"多くの機能を使いたい",scores:{features:10}},
+{label:"専門的な作業をしたい",scores:{specialist:10}}
 ]
 },
 
 {
-question: "月額料金の希望は？",
-answers: [
-"完全無料で使いたい",
-"無料版があればよい",
-"月1,000円程度まで",
-"月3,000円程度まで",
-"効果があれば料金は気にしない"
+question:"月額料金の希望は？",
+answers:[
+{label:"完全無料で使いたい",scores:{free:15}},
+{label:"無料版があればよい",scores:{free:8}},
+{label:"月1,000円程度まで",scores:{budget:8}},
+{label:"月3,000円程度まで",scores:{budget:5}},
+{label:"効果があれば料金は気にしない",scores:{premium:10}}
 ]
 },
 
 {
-question: "利用頻度は？",
-answers: [
-"たまに使う",
-"週に数回",
-"ほぼ毎日",
-"仕事で毎日使う"
+question:"利用頻度は？",
+answers:[
+{label:"たまに使う",scores:{casual:5}},
+{label:"週に数回",scores:{regular:5}},
+{label:"ほぼ毎日",scores:{daily:8}},
+{label:"仕事で毎日使う",scores:{work:8,daily:10}}
 ]
 },
 
 {
-question: "どのくらい時間を節約したいですか？",
-answers: [
-"少し便利になればよい",
-"作業時間を減らしたい",
-"大幅に効率化したい"
+question:"どのくらい時間を節約したいですか？",
+answers:[
+{label:"少し便利になればよい",scores:{casual:5}},
+{label:"作業時間を減らしたい",scores:{efficiency:8}},
+{label:"大幅に効率化したい",scores:{efficiency:15,work:5}}
 ]
 },
 
 {
-question: "文章を作る機会はありますか？",
-answers: [
-"ほとんどない",
-"メールや短い文章",
-"資料やブログなど長文",
-"毎日の仕事で多い"
+question:"文章を作る機会はありますか？",
+answers:[
+{label:"ほとんどない",scores:{}},
+{label:"メールや短い文章",scores:{writing:5}},
+{label:"資料やブログなど長文",scores:{writing:10}},
+{label:"毎日の仕事で多い",scores:{writing:12,work:5}}
 ]
 },
 
 {
-question: "資料や企画を作りますか？",
-answers: [
-"ほとんど作らない",
-"ときどき作る",
-"よく作る",
-"仕事で頻繁に作る"
+question:"資料や企画を作りますか？",
+answers:[
+{label:"ほとんど作らない",scores:{}},
+{label:"ときどき作る",scores:{work:5}},
+{label:"よく作る",scores:{work:8}},
+{label:"仕事で頻繁に作る",scores:{work:12,efficiency:5}}
 ]
 },
 
 {
-question: "会議や音声を文字にする必要がありますか？",
-answers: [
-"必要ない",
-"ときどきある",
-"よくある",
-"仕事で頻繁に必要"
+question:"会議や音声を文字にする必要がありますか？",
+answers:[
+{label:"必要ない",scores:{}},
+{label:"ときどきある",scores:{transcription:5}},
+{label:"よくある",scores:{transcription:10}},
+{label:"仕事で頻繁に必要",scores:{transcription:15,work:5}}
 ]
 },
 
 {
-question: "画像やデザインを作りますか？",
-answers: [
-"ほとんど作らない",
-"SNS用に作りたい",
-"資料や仕事で使いたい",
-"本格的なデザインをしたい"
+question:"画像やデザインを作りますか？",
+answers:[
+{label:"ほとんど作らない",scores:{}},
+{label:"SNS用に作りたい",scores:{design:8}},
+{label:"資料や仕事で使いたい",scores:{design:10,work:5}},
+{label:"本格的なデザインをしたい",scores:{design:15,specialist:5}}
 ]
 },
 
 {
-question: "動画を作りますか？",
-answers: [
-"作らない",
-"SNS用に少し作りたい",
-"趣味・副業で作りたい",
-"仕事で使いたい"
+question:"動画を作りますか？",
+answers:[
+{label:"作らない",scores:{}},
+{label:"SNS用に少し作りたい",scores:{video:8}},
+{label:"趣味・副業で作りたい",scores:{video:12}},
+{label:"仕事で使いたい",scores:{video:15,work:5}}
 ]
 },
 
 {
-question: "音声を作ったり編集したりしますか？",
-answers: [
-"必要ない",
-"少し興味がある",
-"よく使いたい",
-"仕事・コンテンツ制作で必要"
+question:"音声を作ったり編集したりしますか？",
+answers:[
+{label:"必要ない",scores:{}},
+{label:"少し興味がある",scores:{audio:5}},
+{label:"よく使いたい",scores:{audio:10}},
+{label:"仕事・コンテンツ制作で必要",scores:{audio:15,video:5}}
 ]
 },
 
 {
-question: "外国語を使う機会は？",
-answers: [
-"ほとんどない",
-"ときどきある",
-"よくある",
-"仕事で頻繁にある"
+question:"外国語を使う機会は？",
+answers:[
+{label:"ほとんどない",scores:{}},
+{label:"ときどきある",scores:{translation:5}},
+{label:"よくある",scores:{translation:10}},
+{label:"仕事で頻繁にある",scores:{translation:15,work:5}}
 ]
 },
 
 {
-question: "AIに情報収集を手伝ってほしいですか？",
-answers: [
-"あまり必要ない",
-"少し使いたい",
-"よく使いたい",
-"仕事や学習で頻繁に使いたい"
+question:"AIに情報収集を手伝ってほしいですか？",
+answers:[
+{label:"あまり必要ない",scores:{}},
+{label:"少し使いたい",scores:{research:5}},
+{label:"よく使いたい",scores:{research:10,learning:5}},
+{label:"仕事や学習で頻繁に使いたい",scores:{research:15,learning:8}}
 ]
 },
 
 {
-question: "AIを使う目的に近いものは？",
-answers: [
-"日常生活を便利にしたい",
-"仕事を効率化したい",
-"副業・収益化に活用したい",
-"学習やスキルアップに使いたい",
-"クリエイティブな作品を作りたい"
+question:"AIを使う目的に近いものは？",
+answers:[
+{label:"日常生活を便利にしたい",scores:{casual:8}},
+{label:"仕事を効率化したい",scores:{work:10,efficiency:5}},
+{label:"副業・収益化に活用したい",scores:{writing:5,design:5,video:5}},
+{label:"学習やスキルアップに使いたい",scores:{learning:10,research:5}},
+{label:"クリエイティブな作品を作りたい",scores:{design:8,video:8}}
 ]
 },
 
 {
-question: "AIを選ぶときに一番不安なのは？",
-answers: [
-"操作が難しそう",
-"料金が心配",
-"どれを選べばいいかわからない",
-"自分の目的に合うかわからない"
+question:"AIを選ぶときに一番不安なのは？",
+answers:[
+{label:"操作が難しそう",scores:{beginner:8}},
+{label:"料金が心配",scores:{free:10}},
+{label:"どれを選べばいいかわからない",scores:{beginner:5}},
+{label:"自分の目的に合うかわからない",scores:{specialist:5}}
 ]
 },
 
 {
-question: "あなたにとって一番重要なのは？",
-answers: [
-"使いやすさ",
-"料金の安さ",
-"機能の多さ",
-"専門性",
-"仕事の効率化"
+question:"あなたにとって一番重要なのは？",
+answers:[
+{label:"使いやすさ",scores:{beginner:10}},
+{label:"料金の安さ",scores:{free:10}},
+{label:"機能の多さ",scores:{features:10}},
+{label:"専門性",scores:{specialist:10}},
+{label:"仕事の効率化",scores:{efficiency:10,work:5}}
 ]
+}
+
+];
+
+
+/* =========================
+   AIツールデータ
+========================= */
+
+const tools = [
+
+{
+name:"ChatGPT",
+description:"文章作成、情報整理、学習、アイデア出しなど幅広く活用できる総合AI。",
+tags:{work:9,writing:10,learning:10,research:8,beginner:9,features:10,japanese:10,mobile:9,pc:10,efficiency:9,free:7}
+},
+
+{
+name:"Gemini",
+description:"情報整理や文章作成、学習など幅広い用途に対応するGoogleのAI。",
+tags:{work:8,writing:8,learning:10,research:9,beginner:8,features:9,japanese:10,mobile:9,pc:9,free:8}
+},
+
+{
+name:"Claude",
+description:"長文の文章作成や資料の整理・分析に活用しやすいAI。",
+tags:{work:8,writing:10,learning:8,research:8,accuracy:9,features:9,pc:9,advanced:8}
+},
+
+{
+name:"Microsoft Copilot",
+description:"仕事や資料作成など、Microsoft環境での活用に向いているAI。",
+tags:{work:10,writing:8,efficiency:10,features:9,pc:10,beginner:8,japanese:9}
+},
+
+{
+name:"Notta",
+description:"会議や音声の文字起こし、議事録作成を効率化したい人向け。",
+tags:{transcription:10,work:9,efficiency:10,beginner:9,japanese:10,pc:9,mobile:9,daily:8}
+},
+
+{
+name:"Notta Brain",
+description:"会議内容や情報を整理・活用し、業務効率化につなげたい人向け。",
+tags:{transcription:9,work:10,efficiency:10,research:8,features:9,pc:9,daily:9}
+},
+
+{
+name:"Canva",
+description:"SNS画像、資料、デザインなどを初心者でも作りやすいデザインツール。",
+tags:{design:10,beginner:10,mobile:9,pc:10,japanese:10,free:9,features:9}
+},
+
+{
+name:"MiriCanvas",
+description:"テンプレートを活用して、画像や資料を簡単に作成しやすいデザインツール。",
+tags:{design:10,beginner:10,mobile:8,pc:9,japanese:10,free:9,features:8}
+},
+
+{
+name:"Aiarty Image Enhancer",
+description:"画像をよりきれいに見せたい、画質改善をしたい人向け。",
+tags:{design:8,specialist:9,pc:10,features:8}
+},
+
+{
+name:"CapCut",
+description:"SNS動画やショート動画の編集・制作に活用しやすいツール。",
+tags:{video:10,beginner:9,mobile:10,pc:9,free:9,features:9}
+},
+
+{
+name:"ElevenLabs",
+description:"AI音声の生成やコンテンツ制作に活用したい人向け。",
+tags:{audio:10,video:8,specialist:9,features:9,advanced:8}
+},
+
+{
+name:"DeepL",
+description:"外国語の翻訳を高品質に行いたい人向けの翻訳ツール。",
+tags:{translation:10,accuracy:10,beginner:9,japanese:9,pc:9,mobile:9,free:8}
+},
+
+{
+name:"ヤラク翻訳",
+description:"仕事で翻訳を活用したい人向けの翻訳サービス。",
+tags:{translation:10,accuracy:9,work:10,efficiency:8,pc:10,japanese:10}
+},
+
+{
+name:"Languise",
+description:"AIを活用した翻訳・外国語関連の作業を効率化したい人向け。",
+tags:{translation:9,accuracy:8,work:8,efficiency:8,japanese:8}
+},
+
+{
+name:"Perplexity",
+description:"情報収集や調査を効率化したい人向けのAI検索ツール。",
+tags:{research:10,learning:9,accuracy:9,features:9,beginner:8,pc:9,mobile:9}
+},
+
+{
+name:"NotebookLM",
+description:"資料を読み込ませて整理・学習・情報分析を行いたい人向け。",
+tags:{learning:10,research:10,work:8,accuracy:9,pc:10,features:9}
+},
+
+{
+name:"デジタネ",
+description:"子どものIT・プログラミング学習を進めたい家庭向けの学習サービス。",
+tags:{kids:10,learning:10,beginner:10,japanese:10,features:8}
 }
 
 ];
@@ -848,14 +549,14 @@ answers: [
 
 let currentQuestion = 0;
 
-const answers = [];
+let userScores = {};
 
 
 /* =========================
-   質問を表示
+   質問表示
 ========================= */
 
-function showQuestion() {
+function showQuestion(){
 
 const q = questions[currentQuestion];
 
@@ -869,9 +570,7 @@ document.getElementById("progress-label").textContent =
 "質問 " + (currentQuestion + 1) + " / " + questions.length;
 
 const percent =
-Math.round(
-((currentQuestion + 1) / questions.length) * 100
-);
+Math.round(((currentQuestion + 1) / questions.length) * 100);
 
 document.getElementById("progress-percent").textContent =
 percent + "%";
@@ -879,42 +578,35 @@ percent + "%";
 document.getElementById("progress").style.width =
 percent + "%";
 
-
-const answersArea =
-document.getElementById("answers");
+const answersArea = document.getElementById("answers");
 
 answersArea.innerHTML = "";
 
+q.answers.forEach(function(answer){
 
-q.answers.forEach(function(answer) {
+const button = document.createElement("button");
 
-const button =
-document.createElement("button");
+button.className = "answer-button";
 
-button.className =
-"answer-button";
+button.textContent = answer.label;
 
-button.textContent =
-answer;
+button.onclick = function(){
 
-button.onclick =
-function() {
+Object.keys(answer.scores).forEach(function(key){
 
-answers.push({
-question: q.question,
-answer: answer
+userScores[key] =
+(userScores[key] || 0) +
+answer.scores[key];
+
 });
 
 currentQuestion++;
 
-if (
-currentQuestion <
-questions.length
-) {
+if(currentQuestion < questions.length){
 
 showQuestion();
 
-} else {
+}else{
 
 showResult();
 
@@ -930,140 +622,126 @@ answersArea.appendChild(button);
 
 
 /* =========================
-   診断結果
+   結果計算
 ========================= */
 
-function showResult() {
+function calculateResults(){
 
-document.getElementById(
-"diagnosis"
-).style.display =
-"none";
+const results = tools.map(function(tool){
 
-document.getElementById(
-"result"
-).style.display =
-"block";
+let score = 0;
 
+Object.keys(tool.tags).forEach(function(tag){
 
-const resultList =
-document.getElementById(
-"result-list"
-);
+if(userScores[tag]){
 
+score += userScores[tag] * tool.tags[tag];
 
-/* 仮の結果 */
-
-const results = [
-
-{
-rank: "🥇 BEST 1",
-name: "ChatGPT",
-score: "95%",
-description:
-"文章作成、情報整理、学習、仕事など幅広い用途に活用できる万能AIです。"
-},
-
-{
-rank: "🥈 BEST 2",
-name: "Gemini",
-score: "89%",
-description:
-"情報整理や文章作成など、幅広い用途に活用できるAIです。"
-},
-
-{
-rank: "🥉 BEST 3",
-name: "Claude",
-score: "84%",
-description:
-"長文の文章作成や情報整理などを得意とするAIです。"
 }
-
-];
-
-
-resultList.innerHTML = "";
-
-
-results.forEach(function(tool) {
-
-const card =
-document.createElement("div");
-
-card.className =
-"result-card";
-
-card.innerHTML =
-
-'<div class="rank">' +
-tool.rank +
-'</div>' +
-
-'<div class="tool-name">' +
-tool.name +
-'</div>' +
-
-'<div class="score">適合度 ' +
-tool.score +
-'</div>' +
-
-'<div class="tool-description">' +
-tool.description +
-'</div>';
-
-
-resultList.appendChild(card);
 
 });
 
-window.scrollTo({
-top:
-document.getElementById(
-"result"
-).offsetTop,
+return{
+name:tool.name,
+description:tool.description,
+rawScore:score
+};
 
-behavior:
-"smooth"
+});
+
+
+results.sort(function(a,b){
+return b.rawScore - a.rawScore;
+});
+
+
+const maxScore = results[0].rawScore || 1;
+
+return results.slice(0,3).map(function(tool,index){
+
+const percentage =
+Math.max(
+60,
+Math.round((tool.rawScore / maxScore) * 100)
+);
+
+return{
+rank:index + 1,
+name:tool.name,
+description:tool.description,
+score:percentage
+};
+
 });
 
 }
 
 
 /* =========================
-   もう一度診断
+   結果表示
 ========================= */
 
-function restartDiagnosis() {
+function showResult(){
+
+document.getElementById("diagnosis").style.display = "none";
+
+document.getElementById("result").style.display = "block";
+
+const resultList = document.getElementById("result-list");
+
+const results = calculateResults();
+
+const medals = ["🥇 BEST 1","🥈 BEST 2","🥉 BEST 3"];
+
+resultList.innerHTML = "";
+
+results.forEach(function(tool,index){
+
+const card = document.createElement("div");
+
+card.className = "result-card";
+
+card.innerHTML =
+
+'<div class="rank">' + medals[index] + '</div>' +
+
+'<div class="tool-name">' + tool.name + '</div>' +
+
+'<div class="score">適合度 ' + tool.score + '%</div>' +
+
+'<div class="tool-description">' + tool.description + '</div>';
+
+resultList.appendChild(card);
+
+});
+
+window.scrollTo({
+top:document.getElementById("result").offsetTop,
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+   再診断
+========================= */
+
+function restartDiagnosis(){
 
 currentQuestion = 0;
 
-answers.length = 0;
+userScores = {};
 
+document.getElementById("result").style.display = "none";
 
-document.getElementById(
-"result"
-).style.display =
-"none";
-
-
-document.getElementById(
-"diagnosis"
-).style.display =
-"block";
-
+document.getElementById("diagnosis").style.display = "block";
 
 showQuestion();
 
-
 window.scrollTo({
-top:
-document.getElementById(
-"diagnosis"
-).offsetTop,
-
-behavior:
-"smooth"
+top:document.getElementById("diagnosis").offsetTop,
+behavior:"smooth"
 });
 
 }
