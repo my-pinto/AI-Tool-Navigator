@@ -2454,13 +2454,11 @@ const scoredAds=affiliateAds.map(ad=>{
 
 let score=0;
 
-
 Object.entries(ad.matchTags).forEach(([tag,weight])=>{
 
 score+=(profile[tag]||0)*weight;
 
 });
-
 
 return{
 ad,
@@ -2475,19 +2473,50 @@ score
 scoredAds.sort((a,b)=>b.score-a.score);
 
 
-/* 一定以上関連するものだけ表示 */
+/* 一定以上関連する広告だけを抽出 */
 
-const relevant=scoredAds
-.filter(item=>item.score>=0.08)
-.slice(0,3);
+const candidates=scoredAds.filter(item=>item.score>=0.08);
 
 
-/* 条件に合う案件がない場合は表示しない */
+/* 類似サービスの重複を防ぐ */
 
-return relevant;
+const selected=[];
+const usedCategories=new Set();
+
+const categories={
+
+"Notta Brain":"information",
+"Notta":"transcription",
+"Comu":"transcription",
+
+"MiriCanvas":"design",
+"Languise":"translation",
+"Aiarty Image Enhancer":"image",
+"デジタネ":"kids"
+
+};
+
+
+/* 関連度順に最大3件 */
+
+candidates.forEach(item=>{
+
+if(selected.length>=3)return;
+
+const category=categories[item.ad.name]||item.ad.name;
+
+if(usedCategories.has(category))return;
+
+selected.push(item);
+
+usedCategories.add(category);
+
+});
+
+
+return selected;
 
 }
-
 
 /* =========================
    診断結果表示
