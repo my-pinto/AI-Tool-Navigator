@@ -2463,10 +2463,15 @@ score
 
 const candidates=scoredAds.filter(item=>{
 
+if(item.ad.name==="Notta" || item.ad.name==="Comu"){
+
+return item.score>=0.35;
+
+}
+
 return item.score>=0.20;
 
 });
-
 
 candidates.sort((a,b)=>b.score-a.score);
 
