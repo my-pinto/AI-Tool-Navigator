@@ -1251,7 +1251,6 @@ pixel:"https://www10.a8.net/0.gif?a8mat=4BGAV4+1SW9PU+5988+HVFKY",
 matchTags:{
 knowledgeManagement:1.0,
 research:0.6,
-work:0.3
 }
 },
 
@@ -1264,7 +1263,6 @@ pixel:"https://www12.a8.net/0.gif?a8mat=4BGAV4+1BMP6A+5988+5ZEMQ",
 matchTags:{
 transcription:1.0,
 audio:0.5,
-work:0.4
 }
 },
 
@@ -1275,7 +1273,7 @@ text:"録音・文字起こし・要約から、メールや資料の草案作�
 href:"https://px.a8.net/svt/ejp?a8mat=4BGCEZ+AYQFMI+5YZG+5YRHE",
 pixel:"https://www10.a8.net/0.gif?a8mat=4BGCEZ+AYQFMI+5YZG+5YRHE",
 matchTags:{
-transcription:0.9,
+transcription:1.0,
 audio:1.0,
 }
 },
@@ -2461,14 +2459,16 @@ score
 });
 
 
-/* 関連度が高い順 */
+/* 専門用途との関連性が一定以上の広告だけ */
 
-scoredAds.sort((a,b)=>b.score-a.score);
+const candidates=scoredAds.filter(item=>{
+
+return item.score>=0.20;
+
+});
 
 
-/* 一定以上関連する広告だけを抽出 */
-
-const candidates=scoredAds.filter(item=>item.score>=0.08);
+candidates.sort((a,b)=>b.score-a.score);
 
 
 /* 類似サービスの重複を防ぐ */
@@ -2481,7 +2481,6 @@ const categories={
 "Notta Brain":"information",
 "Notta":"transcription",
 "Comu":"transcription",
-
 "MiriCanvas":"design",
 "Languise":"translation",
 "Aiarty Image Enhancer":"image",
@@ -2490,13 +2489,12 @@ const categories={
 };
 
 
-/* 関連度順に最大3件 */
-
 candidates.forEach(item=>{
 
 if(selected.length>=3)return;
 
-const category=categories[item.ad.name]||item.ad.name;
+const category=
+categories[item.ad.name]||item.ad.name;
 
 if(usedCategories.has(category))return;
 
