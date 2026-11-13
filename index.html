@@ -1002,6 +1002,16 @@ a:focus-visible {
   z-index: 1;
 }
 
+/* 案件名ラベルをホログラム反射より前面に固定 */
+.pr-card .pr-label {
+  position: relative;
+  z-index: 5;
+  background: #f1f5f9;
+  color: #263445;
+  border: 1px solid #d8e0e8;
+  box-shadow: 0 2px 5px rgba(0,0,0,.08);
+}
+
 @keyframes prCardHologram {
   0%, 15% {
     transform: translateX(-55%) rotate(14deg);
