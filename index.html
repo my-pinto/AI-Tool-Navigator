@@ -3197,29 +3197,36 @@ const pintoMessages={
 };
 
 function updatePinto(){
-const guide=document.getElementById("pinto-guide");
-const bubble=document.getElementById("pinto-bubble");
-const questionNo=currentQuestion+1;
-const message=pintoMessages[questionNo];
+  const guide=document.getElementById("pinto-guide");
+  const bubble=document.getElementById("pinto-bubble");
+  const questionNo=currentQuestion+1;
+  const message=pintoMessages[questionNo];
 
-guide.classList.remove("has-bubble","pinto-talking","pinto-good","pinto-celebrate");
+  guide.classList.remove(
+    "has-bubble",
+    "pinto-talking",
+    "pinto-good",
+    "pinto-celebrate",
+    "pinto-q15-glow",
+    "pinto-q20-ring"
+  );
 
-if(questionNo===10){
-guide.classList.add("pinto-talking");
-}else if(questionNo===15){
-guide.classList.add("pinto-good");
-}else if(questionNo===20){
-guide.classList.add("pinto-celebrate");
-}
+  if(questionNo===10){
+    guide.classList.add("pinto-talking");
+  }else if(questionNo===15){
+    guide.classList.add("pinto-good","pinto-q15-glow");
+  }else if(questionNo===20){
+    guide.classList.add("pinto-celebrate","pinto-q20-ring");
+  }
 
-if(message){
-bubble.textContent=message;
-bubble.hidden=false;
-guide.classList.add("has-bubble");
-}else{
-bubble.hidden=true;
-bubble.textContent="";
-}
+  if(message){
+    bubble.textContent=message;
+    bubble.hidden=false;
+    guide.classList.add("has-bubble");
+  }else{
+    bubble.hidden=true;
+    bubble.textContent="";
+  }
 }
 
 async function startDiagnosis(){
