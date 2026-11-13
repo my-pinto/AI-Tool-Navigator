@@ -1074,68 +1074,25 @@ a:focus-visible {
   }
 }
 
-
 /* MyPinto Premium Holographic PR Label */
 
 .pr-label {
   display: inline-block;
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
 
   margin-bottom: 12px;
-  padding: 6px 17px;
+  padding: 6px 12px;
 
-  border: 1px solid #fff4c2;
-  border-radius: 5px;
+  border: 1px solid #d8e0e8;
+  border-radius: 6px;
 
-  background:
-    linear-gradient(
-      110deg,
-      #a86b00 0%,
-      #fff1a6 14%,
-      #f5b900 28%,
-      #fffce5 42%,
-      #c17cff 56%,
-      #53eaff 70%,
-      #fff0a0 84%,
-      #b77b00 100%
-    );
+  background: #f1f5f9;
+  color: #263445;
 
-  color: #24162d;
   font-size: 12px;
-  font-weight: 1000;
-  letter-spacing: 1.8px;
+  font-weight: 700;
+  letter-spacing: .5px;
   line-height: 1.4;
-
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.8);
-
-  box-shadow:
-    0 4px 0 #80601c,
-    0 7px 16px rgba(115,75,15,.35),
-    inset 0 2px 3px rgba(255,255,255,.95),
-    inset 0 -2px 3px rgba(75,35,90,.22);
-}
-
-.pr-label::after {
-  content: "";
-  position: absolute;
-  inset: -80%;
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      115deg,
-      transparent 40%,
-      rgba(255,255,255,.95) 47%,
-      rgba(255,255,255,.2) 52%,
-      transparent 60%
-    );
-
-  transform: translateX(-35%) rotate(15deg);
-  animation: prLabelShine 3s ease-in-out infinite;
 }
 
 @keyframes prLabelShine {
