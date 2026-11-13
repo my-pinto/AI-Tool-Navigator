@@ -1632,6 +1632,82 @@ footer {
   .pinto-guide.pinto-celebrate .pinto-eye { transform: scale(1.45); }
 }
 
+/* =================================
+   MyPinto BEST3 Premium Finish
+================================= */
+
+.result-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 22px;
+  box-shadow:
+    0 15px 35px rgba(20,25,30,.12),
+    inset 0 1px 2px rgba(255,255,255,.9);
+}
+
+.result-card.rank-1 {
+  background: linear-gradient(
+    135deg,
+    #fff9e8 0%,
+    #f4df9d 22%,
+    #d4af37 48%,
+    #fff1bd 68%,
+    #c49a32 100%
+  );
+  border-color: #e4c76f;
+  box-shadow:
+    0 18px 42px rgba(150,117,27,.22),
+    inset 0 1px 2px rgba(255,255,255,.95);
+}
+
+.result-card.rank-2 {
+  background: linear-gradient(
+    135deg,
+    #fff 0%,
+    #e5e9ef 25%,
+    #aeb7c2 52%,
+    #f8fafc 72%,
+    #929daa 100%
+  );
+  border-color: #cbd2da;
+  box-shadow:
+    0 16px 36px rgba(80,95,110,.17),
+    inset 0 1px 2px rgba(255,255,255,.95);
+}
+
+.result-card.rank-3 {
+  background: linear-gradient(
+    135deg,
+    #fff4e9 0%,
+    #e8bd98 25%,
+    #b8794a 52%,
+    #f4d3b6 73%,
+    #965b35 100%
+  );
+  border-color: #d5a17b;
+  box-shadow:
+    0 16px 36px rgba(135,80,45,.19),
+    inset 0 1px 2px rgba(255,255,255,.9);
+}
+
+.result-card {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+@media (hover: hover) {
+  .result-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-card {
+    transition: none;
+  }
+}
+
 </style>
 
 <link rel="icon" href="/favicon.ico">
