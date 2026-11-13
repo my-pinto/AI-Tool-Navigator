@@ -1468,51 +1468,93 @@ footer {
 .pinto-bubble[hidden] { display:none; }
 .pinto-guide.has-bubble .pinto-art { animation:pintoHello .65s ease-in-out 1; }
 
-/* 15問目：ピントを包むライムグリーンの光 */
+/* 15問目：ライムグリーンの光と浮遊する粒子 */
 .pinto-guide.pinto-q15-glow .pinto-art {
   filter:
-    drop-shadow(0 0 7px rgba(90,255,25,.85))
-    drop-shadow(0 0 18px rgba(90,255,25,.55))
-    drop-shadow(0 0 30px rgba(90,255,25,.28));
+    drop-shadow(0 0 8px rgba(90,255,25,.9))
+    drop-shadow(0 0 20px rgba(90,255,25,.65))
+    drop-shadow(0 0 32px rgba(90,255,25,.3));
 }
 
 .pinto-guide.pinto-q15-glow .pinto-aura {
   stroke: #5aff19;
   stroke-width: 3.5;
-  filter: drop-shadow(0 0 8px rgba(90,255,25,.95));
+  filter: drop-shadow(0 0 9px rgba(90,255,25,.95));
   animation: pintoQ15Aura 1.2s ease-in-out infinite alternate;
 }
 
-.pinto-guide.pinto-q15-glow .pinto-art::after {
-  content: "";
+.pinto-q15-particles {
+  fill: #5aff19;
+  filter: drop-shadow(0 0 4px #5aff19);
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: pintoQ15Particles 2s ease-in-out infinite;
 }
 
-/* 20問目：ピントの周囲を一周する光のリング */
+.pinto-guide.pinto-q15-glow .pinto-q15-particles circle {
+  animation: pintoQ15Twinkle 1.1s ease-in-out infinite alternate;
+}
+
+.pinto-guide.pinto-q15-glow .pinto-q15-particles circle:nth-child(even) {
+  animation-delay: .45s;
+}
+
+/* 20問目：ピントの周囲を回って消える光のリング */
 .pinto-guide.pinto-q20-ring .pinto-art {
-  filter: drop-shadow(0 0 12px rgba(90,255,25,.65));
+  filter: drop-shadow(0 0 13px rgba(90,255,25,.7));
 }
 
 .pinto-guide.pinto-q20-ring .pinto-aura {
   stroke: #5aff19;
-  stroke-width: 3;
-  filter: drop-shadow(0 0 9px rgba(90,255,25,.95));
-  animation: pintoQ20Ring 1.8s ease-out 1;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 8px rgba(90,255,25,.9));
+}
+
+.pinto-guide.pinto-q20-ring .pinto-q20-orbit {
+  opacity: 1;
+  stroke: #5aff19;
+  filter: drop-shadow(0 0 7px rgba(90,255,25,.95));
+  transform-box: view-box;
+  transform-origin: 50% 51%;
+  animation: pintoQ20Orbit 1.8s ease-out 1 forwards;
 }
 
 @keyframes pintoQ15Aura {
   from { opacity: .45; transform: scale(.94); }
-  to { opacity: 1; transform: scale(1.18); }
+  to { opacity: 1; transform: scale(1.16); }
 }
 
-@keyframes pintoQ20Ring {
-  0% { opacity: .15; transform: scale(.72) rotate(0deg); }
-  55% { opacity: 1; transform: scale(1.25) rotate(180deg); }
-  100% { opacity: 0; transform: scale(1.65) rotate(360deg); }
+@keyframes pintoQ15Particles {
+  0%, 100% { transform: rotate(0deg) scale(.96); }
+  50% { transform: rotate(8deg) scale(1.06); }
+}
+
+@keyframes pintoQ15Twinkle {
+  from { opacity: .3; }
+  to { opacity: 1; }
+}
+
+@keyframes pintoQ20Orbit {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(.65);
+  }
+  20% { opacity: 1; }
+  75% {
+    opacity: .9;
+    transform: rotate(280deg) scale(1.12);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(360deg) scale(1.3);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pinto-guide.pinto-q15-glow .pinto-aura,
-  .pinto-guide.pinto-q20-ring .pinto-aura {
+  .pinto-guide.pinto-q15-glow .pinto-q15-particles,
+  .pinto-guide.pinto-q15-glow .pinto-q15-particles circle,
+  .pinto-guide.pinto-q20-ring .pinto-q20-orbit {
     animation: none !important;
   }
 }
