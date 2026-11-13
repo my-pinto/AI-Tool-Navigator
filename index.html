@@ -1467,6 +1467,56 @@ footer {
 .pinto-bubble { position:relative; max-width:min(330px,calc(100% - 90px)); padding:11px 15px; border:1px solid #d9efdb; border-radius:15px 15px 4px 15px; background:rgba(255,255,255,.96); color:#35543b; font-size:13px; font-weight:700; line-height:1.65; box-shadow:0 7px 22px rgba(54,125,79,.09); animation:bubbleIn .38s cubic-bezier(.2,.8,.2,1) both; }
 .pinto-bubble[hidden] { display:none; }
 .pinto-guide.has-bubble .pinto-art { animation:pintoHello .65s ease-in-out 1; }
+
+/* 15問目：ピントを包むライムグリーンの光 */
+.pinto-guide.pinto-q15-glow .pinto-art {
+  filter:
+    drop-shadow(0 0 7px rgba(90,255,25,.85))
+    drop-shadow(0 0 18px rgba(90,255,25,.55))
+    drop-shadow(0 0 30px rgba(90,255,25,.28));
+}
+
+.pinto-guide.pinto-q15-glow .pinto-aura {
+  stroke: #5aff19;
+  stroke-width: 3.5;
+  filter: drop-shadow(0 0 8px rgba(90,255,25,.95));
+  animation: pintoQ15Aura 1.2s ease-in-out infinite alternate;
+}
+
+.pinto-guide.pinto-q15-glow .pinto-art::after {
+  content: "";
+}
+
+/* 20問目：ピントの周囲を一周する光のリング */
+.pinto-guide.pinto-q20-ring .pinto-art {
+  filter: drop-shadow(0 0 12px rgba(90,255,25,.65));
+}
+
+.pinto-guide.pinto-q20-ring .pinto-aura {
+  stroke: #5aff19;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 9px rgba(90,255,25,.95));
+  animation: pintoQ20Ring 1.8s ease-out 1;
+}
+
+@keyframes pintoQ15Aura {
+  from { opacity: .45; transform: scale(.94); }
+  to { opacity: 1; transform: scale(1.18); }
+}
+
+@keyframes pintoQ20Ring {
+  0% { opacity: .15; transform: scale(.72) rotate(0deg); }
+  55% { opacity: 1; transform: scale(1.25) rotate(180deg); }
+  100% { opacity: 0; transform: scale(1.65) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pinto-guide.pinto-q15-glow .pinto-aura,
+  .pinto-guide.pinto-q20-ring .pinto-aura {
+    animation: none !important;
+  }
+}
+
 @keyframes spaceCloudDrift { from{transform:translate3d(-2%,-1%,0) scale(1)} to{transform:translate3d(3%,2%,0) scale(1.12)} }
 @keyframes spaceTunnel { 0%{background-position:0 0;opacity:.2} 50%{opacity:.52} 100%{background-position:0 480px;opacity:.2} }
 @keyframes lightOrbit { 0%,100%{translate:0 0;rotate:-4deg;opacity:.42} 50%{translate:5% -8%;rotate:5deg;opacity:.9} }
