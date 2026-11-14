@@ -2203,45 +2203,74 @@ footer {
 }
 
 /* =================================
-   20問目：虹色ガラスリングの鼓動
+   20問目：虹色ガラスリング・流動アニメーション
 ================================= */
 
+/* 奥側リング：ゆっくり発光 */
 .pinto-guide.pinto-q20-ring .pinto-final-orbit-back {
-  animation: pintoFinalRingPulse 3s ease-in-out infinite;
+  animation: pintoFinalBackGlow 3s ease-in-out infinite !important;
 }
 
+/* 手前側リング：虹色の光が流れる */
 .pinto-guide.pinto-q20-ring .pinto-final-orbit-front {
-  animation: pintoFinalRingPulse 3s ease-in-out infinite;
+  stroke-dasharray: 24 8 12 8;
+  animation:
+    pintoFinalFrontFlow 3s linear infinite,
+    pintoFinalFrontGlow 2.4s ease-in-out infinite !important;
 }
 
+/* 白い反射：呼吸するように輝く */
 .pinto-guide.pinto-q20-ring .pinto-final-q20-only {
-  animation: pintoFinalShinePulse 3s ease-in-out infinite;
+  animation: pintoFinalShinePulse 2.4s ease-in-out infinite !important;
 }
 
+/* シャボン玉：既存のふわふわ感を維持 */
 .pinto-guide.pinto-q20-ring .pinto-final-bubbles {
   transform-box: fill-box;
   transform-origin: center;
   animation: pintoFinalBubbleFloat 4s ease-in-out infinite;
 }
 
-@keyframes pintoFinalRingPulse {
+@keyframes pintoFinalBackGlow {
   0%, 100% {
-    opacity: .78;
-    stroke-width: 4.2;
-    filter: drop-shadow(0 0 4px rgba(255,255,255,.75))
-            drop-shadow(0 0 9px rgba(130,210,255,.55));
+    opacity: .65;
+    filter: drop-shadow(0 0 4px rgba(130,210,255,.5));
   }
   50% {
     opacity: 1;
-    stroke-width: 6;
-    filter: drop-shadow(0 0 5px #ffffff)
-            drop-shadow(0 0 15px rgba(180,120,255,.85))
-            drop-shadow(0 0 22px rgba(100,230,255,.65));
+    filter:
+      drop-shadow(0 0 7px #ffffff)
+      drop-shadow(0 0 15px rgba(170,120,255,.85));
+  }
+}
+
+@keyframes pintoFinalFrontFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -64;
+  }
+}
+
+@keyframes pintoFinalFrontGlow {
+  0%, 100% {
+    opacity: .8;
+    filter:
+      drop-shadow(0 0 3px #ffffff)
+      drop-shadow(0 0 8px rgba(100,210,255,.65));
+  }
+  50% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 5px #ffffff)
+      drop-shadow(0 0 16px rgba(190,110,255,.9))
+      drop-shadow(0 0 24px rgba(100,230,255,.7));
   }
 }
 
 @keyframes pintoFinalShinePulse {
-  0%, 100% { opacity: .65; }
+  0%, 100% { opacity: .55; }
   50% { opacity: 1; }
 }
 
