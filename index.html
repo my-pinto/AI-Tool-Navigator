@@ -2303,17 +2303,12 @@ footer {
   animation: pintoHoloBubble 3.6s ease-in-out infinite;
 }
 
-/* 虹色の反射光 */
-.pinto-guide.pinto-q20-ring .pinto-holo-shine {
-  opacity: .85 !important;
-  animation: pintoHoloShine 1.8s ease-in-out infinite alternate;
-  filter:
-    drop-shadow(0 0 4px rgba(255,255,255,.8))
-    drop-shadow(0 0 9px rgba(150,210,255,.65));
-}
-
+/* Q20：顔の前の2本の反射光は非表示 */
+.pinto-guide.pinto-q20-ring .pinto-holo-shine,
 .pinto-guide.pinto-q20-ring .pinto-holo-shine-secondary {
-  opacity: .9 !important;
+  opacity: 0 !important;
+  animation: none !important;
+  filter: none !important;
 }
 
 /* 両目を大きくする */
