@@ -2192,6 +2192,16 @@ footer {
     drop-shadow(0 0 7px rgba(130, 220, 255, .55));
 }
 
+/* 反射レイヤーは通常時は非表示 */
+.pinto-final-q20-only {
+  visibility: hidden;
+}
+
+/* 20問目だけ反射レイヤーを表示 */
+.pinto-guide.pinto-q20-ring .pinto-final-q20-only {
+  visibility: visible;
+}
+
 </style>
 
 <link rel="icon" href="/favicon.ico">
