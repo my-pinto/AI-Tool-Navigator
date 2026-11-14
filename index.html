@@ -2609,6 +2609,34 @@ footer {
   </feMerge>
 </filter>
 
+<!-- Q20専用：リングを一つの楕円で描くためのマスク -->
+<mask
+  id="pintoFinalOrbitMask"
+  maskUnits="userSpaceOnUse"
+  maskContentUnits="userSpaceOnUse"
+  x="-10" y="-10" width="120" height="120"
+>
+  <!-- 基本はリング全体を表示 -->
+  <rect
+    x="-10" y="-10"
+    width="120" height="120"
+    fill="white"
+  />
+
+  <!-- ピントの体に重なる部分を隠す -->
+  <path
+    d="M19 53 C18 31 31 17 50 17 C70 17 83 32 82 53 C81 74 68 87 49 87 C30 87 19 73 19 53Z"
+    fill="black"
+  />
+
+  <!-- 下側だけは手前に表示する -->
+  <rect
+    x="-10" y="65"
+    width="120" height="50"
+    fill="white"
+  />
+</mask>
+
 </defs>
           
 <circle class="pinto-aura" cx="50" cy="51" r="43" fill="none" stroke="#9be9bd" stroke-width="2" opacity=".7"/>
