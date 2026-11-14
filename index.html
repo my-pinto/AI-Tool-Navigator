@@ -2264,6 +2264,23 @@ footer {
     drop-shadow(0 0 7px rgba(130, 220, 255, .55));
 }
 
+/* =================================
+   Q20：装飾をすべて停止
+   ピントの顔だけを表示
+================================= */
+
+.pinto-guide.pinto-q20-ring .pinto-final-q20-only,
+.pinto-guide.pinto-q20-ring .pinto-final-bubbles,
+.pinto-guide.pinto-q20-ring .pinto-q20-orbit,
+.pinto-guide.pinto-q20-ring .pinto-final-orbit,
+.pinto-guide.pinto-q20-ring .pinto-final-light-trails {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  animation: none !important;
+  filter: none !important;
+}
+
 </style>
 
 <link rel="icon" href="/favicon.ico">
