@@ -2141,13 +2141,11 @@ footer {
   }
 }
 
-
 /* =================================
-   20問目専用・最終演出テスト
-   静止状態でデザインを確認
+   20問目専用・立体レインボーリング
 ================================= */
 
-/* 既存のリングとオーラはテスト中だけ非表示 */
+/* 既存のリングとオーラは非表示 */
 .pinto-guide.pinto-q20-ring .pinto-q20-orbit {
   opacity: 0 !important;
   animation: none !important;
@@ -2157,24 +2155,41 @@ footer {
   opacity: 0 !important;
 }
 
-/* ピントの後ろ側を通る虹色の軌道 */
+/* 後ろ側のリング：立体的な虹色の光沢 */
 .pinto-guide.pinto-q20-ring .pinto-final-orbit-back {
-  opacity: .9;
-  stroke-width: 3.2;
-  filter: url(#pintoFinalGlow);
+  opacity: .95;
+  stroke: url(#pintoFinalRainbow);
+  stroke-width: 4.2;
+  stroke-linecap: round;
+  filter:
+    drop-shadow(0 0 2px #ffffff)
+    drop-shadow(0 0 5px rgba(120, 220, 255, .9))
+    drop-shadow(0 0 10px rgba(190, 120, 255, .65));
 }
 
-/* ピントの手前側を通る虹色の軌道 */
+/* 手前側のリング：厚みと光沢 */
 .pinto-guide.pinto-q20-ring .pinto-final-orbit-front {
-  opacity: .95;
-  stroke-width: 4;
-  filter: url(#pintoFinalGlow);
+  opacity: 1;
+  stroke: url(#pintoFinalRainbow);
+  stroke-width: 5;
+  stroke-linecap: round;
+  filter:
+    drop-shadow(0 0 2px #ffffff)
+    drop-shadow(0 0 5px rgba(255, 160, 225, .9))
+    drop-shadow(0 0 11px rgba(110, 210, 255, .75));
+}
+
+/* リングの表面に細い白いハイライト */
+.pinto-guide.pinto-q20-ring .pinto-final-orbit-front {
+  paint-order: stroke;
 }
 
 /* 虹色のシャボン玉 */
 .pinto-guide.pinto-q20-ring .pinto-final-bubbles {
   opacity: 1;
-  filter: url(#pintoFinalGlow);
+  filter:
+    drop-shadow(0 0 3px rgba(255, 255, 255, .9))
+    drop-shadow(0 0 7px rgba(130, 220, 255, .55));
 }
 
 </style>
