@@ -2346,6 +2346,48 @@ footer {
   transform: scale(1.15);
 }
 
+/* Q20：口を細い輪郭でパクパク動かす */
+.pinto-guide.pinto-q20-ring .pinto-mouth-open {
+  fill: #3c895f;
+  stroke: #2f7952;
+  stroke-width: .7;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pintoQ20MouthTalk .65s ease-in-out infinite;
+}
+
+.pinto-guide.pinto-q20-ring .pinto-mouth-glint {
+  animation: pintoQ20MouthGlint .65s ease-in-out infinite;
+}
+
+@keyframes pintoQ20MouthTalk {
+  0%, 100% {
+    transform: scale(1.35, .35);
+  }
+  50% {
+    transform: scale(1.5, 1.4);
+  }
+}
+
+@keyframes pintoQ20MouthGlint {
+  0%, 100% {
+    opacity: 0 !important;
+    transform: scale(.5);
+  }
+  50% {
+    opacity: .9 !important;
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pinto-guide.pinto-q20-ring .pinto-mouth-open,
+  .pinto-guide.pinto-q20-ring .pinto-mouth-glint {
+    animation: none !important;
+  }
+}
+
 /* 動きを控える設定にも対応 */
 @media (prefers-reduced-motion: reduce) {
   .pinto-guide.pinto-q20-ring .pinto-holo-bubble,
