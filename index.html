@@ -2208,10 +2208,11 @@ footer {
 
 /* 一つの楕円：虹色の流れと発光 */
 .pinto-guide.pinto-q20-ring .pinto-final-orbit {
-  stroke-dasharray: 26 9 12 9;
+  stroke-dasharray: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   animation:
-    pintoFinalOrbitFlow 3s linear infinite,
-    pintoFinalOrbitGlow 2.4s ease-in-out infinite !important;
+    pintoFinalOrbitSmoothGlow 2.4s ease-in-out infinite !important;
 }
 
 /* 虹色の流れ */
