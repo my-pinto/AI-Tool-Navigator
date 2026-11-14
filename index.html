@@ -1501,15 +1501,30 @@ footer {
   animation: pintoHoloBubble 3.6s ease-in-out infinite;
 }
 
-/* シャボン玉の表面を流れる柔らかな虹色の反射 */
+/* 15〜19問目：表面を流れる虹色の反射光 */
 .pinto-guide.pinto-q15-glow .pinto-holo-shine {
-  opacity: .72;
+  opacity: .78;
   stroke: url(#pintoHoloGradient);
-  stroke-width: 3;
+  stroke-width: 8;
+  stroke-dasharray: 38 18;
+  stroke-dashoffset: 0;
   filter:
     drop-shadow(0 0 5px rgba(255,255,255,.85))
-    drop-shadow(0 0 10px rgba(190,180,255,.55));
-  animation: pintoHoloShine 3s ease-in-out infinite alternate;
+    drop-shadow(0 0 10px rgba(190,180,255,.55))
+    drop-shadow(0 0 16px rgba(120,220,255,.35));
+  animation: pintoHoloShine 3.2s ease-in-out infinite;
+}
+
+.pinto-guide.pinto-q15-glow .pinto-holo-shine-secondary {
+  opacity: .55;
+  stroke: #ffffff;
+  stroke-width: 4;
+  stroke-dasharray: 24 16;
+  stroke-dashoffset: 0;
+  filter:
+    drop-shadow(0 0 5px rgba(255,255,255,.9))
+    drop-shadow(0 0 9px rgba(255,190,230,.5));
+  animation: pintoHoloShine 4.2s ease-in-out infinite reverse;
 }
 
 /* 20問目：虹色の流れ星リング */
