@@ -2678,23 +2678,46 @@ footer {
           <path class="pinto-celebration-spark" d="M74 27l2-4 2 4 4 2-4 2-2 4-2-4-4-2z"
                 fill="#ffffff" opacity="0"/>
 
-<!-- Q20専用：一つの楕円で構成する立体レインボーリング -->
-<ellipse
-  class="pinto-final-orbit pinto-final-q20-only"
-  cx="50"
-  cy="51"
-  rx="49"
-  ry="27"
+<!-- Q20専用：左右に広がる虹色の光の軌跡 -->
+<g
+  class="pinto-final-q20-only pinto-final-light-trails"
   fill="none"
   stroke="url(#pintoFinalRainbow)"
-  stroke-width="10"
   stroke-linecap="round"
+  stroke-linejoin="round"
   filter="url(#pintoFinalGlow)"
-  mask="url(#pintoFinalOrbitMask)"
   opacity="0"
-  transform="rotate(-18 50 51)"
-/>
+>
+  <!-- 左側の光の軌跡 -->
+  <path
+    class="pinto-final-trail-left"
+    d="M8 63 C12 48 17 34 29 25"
+    stroke-width="4.5"
+  />
 
+  <!-- 左側の細い反射光 -->
+  <path
+    d="M11 65 C15 51 19 41 27 33"
+    stroke="#ffffff"
+    stroke-width="1.2"
+    opacity=".8"
+  />
+
+  <!-- 右側の光の軌跡 -->
+  <path
+    class="pinto-final-trail-right"
+    d="M73 25 C85 34 94 48 98 63"
+    stroke-width="4.5"
+  />
+
+  <!-- 右側の細い反射光 -->
+  <path
+    d="M76 33 C84 41 89 51 93 65"
+    stroke="#ffffff"
+    stroke-width="1.2"
+    opacity=".8"
+  />
+</g>
 <!-- Q20専用：15個の大小さまざまな虹色ガラスシャボン玉 -->
 <g class="pinto-final-bubbles" opacity="0">
   <circle cx="13" cy="35" r="4.8" fill="url(#pintoFinalBubble)" stroke="#ffffff" stroke-width=".7"/>
