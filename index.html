@@ -2508,19 +2508,28 @@ footer {
   opacity="0"
 />
           
-<!-- 20問目専用：ピントの後ろを包む虹色の軌道 -->
+<!-- 20問目専用：立体ガラス質感のレインボーリング・奥側 -->
+
+<!-- 奥側の柔らかな虹色の発光 -->
 <ellipse
   class="pinto-final-orbit-back"
-  cx="50"
-  cy="51"
-  rx="49"
-  ry="27"
+  cx="50" cy="51" rx="49" ry="27"
   fill="none"
   stroke="url(#pintoFinalRainbow)"
-  stroke-width="3.2"
+  stroke-width="8"
   stroke-linecap="round"
   filter="url(#pintoFinalGlow)"
   opacity="0"
+  transform="rotate(-18 50 51)"
+/>
+
+<!-- 奥側の透明なハイライト -->
+<ellipse
+  cx="50" cy="51" rx="49" ry="27"
+  fill="none"
+  stroke="#ffffff"
+  stroke-width="2"
+  opacity=".7"
   transform="rotate(-18 50 51)"
 />
 
