@@ -2542,16 +2542,39 @@ footer {
           <path class="pinto-celebration-spark" d="M74 27l2-4 2 4 4 2-4 2-2 4-2-4-4-2z"
                 fill="#ffffff" opacity="0"/>
 
-<!-- 20問目専用：ピントの手前を横切る虹色の光 -->
+<!-- 20問目専用：立体ガラス質感のレインボーリング・手前側 -->
+
+<!-- リングの外側に広がる柔らかな光 -->
 <path
   class="pinto-final-orbit-front"
   d="M7 63 C20 88 70 94 94 57"
   fill="none"
   stroke="url(#pintoFinalRainbow)"
-  stroke-width="4"
+  stroke-width="9"
   stroke-linecap="round"
   filter="url(#pintoFinalGlow)"
-  opacity="0"
+  opacity="0.9"
+/>
+
+<!-- リングの厚みを感じさせる内側の縁 -->
+<path
+  d="M7 63 C20 88 70 94 94 57"
+  fill="none"
+  stroke="#ffffff"
+  stroke-width="5"
+  stroke-linecap="round"
+  opacity="0.72"
+  filter="url(#pintoFinalGlow)"
+/>
+
+<!-- ガラス表面の細い反射ライン -->
+<path
+  d="M12 70 C29 89 69 88 88 62"
+  fill="none"
+  stroke="#ffffff"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  opacity="0.95"
 />
 
 <!-- 20問目専用：虹色に輝くシャボン玉 -->
