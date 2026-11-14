@@ -2192,91 +2192,70 @@ footer {
     drop-shadow(0 0 7px rgba(130, 220, 255, .55));
 }
 
-/* 反射レイヤーは通常時は非表示 */
+/* =================================
+   Q20：一体型レインボーガラスリング
+================================= */
+
+/* Q20以外では非表示 */
 .pinto-final-q20-only {
   visibility: hidden;
 }
 
-/* 20問目だけ反射レイヤーを表示 */
+/* Q20だけ表示 */
 .pinto-guide.pinto-q20-ring .pinto-final-q20-only {
   visibility: visible;
 }
 
-/* =================================
-   20問目：虹色ガラスリング・流動アニメーション
-================================= */
-
-/* 奥側リング：ゆっくり発光 */
-.pinto-guide.pinto-q20-ring .pinto-final-orbit-back {
-  animation: pintoFinalBackGlow 3s ease-in-out infinite !important;
-}
-
-/* 手前側リング：虹色の光が流れる */
-.pinto-guide.pinto-q20-ring .pinto-final-orbit-front {
-  stroke-dasharray: 24 8 12 8;
+/* 一つの楕円：虹色の流れと発光 */
+.pinto-guide.pinto-q20-ring .pinto-final-orbit {
+  stroke-dasharray: 26 9 12 9;
   animation:
-    pintoFinalFrontFlow 3s linear infinite,
-    pintoFinalFrontGlow 2.4s ease-in-out infinite !important;
+    pintoFinalOrbitFlow 3s linear infinite,
+    pintoFinalOrbitGlow 2.4s ease-in-out infinite !important;
 }
 
-/* 白い反射：呼吸するように輝く */
-.pinto-guide.pinto-q20-ring .pinto-final-q20-only {
-  animation: pintoFinalShinePulse 2.4s ease-in-out infinite !important;
-}
-
-/* シャボン玉：既存のふわふわ感を維持 */
-.pinto-guide.pinto-q20-ring .pinto-final-bubbles {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pintoFinalBubbleFloat 4s ease-in-out infinite;
-}
-
-@keyframes pintoFinalBackGlow {
-  0%, 100% {
-    opacity: .65;
-    filter: drop-shadow(0 0 4px rgba(130,210,255,.5));
-  }
-  50% {
-    opacity: 1;
-    filter:
-      drop-shadow(0 0 7px #ffffff)
-      drop-shadow(0 0 15px rgba(170,120,255,.85));
-  }
-}
-
-@keyframes pintoFinalFrontFlow {
-  0% {
+/* 虹色の流れ */
+@keyframes pintoFinalOrbitFlow {
+  from {
     stroke-dashoffset: 0;
   }
-  100% {
+  to {
     stroke-dashoffset: -128;
   }
 }
 
-@keyframes pintoFinalFrontGlow {
+/* リングの柔らかな発光 */
+@keyframes pintoFinalOrbitGlow {
   0%, 100% {
     opacity: .8;
     filter:
-      drop-shadow(0 0 3px #ffffff)
-      drop-shadow(0 0 8px rgba(100,210,255,.65));
+      drop-shadow(0 0 4px #ffffff)
+      drop-shadow(0 0 9px rgba(100,210,255,.7));
   }
   50% {
     opacity: 1;
     filter:
-      drop-shadow(0 0 5px #ffffff)
+      drop-shadow(0 0 6px #ffffff)
       drop-shadow(0 0 16px rgba(190,110,255,.9))
-      drop-shadow(0 0 24px rgba(100,230,255,.7));
+      drop-shadow(0 0 23px rgba(100,230,255,.7));
   }
 }
 
-@keyframes pintoFinalShinePulse {
-  0%, 100% { opacity: .55; }
-  50% { opacity: 1; }
+/* シャボン玉：上下の動きと拡大・縮小 */
+.pinto-guide.pinto-q20-ring .pinto-final-bubbles {
+  opacity: 1 !important;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pintoFinalBubbleFloat 3.6s ease-in-out infinite;
 }
 
 @keyframes pintoFinalBubbleFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.2);
+  }
 }
 
 </style>
