@@ -2304,8 +2304,31 @@ footer {
   <stop offset="65%" stop-color="#8deaff" stop-opacity=".15"/>
   <stop offset="100%" stop-color="#ff9bd9" stop-opacity=".10"/>
 </radialGradient>
-          </defs>
-          <circle class="pinto-aura" cx="50" cy="51" r="43" fill="none" stroke="#9be9bd" stroke-width="2" opacity=".7"/>
+  </defs>
+          
+<circle class="pinto-aura" cx="50" cy="51" r="43" fill="none" stroke="#9be9bd" stroke-width="2" opacity=".7"/>
+<!-- 15〜19問目：虹色のシャボン玉ホログラム -->
+<circle
+  class="pinto-holo-bubble"
+  cx="50"
+  cy="51"
+  r="44"
+  fill="url(#pintoHoloFill)"
+  stroke="url(#pintoHoloGradient)"
+  stroke-width="3"
+  opacity="0"
+/>
+
+<!-- シャボン玉の虹色の反射光 -->
+<path
+  class="pinto-holo-shine"
+  d="M20 38 Q27 12 49 12"
+  fill="none"
+  stroke="url(#pintoHoloGradient)"
+  stroke-width="4"
+  stroke-linecap="round"
+  opacity="0"
+/>
 
 <!-- 20問目：ピントの周囲を一周する光のリング -->
 <ellipse
