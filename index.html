@@ -1483,25 +1483,33 @@ footer {
   filter: drop-shadow(0 0 7px rgba(190,180,255,.65));
 }
 
+
+/* 15〜19問目：ピント全体を包む虹色ホログラム */
 .pinto-guide.pinto-q15-glow .pinto-holo-bubble {
-  opacity: .88;
+  opacity: 1;
   fill: url(#pintoHoloFill);
+  fill-opacity: .48;
+  stroke: url(#pintoHoloGradient);
+  stroke-width: 2.5;
+  stroke-opacity: .82;
+  filter:
+    drop-shadow(0 0 5px rgba(255,190,240,.45))
+    drop-shadow(0 0 12px rgba(120,210,255,.38))
+    drop-shadow(0 0 19px rgba(205,160,255,.25));
+  transform-box: view-box;
+  transform-origin: 50% 51%;
+  animation: pintoHoloBubble 3.6s ease-in-out infinite;
+}
+
+/* シャボン玉の表面を流れる柔らかな虹色の反射 */
+.pinto-guide.pinto-q15-glow .pinto-holo-shine {
+  opacity: .72;
   stroke: url(#pintoHoloGradient);
   stroke-width: 3;
   filter:
-    drop-shadow(0 0 5px rgba(255,190,240,.65))
-    drop-shadow(0 0 12px rgba(120,210,255,.5));
-  transform-box: view-box;
-  transform-origin: 50% 51%;
-  animation: pintoHoloBubble 3s ease-in-out infinite;
-}
-
-.pinto-guide.pinto-q15-glow .pinto-holo-shine {
-  opacity: .85;
-  stroke: url(#pintoHoloGradient);
-  stroke-width: 3.5;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,.9));
-  animation: pintoHoloShine 2.4s ease-in-out infinite alternate;
+    drop-shadow(0 0 5px rgba(255,255,255,.85))
+    drop-shadow(0 0 10px rgba(190,180,255,.55));
+  animation: pintoHoloShine 3s ease-in-out infinite alternate;
 }
 
 /* 20問目：虹色の流れ星リング */
