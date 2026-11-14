@@ -2399,7 +2399,36 @@ footer {
   <stop offset="100%" stop-color="#ffc6e8" stop-opacity=".40"/>
 </radialGradient>
 
-  </defs>
+  
+<!-- 20問目専用：立体的な虹色の光 -->
+<linearGradient id="pintoFinalRainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#ff8bd8"/>
+  <stop offset="20%" stop-color="#a98cff"/>
+  <stop offset="40%" stop-color="#65dfff"/>
+  <stop offset="60%" stop-color="#75ffd0"/>
+  <stop offset="80%" stop-color="#fff19a"/>
+  <stop offset="100%" stop-color="#ff8bd8"/>
+</linearGradient>
+
+<!-- 光の柔らかな発光 -->
+<filter id="pintoFinalGlow" x="-80%" y="-80%" width="260%" height="260%">
+  <feGaussianBlur stdDeviation="2.5" result="blur"/>
+  <feMerge>
+    <feMergeNode in="blur"/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+
+<!-- シャボン玉の虹色反射 -->
+<radialGradient id="pintoFinalBubble" cx="30%" cy="25%" r="75%">
+  <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/>
+  <stop offset="30%" stop-color="#ffb9ed" stop-opacity=".55"/>
+  <stop offset="55%" stop-color="#8ceaff" stop-opacity=".48"/>
+  <stop offset="78%" stop-color="#c5a4ff" stop-opacity=".42"/>
+  <stop offset="100%" stop-color="#ffffff" stop-opacity=".18"/>
+</radialGradient>
+
+</defs>
           
 <circle class="pinto-aura" cx="50" cy="51" r="43" fill="none" stroke="#9be9bd" stroke-width="2" opacity=".7"/>
 
