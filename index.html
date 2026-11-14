@@ -3318,11 +3318,25 @@ function updatePinto(){
 
   if(questionNo===10){
     guide.classList.add("pinto-talking");
-  }else if(questionNo===15){
-    guide.classList.add("pinto-good","pinto-q15-glow");
-  }else if(questionNo===20){
+  }
+
+  if(questionNo>=15 && questionNo<=19){
+    guide.classList.add("pinto-q15-glow");
+  }
+
+  if(questionNo===20){
     guide.classList.add("pinto-celebrate","pinto-q20-ring");
   }
+
+  if(message){
+    bubble.textContent=message;
+    bubble.hidden=false;
+    guide.classList.add("has-bubble");
+  }else{
+    bubble.hidden=true;
+    bubble.textContent="";
+  }
+}
 
   if(message){
     bubble.textContent=message;
