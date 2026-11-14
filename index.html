@@ -2202,6 +2202,54 @@ footer {
   visibility: visible;
 }
 
+/* =================================
+   20問目：虹色ガラスリングの鼓動
+================================= */
+
+.pinto-guide.pinto-q20-ring .pinto-final-orbit-back {
+  animation: pintoFinalRingPulse 3s ease-in-out infinite;
+}
+
+.pinto-guide.pinto-q20-ring .pinto-final-orbit-front {
+  animation: pintoFinalRingPulse 3s ease-in-out infinite;
+}
+
+.pinto-guide.pinto-q20-ring .pinto-final-q20-only {
+  animation: pintoFinalShinePulse 3s ease-in-out infinite;
+}
+
+.pinto-guide.pinto-q20-ring .pinto-final-bubbles {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pintoFinalBubbleFloat 4s ease-in-out infinite;
+}
+
+@keyframes pintoFinalRingPulse {
+  0%, 100% {
+    opacity: .78;
+    stroke-width: 4.2;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,.75))
+            drop-shadow(0 0 9px rgba(130,210,255,.55));
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 6;
+    filter: drop-shadow(0 0 5px #ffffff)
+            drop-shadow(0 0 15px rgba(180,120,255,.85))
+            drop-shadow(0 0 22px rgba(100,230,255,.65));
+  }
+}
+
+@keyframes pintoFinalShinePulse {
+  0%, 100% { opacity: .65; }
+  50% { opacity: 1; }
+}
+
+@keyframes pintoFinalBubbleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 </style>
 
 <link rel="icon" href="/favicon.ico">
