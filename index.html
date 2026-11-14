@@ -1468,92 +1468,86 @@ footer {
 .pinto-bubble[hidden] { display:none; }
 .pinto-guide.has-bubble .pinto-art { animation:pintoHello .65s ease-in-out 1; }
 
-/* 15問目：ライムグリーンの光と浮遊する粒子 */
+/* 15〜19問目：淡いライムグリーンのシャボン玉ホログラム */
 .pinto-guide.pinto-q15-glow .pinto-art {
   filter:
-    drop-shadow(0 0 8px rgba(90,255,25,.9))
-    drop-shadow(0 0 20px rgba(90,255,25,.65))
-    drop-shadow(0 0 32px rgba(90,255,25,.3));
+    drop-shadow(0 0 5px rgba(190,255,150,.45))
+    drop-shadow(0 0 13px rgba(170,255,120,.28));
 }
 
 .pinto-guide.pinto-q15-glow .pinto-aura {
-  stroke: #5aff19;
-  stroke-width: 3.5;
-  filter: drop-shadow(0 0 9px rgba(90,255,25,.95));
-  animation: pintoQ15Aura 1.2s ease-in-out infinite alternate;
+  fill: rgba(205,255,160,.07);
+  stroke: #d9ffb8;
+  stroke-width: 2.8;
+  opacity: .72;
+  filter:
+    drop-shadow(0 0 5px rgba(210,255,170,.8))
+    drop-shadow(0 0 13px rgba(175,255,130,.45));
+  animation: pintoQ15Bubble 2.8s ease-in-out infinite;
 }
 
-.pinto-q15-particles {
-  fill: #5aff19;
-  filter: drop-shadow(0 0 4px #5aff19);
-  transform-box: view-box;
-  transform-origin: 50% 50%;
-  animation: pintoQ15Particles 2s ease-in-out infinite;
-}
-
-.pinto-guide.pinto-q15-glow .pinto-q15-particles circle {
-  animation: pintoQ15Twinkle 1.1s ease-in-out infinite alternate;
-}
-
-.pinto-guide.pinto-q15-glow .pinto-q15-particles circle:nth-child(even) {
-  animation-delay: .45s;
-}
-
-/* 20問目：ピントの周囲を回って消える光のリング */
+/* 20問目：外周を流れる流れ星の光 */
 .pinto-guide.pinto-q20-ring .pinto-art {
-  filter: drop-shadow(0 0 13px rgba(90,255,25,.7));
+  filter:
+    drop-shadow(0 0 7px rgba(150,255,90,.55))
+    drop-shadow(0 0 16px rgba(150,255,90,.3));
 }
 
 .pinto-guide.pinto-q20-ring .pinto-aura {
-  stroke: #5aff19;
-  stroke-width: 2.5;
-  filter: drop-shadow(0 0 8px rgba(90,255,25,.9));
+  stroke: rgba(205,255,170,.8);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgba(180,255,120,.7));
 }
 
 .pinto-guide.pinto-q20-ring .pinto-q20-orbit {
   opacity: 1;
-  stroke: #5aff19;
-  filter: drop-shadow(0 0 7px rgba(90,255,25,.95));
+  stroke: #dfffad;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-dasharray: 17 8 3 42;
+  filter:
+    drop-shadow(0 0 3px #dfffad)
+    drop-shadow(0 0 8px rgba(150,255,80,.95))
+    drop-shadow(0 0 15px rgba(150,255,80,.65));
   transform-box: view-box;
   transform-origin: 50% 51%;
-  animation: pintoQ20Orbit 1.8s ease-out 1 forwards;
+  animation: pintoQ20StarOrbit 1.8s linear 1 forwards;
 }
 
-@keyframes pintoQ15Aura {
-  from { opacity: .45; transform: scale(.94); }
-  to { opacity: 1; transform: scale(1.16); }
+@keyframes pintoQ15Bubble {
+  0%, 100% {
+    opacity: .48;
+    transform: scale(.96);
+  }
+  50% {
+    opacity: .9;
+    transform: scale(1.09);
+  }
 }
 
-@keyframes pintoQ15Particles {
-  0%, 100% { transform: rotate(0deg) scale(.96); }
-  50% { transform: rotate(8deg) scale(1.06); }
-}
-
-@keyframes pintoQ15Twinkle {
-  from { opacity: .3; }
-  to { opacity: 1; }
-}
-
-@keyframes pintoQ20Orbit {
+@keyframes pintoQ20StarOrbit {
   0% {
     opacity: 0;
-    transform: rotate(0deg) scale(.65);
+    stroke-dashoffset: 0;
+    transform: rotate(0deg) scale(.96);
   }
-  20% { opacity: 1; }
-  75% {
-    opacity: .9;
-    transform: rotate(280deg) scale(1.12);
+  12% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+    stroke-dashoffset: -75;
+    transform: rotate(295deg) scale(1.04);
   }
   100% {
     opacity: 0;
-    transform: rotate(360deg) scale(1.3);
+    stroke-dashoffset: -105;
+    transform: rotate(360deg) scale(1.08);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pinto-guide.pinto-q15-glow .pinto-aura,
-  .pinto-guide.pinto-q15-glow .pinto-q15-particles,
-  .pinto-guide.pinto-q15-glow .pinto-q15-particles circle,
   .pinto-guide.pinto-q20-ring .pinto-q20-orbit {
     animation: none !important;
   }
