@@ -2288,6 +2288,22 @@ footer {
               <feGaussianBlur stdDeviation="3" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
+            <!-- 虹色ホログラム用グラデーション -->
+<linearGradient id="pintoHoloGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#ff8bd8"/>
+  <stop offset="18%" stop-color="#c5a0ff"/>
+  <stop offset="36%" stop-color="#75cfff"/>
+  <stop offset="54%" stop-color="#8dffe0"/>
+  <stop offset="72%" stop-color="#fff39a"/>
+  <stop offset="100%" stop-color="#ff9bcf"/>
+</linearGradient>
+
+<radialGradient id="pintoHoloFill" cx="30%" cy="25%" r="85%">
+  <stop offset="0%" stop-color="#ffffff" stop-opacity=".48"/>
+  <stop offset="35%" stop-color="#d9baff" stop-opacity=".20"/>
+  <stop offset="65%" stop-color="#8deaff" stop-opacity=".15"/>
+  <stop offset="100%" stop-color="#ff9bd9" stop-opacity=".10"/>
+</radialGradient>
           </defs>
           <circle class="pinto-aura" cx="50" cy="51" r="43" fill="none" stroke="#9be9bd" stroke-width="2" opacity=".7"/>
 
