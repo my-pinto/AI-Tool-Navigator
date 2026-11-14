@@ -2184,16 +2184,8 @@ footer {
   paint-order: stroke;
 }
 
-/* 虹色のシャボン玉 */
-.pinto-guide.pinto-q20-ring .pinto-final-bubbles {
-  opacity: 1;
-  filter:
-    drop-shadow(0 0 3px rgba(255, 255, 255, .9))
-    drop-shadow(0 0 7px rgba(130, 220, 255, .55));
-}
-
 /* =================================
-   Q20：一体型レインボーガラスリング
+   Q20：虹色の光の軌跡とシャボン玉
 ================================= */
 
 /* Q20以外では非表示 */
@@ -2206,39 +2198,44 @@ footer {
   visibility: visible;
 }
 
-/* 一つの楕円：虹色の流れと発光 */
-.pinto-guide.pinto-q20-ring .pinto-final-orbit {
-  stroke-dasharray: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* 左右の光の軌跡 */
+.pinto-guide.pinto-q20-ring .pinto-final-light-trails {
+  opacity: 1 !important;
+}
+
+/* 左側：ゆっくり明滅 */
+.pinto-guide.pinto-q20-ring .pinto-final-trail-left {
   animation:
-    pintoFinalOrbitSmoothGlow 2.4s ease-in-out infinite !important;
+    pintoFinalTrailLeft 3.2s ease-in-out infinite;
 }
 
-/* 虹色の流れ */
-@keyframes pintoFinalOrbitFlow {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -128;
-  }
+/* 右側：少し時間をずらして明滅 */
+.pinto-guide.pinto-q20-ring .pinto-final-trail-right {
+  animation:
+    pintoFinalTrailRight 3.2s ease-in-out infinite;
 }
 
-/* リングの柔らかな発光 */
-@keyframes pintoFinalOrbitGlow {
+/* 左側の光 */
+@keyframes pintoFinalTrailLeft {
   0%, 100% {
-    opacity: .8;
-    filter:
-      drop-shadow(0 0 4px #ffffff)
-      drop-shadow(0 0 9px rgba(100,210,255,.7));
+    opacity: .65;
+    stroke-width: 3.5;
   }
   50% {
     opacity: 1;
-    filter:
-      drop-shadow(0 0 6px #ffffff)
-      drop-shadow(0 0 16px rgba(190,110,255,.9))
-      drop-shadow(0 0 23px rgba(100,230,255,.7));
+    stroke-width: 5;
+  }
+}
+
+/* 右側の光 */
+@keyframes pintoFinalTrailRight {
+  0%, 100% {
+    opacity: 1;
+    stroke-width: 5;
+  }
+  50% {
+    opacity: .65;
+    stroke-width: 3.5;
   }
 }
 
@@ -2257,6 +2254,14 @@ footer {
   50% {
     transform: translateY(-1px) scale(1.2);
   }
+}
+
+/* 虹色のシャボン玉 */
+.pinto-guide.pinto-q20-ring .pinto-final-bubbles {
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 3px rgba(255, 255, 255, .9))
+    drop-shadow(0 0 7px rgba(130, 220, 255, .55));
 }
 
 </style>
