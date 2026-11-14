@@ -2141,6 +2141,42 @@ footer {
   }
 }
 
+
+/* =================================
+   20問目専用・最終演出テスト
+   静止状態でデザインを確認
+================================= */
+
+/* 既存のリングとオーラはテスト中だけ非表示 */
+.pinto-guide.pinto-q20-ring .pinto-q20-orbit {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+.pinto-guide.pinto-q20-ring .pinto-aura {
+  opacity: 0 !important;
+}
+
+/* ピントの後ろ側を通る虹色の軌道 */
+.pinto-guide.pinto-q20-ring .pinto-final-orbit-back {
+  opacity: .9;
+  stroke-width: 3.2;
+  filter: url(#pintoFinalGlow);
+}
+
+/* ピントの手前側を通る虹色の軌道 */
+.pinto-guide.pinto-q20-ring .pinto-final-orbit-front {
+  opacity: .95;
+  stroke-width: 4;
+  filter: url(#pintoFinalGlow);
+}
+
+/* 虹色のシャボン玉 */
+.pinto-guide.pinto-q20-ring .pinto-final-bubbles {
+  opacity: 1;
+  filter: url(#pintoFinalGlow);
+}
+
 </style>
 
 <link rel="icon" href="/favicon.ico">
