@@ -2450,22 +2450,34 @@ footer {
   <stop offset="100%" stop-color="#ffc6e8" stop-opacity=".40"/>
 </radialGradient>
 
-  
-<!-- 20問目専用：立体的な虹色の光 -->
-<linearGradient id="pintoFinalRainbow" x1="0%" y1="0%" x2="100%" y2="100%">
-  <stop offset="0%" stop-color="#ff8bd8"/>
-  <stop offset="20%" stop-color="#a98cff"/>
-  <stop offset="40%" stop-color="#65dfff"/>
-  <stop offset="60%" stop-color="#75ffd0"/>
-  <stop offset="80%" stop-color="#fff19a"/>
-  <stop offset="100%" stop-color="#ff8bd8"/>
+<!-- 立体ホログラム用・高彩度レインボー -->
+<linearGradient id="pintoFinalRainbow"
+  x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#ff72c8"/>
+  <stop offset="12%" stop-color="#fff4fb"/>
+  <stop offset="24%" stop-color="#b28aff"/>
+  <stop offset="38%" stop-color="#68caff"/>
+  <stop offset="50%" stop-color="#eaffff"/>
+  <stop offset="62%" stop-color="#65f4d0"/>
+  <stop offset="76%" stop-color="#fff18a"/>
+  <stop offset="88%" stop-color="#ffad70"/>
+  <stop offset="100%" stop-color="#ff72c8"/>
 </linearGradient>
 
-<!-- 光の柔らかな発光 -->
-<filter id="pintoFinalGlow" x="-80%" y="-80%" width="260%" height="260%">
-  <feGaussianBlur stdDeviation="2.5" result="blur"/>
+<!-- 多層反射・ガラス質感用グロウ -->
+<filter id="pintoFinalGlow"
+  x="-100%" y="-100%" width="300%" height="300%"
+  color-interpolation-filters="sRGB">
+
+  <feGaussianBlur in="SourceGraphic"
+    stdDeviation="3.5" result="outerGlow"/>
+
+  <feGaussianBlur in="SourceGraphic"
+    stdDeviation="1.2" result="innerGlow"/>
+
   <feMerge>
-    <feMergeNode in="blur"/>
+    <feMergeNode in="outerGlow"/>
+    <feMergeNode in="innerGlow"/>
     <feMergeNode in="SourceGraphic"/>
   </feMerge>
 </filter>
